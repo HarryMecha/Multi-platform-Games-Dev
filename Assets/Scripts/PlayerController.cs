@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float CameraSensitivity;
     private float rotationX;
     private float rotationY;
+    public float HitDistance;
 
     private void Start()
     {
@@ -32,7 +33,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Ray ray = PlayerCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastCommand hit;
+            RaycastHit hit;
+
+            if(Physics.Raycast(ray, out hit, HitDistance))
+            {
+                Debug.Log("You are looking at " + hit.transform.name);
+            }
             
         }
     }

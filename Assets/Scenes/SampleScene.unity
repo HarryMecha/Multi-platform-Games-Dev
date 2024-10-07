@@ -533,7 +533,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCamera: {fileID: 963194227}
-  CameraSensitivity: 3
+  CameraSensitivity: 1
+  HitDistance: 50
 --- !u!1001 &1111283847
 PrefabInstance:
   m_ObjectHideFlags: 0
