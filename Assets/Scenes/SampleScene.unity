@@ -547,7 +547,7 @@ MonoBehaviour:
   PlayerCamera: {fileID: 963194227}
   cameraSensitivity: 1
   HitDistance: 5
-  jumpForce: 0.01
+  jumpForce: 10
   moveValue: {x: 0, y: 0}
   moveSpeed: 6
   lookValue: {x: 0, y: 0}
