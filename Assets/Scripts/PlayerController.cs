@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public Camera PlayerCamera;
     public float cameraSensitivity;
     public float HitDistance;
+    public float jumpForce;
     private Rigidbody rigidbody;
     private string currentGroundType;
     public Vector2 moveValue;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         currentGroundType = "Jumping";
+        lookValue = Vector3.zero;
     }
 
     public void OnMove(InputValue value)
@@ -51,16 +53,22 @@ public class PlayerController : MonoBehaviour
     }
     void OnJump(InputValue value)
     {
-        Debug.Log("Jump");
+        if (currentGroundType != "Jumping")
+        {
+          rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+        }
     }
     
 
     private void FixedUpdate()
     {
-        Vector2 moveDirection = moveValue;
-        Vector3 velocity = rigidbody.velocity;
-        velocity.x = moveSpeed * moveDirection.x;
-        velocity.z = moveSpeed * moveDirection.y;
+        Vector3 cameraForward = PlayerCamera.transform.forward;
+        cameraForward.y = 0; 
+        cameraForward.Normalize(); 
+        Vector3 cameraRight = PlayerCamera.transform.right;
+        Vector3 moveDirection = (cameraForward * moveValue.y + cameraRight * moveValue.x).normalized;
+        Vector3 velocity = moveDirection * moveSpeed;
+        velocity.y = rigidbody.velocity.y; //keeps the y velocity the same, so is only affected by jump
         rigidbody.velocity = velocity;
     }
 
@@ -69,11 +77,20 @@ public class PlayerController : MonoBehaviour
         cameraRotation.x += lookValue.y * cameraSensitivity;
         cameraRotation.y += lookValue.x * cameraSensitivity;
         cameraRotation.x = Mathf.Clamp(cameraRotation.x, -90f, 90f);
-        PlayerCamera.transform.localRotation = Quaternion.Euler(-cameraRotation.x, 0f, 0f); // Camera rotation
-        transform.localRotation = Quaternion.Euler(0f, cameraRotation.y, 0f); // Player rotation
+        PlayerCamera.transform.localRotation = Quaternion.Euler(-cameraRotation.x, 0.0f, 0.0f);
+        rigidbody.transform.localRotation = Quaternion.Euler(0f, cameraRotation.y, 0.0f);
+        Debug.Log(currentGroundType);
     }
 
     private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            currentGroundType = collision.gameObject.name;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
@@ -88,5 +105,4 @@ public class PlayerController : MonoBehaviour
             currentGroundType = "Jumping";
         }
     }
-
 }

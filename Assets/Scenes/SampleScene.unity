@@ -545,8 +545,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCamera: {fileID: 963194227}
-  cameraSensitivity: 0.5
+  cameraSensitivity: 1
   HitDistance: 5
+  jumpForce: 0.01
   moveValue: {x: 0, y: 0}
   moveSpeed: 6
   lookValue: {x: 0, y: 0}
@@ -1253,7 +1254,7 @@ Transform:
   m_GameObject: {fileID: 1712250691}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.74849725, y: 0.91902995, z: 4.111196}
+  m_LocalPosition: {x: 0.74849725, y: 9.37, z: 4.111196}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
