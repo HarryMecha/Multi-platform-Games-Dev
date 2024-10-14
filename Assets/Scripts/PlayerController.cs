@@ -13,22 +13,24 @@ public class PlayerController : MonoBehaviour
     public float cameraSensitivity;
     public float HitDistance;
     public float jumpForce;
-    private Rigidbody rigidbody;
+    private Rigidbody playerRigidbody;
     private string currentGroundType;
-    public Vector2 moveValue;
+    private Vector2 moveValue;
+    private Vector2 lookValue;
     public float moveSpeed;
-    public Vector2 lookValue;
     private InputAction moveAction;
     private InputAction lookAction;
     private Vector3 cameraRotation;
+    private Dictionary<string, int> collectibleCount;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        playerRigidbody = GetComponent<Rigidbody>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         currentGroundType = "Jumping";
         lookValue = Vector3.zero;
+        collectibleCount = new Dictionary<string, int>();
     }
 
     public void OnMove(InputValue value)
@@ -55,7 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentGroundType != "Jumping")
         {
-          rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+            playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
     }
     
@@ -68,8 +70,8 @@ public class PlayerController : MonoBehaviour
         Vector3 cameraRight = PlayerCamera.transform.right;
         Vector3 moveDirection = (cameraForward * moveValue.y + cameraRight * moveValue.x).normalized;
         Vector3 velocity = moveDirection * moveSpeed;
-        velocity.y = rigidbody.velocity.y; //keeps the y velocity the same, so is only affected by jump
-        rigidbody.velocity = velocity;
+        velocity.y = playerRigidbody.velocity.y; //keeps the y velocity the same, so is only affected by jump
+        playerRigidbody.velocity = velocity;
     }
 
     void Update()
@@ -78,7 +80,7 @@ public class PlayerController : MonoBehaviour
         cameraRotation.y += lookValue.x * cameraSensitivity;
         cameraRotation.x = Mathf.Clamp(cameraRotation.x, -90f, 90f);
         PlayerCamera.transform.localRotation = Quaternion.Euler(-cameraRotation.x, 0.0f, 0.0f);
-        rigidbody.transform.localRotation = Quaternion.Euler(0f, cameraRotation.y, 0.0f);
+        playerRigidbody.transform.localRotation = Quaternion.Euler(0f, cameraRotation.y, 0.0f);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -86,6 +88,21 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             currentGroundType = collision.gameObject.name;
+        }
+
+        if (collision.gameObject.tag == "Collectible")
+        {
+            if (collectibleCount.ContainsKey((string)collision.gameObject.name))
+            {
+                collectibleCount[collision.gameObject.name] += 1;
+            }
+            else collectibleCount.Add(collision.gameObject.name, 1);
+            
+            Debug.Log(collectibleCount[collision.gameObject.name]);
+            
+            Destroy(collision.gameObject);
+
+            
         }
     }
 
