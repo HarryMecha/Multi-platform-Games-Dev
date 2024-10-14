@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
 
             case(weaponSelection.harpoonGun):
-
+                if((gameObject.GetComponent<SpringJoint>() == null) && (gameObject.GetComponent<ConfigurableJoint>() == null))
                 harpoonGun.shootRope();
 
             break;
