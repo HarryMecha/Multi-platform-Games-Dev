@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public float HitDistance;
     public float jumpForce;
     private Rigidbody playerRigidbody;
-    private string currentGroundType;
+    private groundType currentGroundType;
     private Vector2 moveValue;
     private Vector2 lookValue;
     public float moveSpeed;
@@ -25,6 +25,15 @@ public class PlayerController : MonoBehaviour
     public GameObject harpoonGunObject;
     private HarpoonGun harpoonGun;
     private weaponSelection currentWeapon;
+
+    public enum groundType
+    {
+        Regular,
+        Ice,
+        Bounce,
+        Jumping,
+        Swinging
+    }
 
     enum weaponSelection
     {
@@ -37,11 +46,16 @@ public class PlayerController : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        currentGroundType = "Jumping";
+        currentGroundType = groundType.Jumping;
         lookValue = Vector3.zero;
         collectibleCount = new Dictionary<string, int>();
         harpoonGun = harpoonGunObject.GetComponent<HarpoonGun>();
         currentWeapon = weaponSelection.harpoonGun;
+    }
+
+    public void setGroundType(groundType type)
+    {
+        currentGroundType = type;
     }
 
     public void OnMove(InputValue value)
@@ -84,7 +98,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnJump(InputValue value)
     {
-        if (currentGroundType != "Jumping")
+        if (currentGroundType != groundType.Jumping)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
@@ -116,7 +130,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            currentGroundType = collision.gameObject.name;
+            currentGroundType = (groundType) Enum.Parse(typeof(groundType), collision.gameObject.name);
         }
 
         if (collision.gameObject.tag == "Collectible")
@@ -139,7 +153,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            currentGroundType = collision.gameObject.name;
+            currentGroundType = (groundType)Enum.Parse(typeof(groundType), collision.gameObject.name);
         }
     }
 
@@ -147,7 +161,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            currentGroundType = "Jumping";
+            currentGroundType = groundType.Jumping;
         }
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HarpoonGun : MonoBehaviour
@@ -9,21 +11,48 @@ public class HarpoonGun : MonoBehaviour
     public LineRenderer lineRenderer;
     private Vector3 harpoonEnd;
     public Transform harpoonStart;
-    private SpringJoint joint;
+    private SpringJoint swingJoint;
+    private ConfigurableJoint joint;
     public Transform player;
+    private float lerpSpeed;
+    private GameObject hookedObject;
+    private Vector3 hookedObjectStartPos;
+    private Vector3 hookedObjectEndPos;
+    private float startTime;
+    private float journeyLength;
 
     // Start is called before the first frame update
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        hookedObjectStartPos = Vector3.zero;
+        hookedObjectEndPos = Vector3.zero;
+        lerpSpeed = 2f;
+}
 
-    }
 
     private void LateUpdate()
-    {
+    { 
         DrawRope();
-    }
+        if (hookedObject)
+        {
+            float distCovered = (Time.time - startTime) * lerpSpeed;
 
+            float fractionOfJourney = distCovered / journeyLength;
+           fractionOfJourney = Mathf.Clamp01(fractionOfJourney);
+
+            hookedObject.transform.position = Vector3.Lerp(hookedObjectStartPos, hookedObjectEndPos, fractionOfJourney);
+
+
+            if (hookedObject.transform.position == hookedObjectEndPos)
+            {
+                lineRenderer.positionCount = 0;
+                Destroy(joint);
+                hookedObject = null;
+            }
+
+        }
+    }
 
     public void shootRope()
     {
@@ -31,30 +60,64 @@ public class HarpoonGun : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
-            Debug.Log("This");
-            if (hit.transform.tag == "Swingable")
-            {
-                harpoonEnd = hit.point;
-                joint = player.gameObject.AddComponent<SpringJoint>();
-                joint.autoConfigureConnectedAnchor = false;
-                joint.connectedAnchor = harpoonEnd;
+            switch (hit.transform.tag) {
+                case ("Swingable"):
 
-                float distance = Vector3.Distance(player.transform.position, harpoonEnd);
+                    player.gameObject.GetComponent<PlayerController>().setGroundType(PlayerController.groundType.Swinging);
 
-                joint.maxDistance = distance * 0.8f;
-                joint.minDistance = distance * 0.25f;
+                    harpoonEnd = hit.point;
+                    swingJoint = player.gameObject.AddComponent<SpringJoint>();
+                    swingJoint.autoConfigureConnectedAnchor = false;
+                    swingJoint.connectedAnchor = harpoonEnd;
 
-                joint.spring = 4.5f;
-                joint.damper = 7.0f;
-                joint.massScale = 4.5f;
+                    float distance = Vector3.Distance(player.transform.position, harpoonEnd);
+
+                    swingJoint.maxDistance = distance * 0.8f;
+                    swingJoint.minDistance = distance * 0.25f;
+
+                    swingJoint.spring = 4.5f;
+                    swingJoint.damper = 7.0f;
+                    swingJoint.massScale = 4.5f;
+
+                    lineRenderer.positionCount = 2;
+
+                break;
+
+                case ("Enemy"):
+                    startTime = Time.time;
+                    harpoonEnd = hit.point;
+                    hookedObject = hit.collider.gameObject;
+                    hookedObjectStartPos = hookedObject.transform.position;
+                    hookedObjectEndPos = transform.position;
+                    journeyLength = Vector3.Distance(hookedObjectStartPos, hookedObjectEndPos);
+                    joint = player.gameObject.AddComponent<ConfigurableJoint>();
+                    joint.connectedAnchor = harpoonEnd;
+                    lineRenderer.positionCount = 2;
+                    break;
             }
+
 
         }
     }
 
+    public void stopRope()
+    {
+        lineRenderer.positionCount = 0;
+        Destroy(joint);
+    }
+
     void DrawRope()
     {
-        lineRenderer.SetPosition(0, harpoonStart.position);
-        lineRenderer.SetPosition(1, harpoonEnd);
+        if (swingJoint)
+        {
+            lineRenderer.SetPosition(0, harpoonStart.position);
+            lineRenderer.SetPosition(1, harpoonEnd);
+        }
+
+        if (joint)
+        {
+            lineRenderer.SetPosition(0, harpoonStart.position);
+            lineRenderer.SetPosition(1, hookedObject.transform.position);
+        }
     }
 }
