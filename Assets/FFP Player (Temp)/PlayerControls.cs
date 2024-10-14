@@ -59,9 +59,8 @@ public class PlayerControls : MonoBehaviour
     private void HandleJump()
     {
         if (!inputHandler.JumpTriggred)
-        {
             canJump = true;
-        }
+
         if (characterController.isGrounded)
         {
             currentMovement.y = -0.5f;
@@ -71,18 +70,8 @@ public class PlayerControls : MonoBehaviour
                 canJump = false;
             }
         }
+
         else
-        {
             currentMovement.y -= gravity * Time.deltaTime;
-        }
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "JumpPads")
-        {
-            
-        }
-    }
-
 }

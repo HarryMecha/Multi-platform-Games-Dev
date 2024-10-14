@@ -23,9 +23,7 @@ public class InputHandler : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else
-        {
             Destroy(gameObject);
-        }
 
         moveAction = playerControls.FindActionMap("Player").FindAction("Move");
         lookAction = playerControls.FindActionMap("Player").FindAction("Look");
