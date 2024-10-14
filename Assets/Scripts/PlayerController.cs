@@ -97,8 +97,12 @@ public class PlayerController : MonoBehaviour
 
     }
     void OnJump(InputValue value)
-    {
-        if (currentGroundType != groundType.Jumping)
+    {    
+        if(currentGroundType == groundType.Swinging)
+                {
+            harpoonGun.stopRope();
+                }
+        if (currentGroundType != groundType.Jumping && currentGroundType != groundType.Swinging)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }

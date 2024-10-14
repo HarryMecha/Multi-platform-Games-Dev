@@ -27,7 +27,7 @@ public class HarpoonGun : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         hookedObjectStartPos = Vector3.zero;
         hookedObjectEndPos = Vector3.zero;
-        lerpSpeed = 2f;
+        lerpSpeed = 10f;
 }
 
 
@@ -40,7 +40,7 @@ public class HarpoonGun : MonoBehaviour
 
             float fractionOfJourney = distCovered / journeyLength;
            fractionOfJourney = Mathf.Clamp01(fractionOfJourney);
-
+            hookedObjectEndPos = harpoonStart.position;
             hookedObject.transform.position = Vector3.Lerp(hookedObjectStartPos, hookedObjectEndPos, fractionOfJourney);
 
 
@@ -103,7 +103,7 @@ public class HarpoonGun : MonoBehaviour
     public void stopRope()
     {
         lineRenderer.positionCount = 0;
-        Destroy(joint);
+        Destroy(swingJoint);
     }
 
     void DrawRope()
