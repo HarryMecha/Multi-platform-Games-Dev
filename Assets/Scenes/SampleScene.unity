@@ -618,9 +618,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCamera: {fileID: 963194227}
-  maxDistance: 100
+  maxDistance: 25
   lineRenderer: {fileID: 724637145}
-  player: {fileID: 800354924}
+  harpoonStart: {fileID: 2032719050}
+  player: {fileID: 800354925}
 --- !u!1 &800354924
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,7 +777,7 @@ MonoBehaviour:
   HitDistance: 5
   jumpForce: 10
   moveSpeed: 6
-  harpoonGunObject: {fileID: 0}
+  harpoonGunObject: {fileID: 724637141}
 --- !u!114 &800354931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1709,9 +1710,9 @@ GameObject:
   - component: {fileID: 1712250694}
   - component: {fileID: 1712250693}
   - component: {fileID: 1712250692}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Ground
+  m_TagString: Swingable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
