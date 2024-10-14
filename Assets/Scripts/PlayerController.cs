@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,7 +18,9 @@ public class PlayerController : MonoBehaviour
     private groundType currentGroundType;
     private Vector2 moveValue;
     private Vector2 lookValue;
+    private float sprintValue;
     public float moveSpeed;
+    private float currentMoveSpeed;
     private InputAction moveAction;
     private InputAction lookAction;
     private Vector3 cameraRotation;
@@ -43,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        currentMoveSpeed = moveSpeed;
         playerRigidbody = GetComponent<Rigidbody>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -67,6 +71,13 @@ public class PlayerController : MonoBehaviour
     {
         lookValue = value.Get<Vector2>();
     }
+
+    public void OnSprint(InputValue value)
+    {
+        currentMoveSpeed =  moveSpeed + (5f * value.Get<float>());
+    }
+
+
 
     void OnFire(InputValue value)
     {
@@ -116,7 +127,7 @@ public class PlayerController : MonoBehaviour
         cameraForward.Normalize(); 
         Vector3 cameraRight = PlayerCamera.transform.right;
         Vector3 moveDirection = (cameraForward * moveValue.y + cameraRight * moveValue.x).normalized;
-        Vector3 velocity = moveDirection * moveSpeed;
+        Vector3 velocity = moveDirection * currentMoveSpeed;
         velocity.y = playerRigidbody.velocity.y; //keeps the y velocity the same, so is only affected by jump
         playerRigidbody.velocity = velocity;
     }
