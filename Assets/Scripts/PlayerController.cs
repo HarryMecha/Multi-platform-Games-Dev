@@ -22,6 +22,15 @@ public class PlayerController : MonoBehaviour
     private InputAction lookAction;
     private Vector3 cameraRotation;
     private Dictionary<string, int> collectibleCount;
+    public GameObject harpoonGunObject;
+    private HarpoonGun harpoonGun;
+    private weaponSelection currentWeapon;
+
+    enum weaponSelection
+    {
+        fists,
+        harpoonGun
+    }
 
     private void Awake()
     {
@@ -31,6 +40,8 @@ public class PlayerController : MonoBehaviour
         currentGroundType = "Jumping";
         lookValue = Vector3.zero;
         collectibleCount = new Dictionary<string, int>();
+        harpoonGun = harpoonGunObject.GetComponent<HarpoonGun>();
+        currentWeapon = weaponSelection.harpoonGun;
     }
 
     public void OnMove(InputValue value)
@@ -45,12 +56,30 @@ public class PlayerController : MonoBehaviour
 
     void OnFire(InputValue value)
     {
-        Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, HitDistance))
+        switch (currentWeapon)
         {
-            Debug.Log("You are looking at " + hit.transform.name);
+            case(weaponSelection.fists):
+                Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, HitDistance))
+                {
+                    if(hit.transform.tag == "Enemy")
+                    {
+
+                    }
+                }
+            break;
+
+
+            case(weaponSelection.harpoonGun):
+
+                harpoonGun.shootRope();
+
+            break;
         }
+
+
+        
 
     }
     void OnJump(InputValue value)
