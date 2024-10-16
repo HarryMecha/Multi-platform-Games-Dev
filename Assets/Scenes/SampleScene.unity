@@ -2161,7 +2161,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4220421379259492863, guid: 03216ba1ce9c0c444be746c8313ec956, type: 3}
       propertyPath: m_Name
-      value: MovingPlatform
+      value: Moving
       objectReference: {fileID: 0}
     - target: {fileID: 4338818763726997860, guid: 03216ba1ce9c0c444be746c8313ec956, type: 3}
       propertyPath: m_LocalPosition.x
