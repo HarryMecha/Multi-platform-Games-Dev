@@ -35,7 +35,8 @@ public class PlayerController : MonoBehaviour
         Ice,
         Bounce,
         Jumping,
-        Swinging
+        Swinging,
+        Moving
     }
 
     enum weaponSelection
