@@ -928,10 +928,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 920552848455145569, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8472053547730587732, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
       propertyPath: m_Name
       value: Blast Traps

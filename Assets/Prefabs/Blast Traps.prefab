@@ -265,7 +265,6 @@ MonoBehaviour:
   player:
     serializedVersion: 2
     m_Bits: 64
-  sightRange: 10
   damageRadius: 5
   damageAmount: 50
   explodeDelay: 1.5
@@ -294,7 +293,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!1 &8532523043693653737
 GameObject:
