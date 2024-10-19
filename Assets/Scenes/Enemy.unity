@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 24
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -608,7 +608,7 @@ GameObject:
   - component: {fileID: 1998571039}
   - component: {fileID: 1998571038}
   - component: {fileID: 1998571037}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Base
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -876,6 +876,71 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 122f5188dbbcfa24ea7bf4e9dcd81c43, type: 3}
+--- !u!1001 &8866758309302443667
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 292110879298248483, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: playerObject
+      value: 
+      objectReference: {fileID: 1559093906}
+    - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 920552848455145569, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472053547730587732, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
+      propertyPath: m_Name
+      value: Blast Traps
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
 --- !u!1001 &9016402798770687136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -888,10 +953,6 @@ PrefabInstance:
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 1559093906}
-    - target: {fileID: 598942698740908268, guid: e2f9c3f0929f2984ebf16e7b9b6af7c5, type: 3}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 246569065810601495, guid: e1cfbb6fdb9db1d4081a1a504b2a6acc, type: 3}
     - target: {fileID: 3006982638706597596, guid: e2f9c3f0929f2984ebf16e7b9b6af7c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.26
@@ -952,3 +1013,4 @@ SceneRoots:
   - {fileID: 5237589819291060992}
   - {fileID: 2410039593287403615}
   - {fileID: 9016402798770687136}
+  - {fileID: 8866758309302443667}

@@ -31,7 +31,7 @@ public class VillanAI : MonoBehaviour
     private bool playerInSightRange;      // Is the player within the villain's sight range
     private bool playerInAttackRange;     // Is the player within the villain's attack range
 
-    private void Start()
+    void Start()
     {
         // Find the player's transform at the start of the game
         playerObject = GameObject.Find("Player").transform;
@@ -40,7 +40,7 @@ public class VillanAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    private void Update()
+    void Update()
     {
         // Check for Sight Range and Attack Range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, player);

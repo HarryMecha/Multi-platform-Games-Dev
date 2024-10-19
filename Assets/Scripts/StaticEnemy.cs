@@ -12,7 +12,7 @@ public class StaticEnemy : MonoBehaviour
     [Header("Attacking")]
     [SerializeField] private float timeBetweenAttacks;   // Time delay between attacks
     [SerializeField] private float attackRange;          // Range within which the villain can attack the player
-    [SerializeField] public float projectileSpeed = 10f; // Speed of the projectile
+    [SerializeField] public float projectileSpeed; // Speed of the projectile
 
     private bool alreadyAttacked = false; // Whether the villain has already attacked and is waiting for cooldown
     private bool playerInAttackRange;     // Is the player within the villain's attack range
@@ -63,6 +63,7 @@ public class StaticEnemy : MonoBehaviour
         alreadyAttacked = false;
     }
 
+    // Look at the player when player is in attack range
     private void LookAtPlayer()
     {
         // Calculate the direction from this object to the player
@@ -78,6 +79,7 @@ public class StaticEnemy : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
     }
 
+    // Reset the rotation when player is not in attack range
     private void ResetRotation()
     {
         // Initialize the target rotation to Quaternion identity (0, 0, 0)

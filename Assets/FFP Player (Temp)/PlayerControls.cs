@@ -37,7 +37,7 @@ public class PlayerControls : MonoBehaviour
     }
 
     // Called every frame
-    private void Update()
+    void Update()
     {
         HandleMovement();  // Handle player movement input
         HandleRotation();  // Handle player camera rotation input

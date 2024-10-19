@@ -238,6 +238,7 @@ MonoBehaviour:
   player:
     serializedVersion: 2
     m_Bits: 64
-  projectile: {fileID: 0}
+  projectilePrefab: {fileID: 246569065810601495, guid: e1cfbb6fdb9db1d4081a1a504b2a6acc, type: 3}
   timeBetweenAttacks: 3
   attackRange: 10
+  projectileSpeed: 10
