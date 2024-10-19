@@ -13,10 +13,12 @@ public class VillanAI : MonoBehaviour
     [Header("Patrolling")]
     [SerializeField] private Vector3 walkPoint;    // Current target position for patrolling
     [SerializeField] private float walkPointRange; // Range within which the villain will randomly patrol
+    [SerializeField] private float patrollSpeed;   // Speed at which the Villian moves while patrolling
 
     // Variables for attacking behavior
     [Header("Attacking")]
     [SerializeField] private float timeBetweenAttacks; // Time delay between attacks
+    [SerializeField] private float chaseSpeed;         // Speed at which the Villian moves while chasing
 
     // Variables for tracking different states
     [Header("States")]
@@ -60,6 +62,9 @@ public class VillanAI : MonoBehaviour
     // Patrolling logic
     private void Patrolling()
     {
+        //Set movemnt speed to patrolling speed
+        agent.speed = patrollSpeed;
+
         // If no walk point has been set, search for a new random walk point
         if (!walkPointSet)
             SearchWalkPoint();
@@ -94,6 +99,9 @@ public class VillanAI : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(playerObject.position);
+
+        // Set movement speed to chase speed
+        agent.speed = chaseSpeed;
     }
 
     // Attack the player by stopping the agent's movement and managing the attack cooldown
@@ -101,10 +109,13 @@ public class VillanAI : MonoBehaviour
     {
         agent.SetDestination(transform.position);
 
+        LookAtPlayer();
+
         // Ensure the attack is only triggered once during the cooldown
         if (!alreadyAttacked)
         {
-            //attack and health sytem implementation
+            //attack and health system implementation
+            Debug.Log("attacking");
 
             alreadyAttacked = true;
 
@@ -117,5 +128,20 @@ public class VillanAI : MonoBehaviour
     private void ResetAttack()
     {
         alreadyAttacked = false;
+    }
+
+    private void LookAtPlayer()
+    {
+        // Calculate the direction from this object to the player
+        Vector3 directionToPlayer = playerObject.position - transform.position;
+
+        // Remove any vertical difference so the object only rotates on the Y axis (optional, depends on use case)
+        directionToPlayer.y = 0;
+
+        // Calculate the target rotation based on the direction
+        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+        // Smoothly rotate towards the target rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
     }
 }
