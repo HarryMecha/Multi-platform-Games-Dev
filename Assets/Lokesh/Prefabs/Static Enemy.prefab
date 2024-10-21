@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 3006982638706597596}
   - component: {fileID: 8311022915818920138}
   - component: {fileID: 598942698740908268}
+  - component: {fileID: -8243967068016931120}
   m_Layer: 0
   m_Name: Static Enemy
   m_TagString: Enemy
@@ -244,6 +245,19 @@ MonoBehaviour:
   timeBetweenAttacks: 3
   attackRange: 10
   projectileSpeed: 15
+--- !u!114 &-8243967068016931120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7534679412423681600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b4a684f183edf47b26c8c864554281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
 --- !u!1 &8563381223745194274
 GameObject:
   m_ObjectHideFlags: 0

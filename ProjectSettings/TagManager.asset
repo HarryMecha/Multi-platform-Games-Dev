@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Checkpoint
   - VillanAI
+  - Bounce
   layers:
   - Default
   - TransparentFX

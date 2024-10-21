@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float cameraSensitivity;
     public float HitDistance;
     public float jumpForce;
+    public float bounceForce;
     private Rigidbody playerRigidbody;
     private groundType currentGroundType;
     private Vector2 moveValue;
@@ -91,14 +92,12 @@ public class PlayerController : MonoBehaviour
         scrollValue = value.Get<Vector2>();
         if(currentWeapon == weaponSelection.fists && scrollValue.y > 0)
         {
-            //Debug.Log("Fist");
             currentWeapon = weaponSelection.harpoonGun;
             playerHandsObject.SetActive(false);
             harpoonGunObject.SetActive(true);
         }
-        if (currentWeapon == weaponSelection.harpoonGun && scrollValue.y < 0 && currentGroundType != groundType.Swinging)
+        if (currentWeapon == weaponSelection.harpoonGun && scrollValue.y < 0 && currentGroundType != groundType.Swinging && harpoonGun.isHooked() == false)
         {
-            //Debug.Log("Harpoon");
             currentWeapon = weaponSelection.fists;
             harpoonGunObject.SetActive(false);
             playerHandsObject.SetActive(true);
@@ -117,7 +116,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if(hit.transform.tag == "Enemy")
                     {
-
+                        hit.transform.GetComponent<EnemyHealth>().TakeDamage(10);
                     }
                 }
             break;
@@ -135,6 +134,7 @@ public class PlayerController : MonoBehaviour
         if(currentGroundType == groundType.Swinging)
                 {
             harpoonGun.stopRope();
+            currentGroundType = groundType.Jumping;
                 }
         if (currentGroundType != groundType.Jumping && currentGroundType != groundType.Swinging)
         {
@@ -167,57 +167,64 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = spawnLocation;
         }
-        //Debug.Log(currentGroundType);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.tag);
-        if (collision.gameObject.layer == 3)
+        if (currentGroundType != groundType.Swinging)
         {
-            setGroundType((groundType)Enum.Parse(typeof(groundType), collision.gameObject.tag));
-        }
 
-        if (collision.gameObject.tag == "Collectible")
-        {
-            if (collectibleCount.ContainsKey((string)collision.gameObject.name))
+            if (collision.gameObject.layer == 3)
             {
-                collectibleCount[collision.gameObject.name] += 1;
+                setGroundType((groundType)Enum.Parse(typeof(groundType), collision.gameObject.tag));
             }
-            else collectibleCount.Add(collision.gameObject.name, 1);
-            
-            Debug.Log(collectibleCount[collision.gameObject.name]);
-            
-            Destroy(collision.gameObject);
-
-            
         }
-
-        if (collision.gameObject.tag == "Checkpoint")
+        switch (collision.gameObject.tag)
         {
-            spawnLocation = transform.position;
+            case ("Collectible"):
+                if (collectibleCount.ContainsKey((string)collision.gameObject.name))
+                {
+                    collectibleCount[collision.gameObject.name] += 1;
+                }
+                else collectibleCount.Add(collision.gameObject.name, 1);
+                Destroy(collision.gameObject);
+                break;
+
+            case ("Checkpoint"):
+                spawnLocation = transform.position;
+                break;
+
+            case ("Bounce"):
+
+                playerRigidbody.AddForce(Vector3.up * bounceForce, ForceMode.VelocityChange);
+
+                break;
         }
+
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.layer == 3)
-        {
-            setGroundType((groundType)Enum.Parse(typeof(groundType), collision.gameObject.tag));
-        }
-    }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.layer == 3)
+        Debug.Log(currentGroundType);   
+        if (currentGroundType != groundType.Swinging)
         {
-            setGroundType(groundType.Jumping);
+            if (collision.gameObject.layer == 3)
+            {
+                Debug.Log("This is switching");
+                setGroundType(groundType.Jumping);
+            }
         }
     }
 
     private void resetPosition()
     {
         spawnLocation = initalspawnLocation;
+    }
+
+    public groundType GetGroundType()
+    {
+        return currentGroundType;
     }
 }
 

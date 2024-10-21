@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class HarpoonGun : MonoBehaviour
 {
@@ -69,7 +70,6 @@ public class HarpoonGun : MonoBehaviour
                 case ("Swingable"):
 
                     player.gameObject.GetComponent<PlayerController>().setGroundType(PlayerController.groundType.Swinging);
-
                     harpoonEnd = hit.point;
                     swingJoint = player.gameObject.AddComponent<SpringJoint>();
                     swingJoint.autoConfigureConnectedAnchor = false;
@@ -109,6 +109,7 @@ public class HarpoonGun : MonoBehaviour
     {
         lineRenderer.positionCount = 0;
         Destroy(swingJoint);
+        hookedObject = null;
 
     }
 
@@ -125,5 +126,12 @@ public class HarpoonGun : MonoBehaviour
             lineRenderer.SetPosition(0, harpoonStart.position);
             lineRenderer.SetPosition(1, hookedObject.transform.position);
         }
+    }
+
+    public bool isHooked()
+    {
+        if (hookedObject) return true;
+
+        return false;
     }
 }

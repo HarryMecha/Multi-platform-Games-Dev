@@ -22,7 +22,7 @@ public class EnemyHealth : MonoBehaviour
         // Reduce current health by damage amount
         currentHealth -= damageAmount;
 
-        Debug.Log("Player took damage. Current Health: " + currentHealth);
+        Debug.Log("Enemy took damage. Current Health: " + currentHealth);
 
         // Check if the player health has reached zero or below
         if (currentHealth <= 0)
@@ -34,7 +34,7 @@ public class EnemyHealth : MonoBehaviour
     // Function to handle player death
     private void Die()
     {
-        Debug.Log("Player died. Restarting level...");
+        Debug.Log("Enemy died.");
 
         // Destory the enemy
         Destroy(gameObject);
