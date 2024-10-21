@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 cameraRotation;
     private Dictionary<string, int> collectibleCount;
     public GameObject harpoonGunObject;
+    public GameObject playerHandsObject;
     private HarpoonGun harpoonGun;
     private weaponSelection currentWeapon;
     private PlayerHealth Damage;
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        
         currentMoveSpeed = moveSpeed;
         playerRigidbody = GetComponent<Rigidbody>();
         Cursor.visible = false;
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour
         lookValue = Vector3.zero;
         collectibleCount = new Dictionary<string, int>();
         harpoonGun = harpoonGunObject.GetComponent<HarpoonGun>();
-        currentWeapon = weaponSelection.harpoonGun;
+        currentWeapon = weaponSelection.fists;
         spawnLocation = transform.position;
     }
 
@@ -81,6 +83,19 @@ public class PlayerController : MonoBehaviour
         currentMoveSpeed =  moveSpeed + (5f * value.Get<float>());
     }
 
+    public void OnSwap(InputValue value)
+    {
+        Debug.Log("Scrolled");
+        Debug.Log(value.ToString());
+        if(currentWeapon == weaponSelection.fists)
+        {
+            currentWeapon = weaponSelection.harpoonGun;
+        }
+        if (currentWeapon == weaponSelection.harpoonGun)
+        {
+            currentWeapon = weaponSelection.fists;
+        }
+    }
 
 
     void OnFire(InputValue value)
@@ -88,6 +103,8 @@ public class PlayerController : MonoBehaviour
         switch (currentWeapon)
         {
             case(weaponSelection.fists):
+                harpoonGunObject.SetActive(false);
+                playerHandsObject.SetActive(true);
                 Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, HitDistance))
@@ -101,7 +118,9 @@ public class PlayerController : MonoBehaviour
 
 
             case(weaponSelection.harpoonGun):
-                if((gameObject.GetComponent<SpringJoint>() == null) && (gameObject.GetComponent<ConfigurableJoint>() == null))
+                harpoonGunObject.SetActive(true);
+                playerHandsObject.SetActive(false);
+                if ((gameObject.GetComponent<SpringJoint>() == null) && (gameObject.GetComponent<ConfigurableJoint>() == null))
                 harpoonGun.shootRope();
 
             break;

@@ -12,18 +12,8 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth=maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        //healthBar.SetMaxHealth(maxHealth);
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(20);
-        }
-        
     }
 
     void TakeDamage(int damage)
@@ -45,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Obstacle"))
+            if (collision.gameObject.CompareTag("Enemy"))
             {
                 TakeDamage(20);
             }
