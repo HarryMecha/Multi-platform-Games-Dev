@@ -7,6 +7,7 @@ public class StaticEnemy : MonoBehaviour
     [SerializeField] private Transform playerObject; // Reference to the player's Transform component
     [SerializeField] private LayerMask player;       // Layer mask to identify the player
     [SerializeField] private GameObject projectilePrefab;  // Reference to the projectile prefab
+    [SerializeField] private Transform throwProjectile;
 
     // Variables for attacking behavior
     [Header("Attacking")]
@@ -16,13 +17,6 @@ public class StaticEnemy : MonoBehaviour
 
     private bool alreadyAttacked = false; // Whether the villain has already attacked and is waiting for cooldown
     private bool playerInAttackRange;     // Is the player within the villain's attack range
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Find the player's transform at the start of the game
-        playerObject = GameObject.Find("Player").transform;
-    }
 
     // Update is called once per frame
     void Update()
@@ -99,7 +93,7 @@ public class StaticEnemy : MonoBehaviour
     private void ThrowProjectile()
     {
         // Create the projectile at the GameObject's position
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject projectile = Instantiate(projectilePrefab, throwProjectile.position, Quaternion.identity);
 
         // Get the direction to the player
         Vector3 directionToPlayer = (playerObject.position - transform.position).normalized;

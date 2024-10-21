@@ -22,9 +22,6 @@ public class BlastTrap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Find the player's transform at the start of the game
-        playerObject = GameObject.Find("Player").transform;
-
         // Get the NavMeshAgent component attached to this GameObject
         agent = GetComponent<NavMeshAgent>();
     }
