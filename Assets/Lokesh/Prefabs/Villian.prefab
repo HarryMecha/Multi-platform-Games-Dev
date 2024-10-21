@@ -314,10 +314,10 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   ground:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 128
   player:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 256
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 25
   patrollSpeed: 3

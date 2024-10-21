@@ -264,7 +264,7 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   player:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 256
   damageRadius: 5
   damageAmount: 50
   explodeDelay: 1.5

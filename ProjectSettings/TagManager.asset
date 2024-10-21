@@ -9,6 +9,7 @@ TagManager:
   - Swingable
   - Enemy
   - Checkpoint
+  - VillanAI
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - Water
   - UI
   - Swingable
-  - 
-  - 
+  - Ground
+  - Player
   - 
   - 
   - 

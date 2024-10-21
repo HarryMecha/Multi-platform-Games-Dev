@@ -238,7 +238,7 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   player:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 256
   projectilePrefab: {fileID: 246569065810601495, guid: e1cfbb6fdb9db1d4081a1a504b2a6acc, type: 3}
   throwProjectile: {fileID: 169804244400402347}
   timeBetweenAttacks: 3
