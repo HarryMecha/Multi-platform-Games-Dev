@@ -37,8 +37,6 @@ public class MovingPlatform : MonoBehaviour
                 break;
         }
         journeyDistance = Vector3.Distance(startingPosition, endPosition);
-        Debug.Log(journeyDistance);
-        Debug.Log(endPosition);
     }
 
     // Update is called once per frame

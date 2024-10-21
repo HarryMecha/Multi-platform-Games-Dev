@@ -8,6 +8,7 @@ TagManager:
   - Collectible
   - Swingable
   - Enemy
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

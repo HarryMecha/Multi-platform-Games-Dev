@@ -9,7 +9,7 @@ using UnityEngine.InputSystem.Controls;
 
 public class PlayerController : MonoBehaviour
 {
-
+    private Vector3 spawnLocation;
     public Camera PlayerCamera;
     public float cameraSensitivity;
     public float HitDistance;
@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
         collectibleCount = new Dictionary<string, int>();
         harpoonGun = harpoonGunObject.GetComponent<HarpoonGun>();
         currentWeapon = weaponSelection.harpoonGun;
+        spawnLocation = transform.position;
     }
 
     public void setGroundType(groundType type)
@@ -140,10 +141,16 @@ public class PlayerController : MonoBehaviour
         cameraRotation.x = Mathf.Clamp(cameraRotation.x, -90f, 90f);
         PlayerCamera.transform.localRotation = Quaternion.Euler(-cameraRotation.x, 0.0f, 0.0f);
         playerRigidbody.transform.localRotation = Quaternion.Euler(0f, cameraRotation.y, 0.0f);
+
+        if (transform.position.y < -10)
+        {
+            transform.position = spawnLocation;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Ground")
         {
             currentGroundType = (groundType) Enum.Parse(typeof(groundType), collision.gameObject.name);
@@ -162,6 +169,11 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
 
             
+        }
+
+        if (collision.gameObject.tag == "Checkpoint")
+        {
+            spawnLocation = transform.position;
         }
     }
 
