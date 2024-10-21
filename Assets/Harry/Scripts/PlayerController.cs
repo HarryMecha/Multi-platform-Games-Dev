@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         lookValue = Vector3.zero;
         collectibleCount = new Dictionary<string, int>();
         harpoonGun = harpoonGunObject.GetComponent<HarpoonGun>();
-        currentWeapon = weaponSelection.harpoonGun;
+        currentWeapon = weaponSelection.fists;
         spawnLocation = transform.position;
         initalspawnLocation = transform.position;
     }
