@@ -1642,7 +1642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1613154296
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2519,7 +2519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4389990822119901365, guid: da83393120e26a34e9e4639cbd451482, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4689038979944613213, guid: da83393120e26a34e9e4639cbd451482, type: 3}
       propertyPath: HitDistance
