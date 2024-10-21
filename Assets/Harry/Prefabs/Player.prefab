@@ -286,6 +286,7 @@ MonoBehaviour:
   jumpForce: 10
   moveSpeed: 6
   harpoonGunObject: {fileID: 4389990822119901365}
+  playerHandsObject: {fileID: 0}
 --- !u!54 &6567833355436251832
 Rigidbody:
   m_ObjectHideFlags: 0

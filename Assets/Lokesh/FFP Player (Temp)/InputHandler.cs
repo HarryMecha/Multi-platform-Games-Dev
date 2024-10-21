@@ -10,11 +10,17 @@ public class InputHandler : MonoBehaviour
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction jumpAction;
+    private InputAction sprintAction;
+    private InputAction fireAction;
+    private InputAction swapAction;
 
     // Public properties to expose player inputs for movement, looking, and jumping
     public Vector2 MoveInput { get; private set; }      // Stores movement input (e.g., WASD or left stick)
     public Vector2 LookInput { get; private set; }      // Stores camera look input (e.g., mouse or right stick)
     public bool JumpTriggred { get; private set; }      // Stores jump input (true when jump is triggered)
+    public float sprintValue { get; private set; }
+    public bool fireTriggred { get; private set; }
+    public Vector2 swapInput { get; private set; }
 
     // Singleton instance to ensure only one InputHandler exists at a time
     public static InputHandler Instance { get; private set; }
@@ -35,6 +41,9 @@ public class InputHandler : MonoBehaviour
         moveAction = playerControls.FindActionMap("Player").FindAction("Move");
         lookAction = playerControls.FindActionMap("Player").FindAction("Look");
         jumpAction = playerControls.FindActionMap("Player").FindAction("Jump");
+        sprintAction = playerControls.FindActionMap("Player").FindAction("Sprint");
+        fireAction = playerControls.FindActionMap("Player").FindAction("Fire");
+        swapAction = playerControls.FindActionMap("Player").FindAction("Swap");
 
         // Register event listeners for input actions
         RegisterInputAction();
@@ -54,6 +63,15 @@ public class InputHandler : MonoBehaviour
         // Register jump input: Capture when the jump button is pressed and released
         jumpAction.performed += context => JumpTriggred = true; // Set JumpTriggred to true when jump is pressed
         jumpAction.canceled += context => JumpTriggred = false; // Set JumpTriggred to false when jump is released
+
+        sprintAction.performed += context => sprintValue = context.ReadValue<float>();
+        sprintAction.canceled += context => sprintValue = 0f;
+
+        fireAction.performed += context => fireTriggred = true;
+        fireAction.canceled += context => fireTriggred = false;
+
+        swapAction.performed += context => swapInput = context.ReadValue<Vector2>();
+        swapAction.canceled += context => swapInput = Vector2.zero;
     }
 
     // Enable input actions when the object is enabled
@@ -62,6 +80,9 @@ public class InputHandler : MonoBehaviour
         moveAction.Enable();  // Enable movement input
         lookAction.Enable();  // Enable look input
         jumpAction.Enable();  // Enable jump input
+        sprintAction.Enable();
+        fireAction.Enable();
+        swapAction.Enable();
     }
 
     // Disable input actions when the object is disabled
@@ -70,5 +91,8 @@ public class InputHandler : MonoBehaviour
         moveAction.Disable();  // Disable movement input
         lookAction.Disable();  // Disable look input
         jumpAction.Disable();  // Disable jump input
+        sprintAction.Disable();
+        fireAction.Disable();
+        swapAction.Disable();
     }
 }

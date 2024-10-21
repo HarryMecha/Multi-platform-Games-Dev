@@ -5,6 +5,7 @@ public class PlayerControls : MonoBehaviour
     // Serialized fields for player movement settings
     [Header("Movement")]
     [SerializeField] private float walkSpeed;         // Walking speed of the player
+    [SerializeField] private float sprintMultiplier;
 
     // Serialized fields for jump mechanics
     [Header("Jumping")]

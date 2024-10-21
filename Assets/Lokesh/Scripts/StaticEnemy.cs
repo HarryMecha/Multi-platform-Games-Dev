@@ -1,36 +1,36 @@
-using System;
 using UnityEngine;
-using static PlayerController;
 
 public class StaticEnemy : MonoBehaviour
 {
     // Variables for references
     [Header("References")]
-    [SerializeField] private Transform playerObject; // Reference to the player's Transform component
-    [SerializeField] private LayerMask player;       // Layer mask to identify the player
-    [SerializeField] private GameObject projectilePrefab;  // Reference to the projectile prefab
-    [SerializeField] private Transform throwProjectile;
+    [SerializeField] private Transform playerObject;      // Reference to the player's Transform component
+    [SerializeField] private LayerMask player;            // Layer mask to identify the player
+    [SerializeField] private GameObject projectilePrefab; // Reference to the projectile prefab
+    [SerializeField] private Transform throwProjectile;   // Reference to the poistion of Throw Projectile point
 
     // Variables for attacking behavior
     [Header("Attacking")]
-    [SerializeField] private float timeBetweenAttacks;   // Time delay between attacks
-    [SerializeField] private float attackRange;          // Range within which the villain can attack the player
-    [SerializeField] public float projectileSpeed; // Speed of the projectile
+    [SerializeField] private float timeBetweenAttacks; // Time delay between attacks
+    [SerializeField] private float attackRange;        // Range within which the villain can attack the player
+    [SerializeField] public float projectileSpeed;     // Speed of the projectile
 
     private bool alreadyAttacked = false; // Whether the villain has already attacked and is waiting for cooldown
     private bool playerInAttackRange;     // Is the player within the villain's attack range
 
 
-    // Update is called once per frame
-    void Update()
+    // FixedUpdate is called once per frame
+    void FixedUpdate()
     {
         // Check for Attack Rang
         if (Vector3.Distance(playerObject.position, transform.position) <= attackRange) playerInAttackRange = true; 
         else playerInAttackRange = false;
 
-        // If the player is in attack range, attack the player
+        // If the player is in attack range, look at player and attack the player
         if (playerInAttackRange)
-            AttackPlayer(playerInAttackRange);
+        {
+            LookAtPlayer();
+        }
 
         // If the player is not in attack range, reset the rotation after 1 second
         else if (!playerInAttackRange)
@@ -38,10 +38,8 @@ public class StaticEnemy : MonoBehaviour
     }
 
     // Attack the player by firing projectile and managing the attack cooldown
-    private void AttackPlayer(bool attackRange)
+    private void AttackPlayer()
     {
-        LookAtPlayer();
-
         // Ensure the attack is only triggered once during the cooldown
         if (!alreadyAttacked)
         {
@@ -67,7 +65,7 @@ public class StaticEnemy : MonoBehaviour
         // Calculate the direction from this object to the player
         Vector3 directionToPlayer = playerObject.position - transform.position;
 
-        // Remove any vertical difference so the object only rotates on the Y axis (optional, depends on use case)
+        // Remove any vertical difference so the object only rotates on the Y axis
         directionToPlayer.y = 0;
 
         // Calculate the target rotation based on the direction
@@ -75,6 +73,9 @@ public class StaticEnemy : MonoBehaviour
 
         // Smoothly rotate towards the target rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+
+        // Attack the player after rotation is completed
+        Invoke(nameof(AttackPlayer), 1f);
     }
 
     // Reset the rotation when player is not in attack range
