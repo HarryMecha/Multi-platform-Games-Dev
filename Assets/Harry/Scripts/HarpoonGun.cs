@@ -1,3 +1,8 @@
+/* ACKNOWLEDGMENTS
+ * Code has been modified from Grapple Hook script found at: https://youtu.be/Xgh4v1w5DxU?si=d17aevaVWMJ_xfsd 
+ */
+
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;

@@ -9,6 +9,7 @@ using UnityEngine.InputSystem.Controls;
 
 public class PlayerController : MonoBehaviour
 {
+    private Vector3 initalspawnLocation;
     private Vector3 spawnLocation;
     public Camera PlayerCamera;
     public float cameraSensitivity;
@@ -52,7 +53,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        
         currentMoveSpeed = moveSpeed;
         playerRigidbody = GetComponent<Rigidbody>();
         Cursor.visible = false;
@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
         harpoonGun = harpoonGunObject.GetComponent<HarpoonGun>();
         currentWeapon = weaponSelection.harpoonGun;
         spawnLocation = transform.position;
+        initalspawnLocation = transform.position;
     }
 
     public void setGroundType(groundType type)
@@ -213,4 +214,10 @@ public class PlayerController : MonoBehaviour
             setGroundType(groundType.Jumping);
         }
     }
+
+    private void resetPosition()
+    {
+        spawnLocation = initalspawnLocation;
+    }
 }
+
