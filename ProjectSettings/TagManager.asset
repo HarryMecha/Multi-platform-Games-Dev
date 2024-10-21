@@ -14,11 +14,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - HUD
+  - Ground
   - Water
   - UI
   - Swingable
-  - Ground
+  - HUD
   - Player
   - 
   - 

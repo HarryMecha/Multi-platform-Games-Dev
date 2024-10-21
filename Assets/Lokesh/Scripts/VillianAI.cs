@@ -41,8 +41,11 @@ public class VillanAI : MonoBehaviour
     void Update()
     {
         // Check for Sight Range and Attack Range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, player);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, player);
+        if (Vector3.Distance(playerObject.position, transform.position) <= sightRange) playerInSightRange = true;
+        else playerInSightRange = false;
+        
+        if (Vector3.Distance(playerObject.position, transform.position) <= attackRange) playerInAttackRange = true;
+        else playerInAttackRange = false;
 
         // If the player is neither in sight nor attack range, continue patrolling
         if (!playerInSightRange && !playerInAttackRange)

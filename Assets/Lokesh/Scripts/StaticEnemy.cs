@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using static PlayerController;
 
 public class StaticEnemy : MonoBehaviour
 {
@@ -18,15 +20,17 @@ public class StaticEnemy : MonoBehaviour
     private bool alreadyAttacked = false; // Whether the villain has already attacked and is waiting for cooldown
     private bool playerInAttackRange;     // Is the player within the villain's attack range
 
+
     // Update is called once per frame
     void Update()
     {
-        // Check for Attack Range
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, player);
+        // Check for Attack Rang
+        if (Vector3.Distance(playerObject.position, transform.position) <= attackRange) playerInAttackRange = true; 
+        else playerInAttackRange = false;
 
         // If the player is in attack range, attack the player
         if (playerInAttackRange)
-            AttackPlayaer(playerInAttackRange);
+            AttackPlayer(playerInAttackRange);
 
         // If the player is not in attack range, reset the rotation after 1 second
         else if (!playerInAttackRange)
@@ -34,7 +38,7 @@ public class StaticEnemy : MonoBehaviour
     }
 
     // Attack the player by firing projectile and managing the attack cooldown
-    private void AttackPlayaer(bool attackRange)
+    private void AttackPlayer(bool attackRange)
     {
         LookAtPlayer();
 
@@ -103,4 +107,5 @@ public class StaticEnemy : MonoBehaviour
         if (projectileRb != null)
             projectileRb.velocity = directionToPlayer * projectileSpeed;
     }
+
 }
