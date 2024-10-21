@@ -75,7 +75,7 @@ public class HarpoonGun : MonoBehaviour
                     swingJoint.maxDistance = distance * 0.8f;
                     swingJoint.minDistance = distance * 0.25f;
 
-                    swingJoint.spring = 4.5f;
+                    swingJoint.spring = 7;
                     swingJoint.damper = 7.0f;
                     swingJoint.massScale = 4.5f;
 
@@ -104,6 +104,7 @@ public class HarpoonGun : MonoBehaviour
     {
         lineRenderer.positionCount = 0;
         Destroy(swingJoint);
+
     }
 
     void DrawRope()

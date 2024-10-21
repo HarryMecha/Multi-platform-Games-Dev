@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour
 
     public enum groundType
     {
-        Regular,
+        Ground,
+        Checkpoint,
         Ice,
         Bounce,
         Jumping,
@@ -147,14 +148,15 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = spawnLocation;
         }
+        Debug.Log(currentGroundType);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log(collision.gameObject.tag);
-        if (collision.gameObject.tag == "Ground")
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.layer == 3)
         {
-            currentGroundType = (groundType) Enum.Parse(typeof(groundType), collision.gameObject.name);
+            setGroundType((groundType)Enum.Parse(typeof(groundType), collision.gameObject.tag));
         }
 
         if (collision.gameObject.tag == "Collectible")
@@ -180,17 +182,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.layer == 3)
         {
-            currentGroundType = (groundType)Enum.Parse(typeof(groundType), collision.gameObject.name);
+            setGroundType((groundType)Enum.Parse(typeof(groundType), collision.gameObject.tag));
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.layer == 3)
         {
-            currentGroundType = groundType.Jumping;
+            setGroundType(groundType.Jumping);
         }
     }
 }
