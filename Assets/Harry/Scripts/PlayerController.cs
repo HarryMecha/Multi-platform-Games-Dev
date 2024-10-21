@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private HarpoonGun harpoonGun;
     private weaponSelection currentWeapon;
     private PlayerHealth Damage;
+    public GameObject HUDCanvas;
 
     public enum groundType
     {
@@ -142,6 +144,11 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    void OnReset(InputValue value)
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
 
     private void FixedUpdate()
     {
@@ -188,6 +195,10 @@ public class PlayerController : MonoBehaviour
                 }
                 else collectibleCount.Add(collision.gameObject.name, 1);
                 Destroy(collision.gameObject);
+                if(collision.gameObject.name == "Win")
+                {
+                    WinCondition();
+                }
                 break;
 
             case ("Checkpoint"):
@@ -206,12 +217,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        Debug.Log(currentGroundType);   
         if (currentGroundType != groundType.Swinging)
         {
             if (collision.gameObject.layer == 3)
             {
-                Debug.Log("This is switching");
                 setGroundType(groundType.Jumping);
             }
         }
@@ -225,6 +234,12 @@ public class PlayerController : MonoBehaviour
     public groundType GetGroundType()
     {
         return currentGroundType;
+    }
+
+    private void WinCondition()
+    {
+        HUDCanvas.transform.GetChild(0).gameObject.SetActive(false);
+        HUDCanvas.transform.GetChild(1).gameObject.SetActive(true);
     }
 }
 
