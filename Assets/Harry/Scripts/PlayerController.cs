@@ -18,11 +18,13 @@ public class PlayerController : MonoBehaviour
     private groundType currentGroundType;
     private Vector2 moveValue;
     private Vector2 lookValue;
+    private Vector2 scrollValue;
     private float sprintValue;
     public float moveSpeed;
     private float currentMoveSpeed;
     private InputAction moveAction;
     private InputAction lookAction;
+    private InputAction swapAction;
     private Vector3 cameraRotation;
     private Dictionary<string, int> collectibleCount;
     public GameObject harpoonGunObject;
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour
         lookValue = Vector3.zero;
         collectibleCount = new Dictionary<string, int>();
         harpoonGun = harpoonGunObject.GetComponent<HarpoonGun>();
-        currentWeapon = weaponSelection.fists;
+        currentWeapon = weaponSelection.harpoonGun;
         spawnLocation = transform.position;
     }
 
@@ -83,17 +85,22 @@ public class PlayerController : MonoBehaviour
         currentMoveSpeed =  moveSpeed + (5f * value.Get<float>());
     }
 
-    public void OnSwap(InputValue value)
+    void OnScroll(InputValue value)
     {
-        Debug.Log("Scrolled");
-        Debug.Log(value.ToString());
-        if(currentWeapon == weaponSelection.fists)
+        scrollValue = value.Get<Vector2>();
+        if(currentWeapon == weaponSelection.fists && scrollValue.y > 0)
         {
+            //Debug.Log("Fist");
             currentWeapon = weaponSelection.harpoonGun;
+            playerHandsObject.SetActive(false);
+            harpoonGunObject.SetActive(true);
         }
-        if (currentWeapon == weaponSelection.harpoonGun)
+        if (currentWeapon == weaponSelection.harpoonGun && scrollValue.y < 0 && currentGroundType != groundType.Swinging)
         {
+            //Debug.Log("Harpoon");
             currentWeapon = weaponSelection.fists;
+            harpoonGunObject.SetActive(false);
+            playerHandsObject.SetActive(true);
         }
     }
 
@@ -103,8 +110,6 @@ public class PlayerController : MonoBehaviour
         switch (currentWeapon)
         {
             case(weaponSelection.fists):
-                harpoonGunObject.SetActive(false);
-                playerHandsObject.SetActive(true);
                 Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, HitDistance))
@@ -118,17 +123,11 @@ public class PlayerController : MonoBehaviour
 
 
             case(weaponSelection.harpoonGun):
-                harpoonGunObject.SetActive(true);
-                playerHandsObject.SetActive(false);
                 if ((gameObject.GetComponent<SpringJoint>() == null) && (gameObject.GetComponent<ConfigurableJoint>() == null))
                 harpoonGun.shootRope();
 
             break;
         }
-
-
-        
-
     }
     void OnJump(InputValue value)
     {    
@@ -167,7 +166,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = spawnLocation;
         }
-        Debug.Log(currentGroundType);
+        //Debug.Log(currentGroundType);
     }
 
     private void OnCollisionEnter(Collision collision)
