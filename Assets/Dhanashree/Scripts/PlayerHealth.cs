@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth= 100;
-    public int currentHealth;
+    public float maxHealth= 100;
+    public float currentHealth;
     public Health_Bar healthBar;
    // private int damageAmount = 0;
 
@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-    void TakeDamage(int damage)
+    void TakeDamage(float damage)
         {
             currentHealth-=damage;
             healthBar.SetHealth(currentHealth);
@@ -43,6 +43,10 @@ public class PlayerHealth : MonoBehaviour
             else if(collision.gameObject.CompareTag("Projectile"))
             {
                 TakeDamage(5);
+            }
+            else if (collision.gameObject.CompareTag("Trap"))
+            {
+                TakeDamage(7.5f);
             }
         }
 }

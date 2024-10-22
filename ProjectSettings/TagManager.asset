@@ -12,6 +12,8 @@ TagManager:
   - VillanAI
   - Bounce
   - Obstacle
+  - Projectile
+  - Trap
   layers:
   - Default
   - TransparentFX

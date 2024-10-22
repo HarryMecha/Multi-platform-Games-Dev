@@ -24,6 +24,7 @@ public class BlastTrap : MonoBehaviour
     private bool playerInTriggerRange; // Is the player within the trigger range
     private Vector3 targetPosition;    // Current target position while roaming
     private Vector3 movementCenter;    // The center of the movement area
+    private Collider explosionCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,9 @@ public class BlastTrap : MonoBehaviour
 
         // Assign spawn postion of the object as the center of the movement area
         movementCenter = transform.position;
+
+        explosionCollider = GetComponent<Collider>();
+        explosionCollider.enabled = false; 
     }
 
     // Update is called once per frame
@@ -41,20 +45,21 @@ public class BlastTrap : MonoBehaviour
         // Check for trigger range
         if (Vector3.Distance(playerObject.position, transform.position) <= interactRadius) playerInTriggerRange = true;
 
+        RandomMovement();
+
         // If the player is trigger range, explode the object else move randomly
         if (playerInTriggerRange)
             Invoke(nameof(Explode), explodeDelay);
-        else
-            RandomMovement();
-
     }
 
     private void Explode()
     {
         Debug.Log("Object exploded!");
 
+        explosionCollider.enabled = true;
         // Destroy the explosive object
         Destroy(gameObject);
+
     }
 
     // This method handles random movement for the object.
@@ -83,9 +88,7 @@ public class BlastTrap : MonoBehaviour
     private void SetNewTarget()
     {
         // Check if the player is the range of the object, if not set a new random tagert else set player as a new target
-        if (!playerInTriggerRange)
+
             targetPosition = movementCenter + new Vector3(Random.Range(-movementRange, movementRange), Random.Range(-2, 2), Random.Range(-movementRange, movementRange));
-        else
-            targetPosition = playerObject.position;
     }
 }
