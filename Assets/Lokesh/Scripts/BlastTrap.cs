@@ -7,7 +7,6 @@ public class BlastTrap : MonoBehaviour
     // Variables for references
     [Header("References")]
     [SerializeField] private Transform playerObject; // Reference to the player's Transform component
-    [SerializeField] private LayerMask player;       // Layer mask to identify the player
 
     // Variables for movment behavior
     [Header("Movement")]
@@ -40,7 +39,7 @@ public class BlastTrap : MonoBehaviour
     void Update()
     {
         // Check for trigger range
-        playerInTriggerRange = Physics.CheckSphere(transform.position, interactRadius, player);
+        if (Vector3.Distance(playerObject.position, transform.position) <= interactRadius) playerInTriggerRange = true;
 
         // If the player is trigger range, explode the object else move randomly
         if (playerInTriggerRange)

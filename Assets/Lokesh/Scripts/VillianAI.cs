@@ -7,7 +7,6 @@ public class VillanAI : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform playerObject; // Reference to the player's Transform component
     [SerializeField] private LayerMask ground;       // Layer mask to identify what is considered the ground
-    [SerializeField] private LayerMask player;       // Layer mask to identify the player
 
     // Variables for patrolling behavior
     [Header("Patrolling")]

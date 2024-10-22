@@ -5,7 +5,6 @@ public class StaticEnemy : MonoBehaviour
     // Variables for references
     [Header("References")]
     [SerializeField] private Transform playerObject;      // Reference to the player's Transform component
-    [SerializeField] private LayerMask player;            // Layer mask to identify the player
     [SerializeField] private GameObject projectilePrefab; // Reference to the projectile prefab
     [SerializeField] private Transform throwProjectile;   // Reference to the poistion of Throw Projectile point
 
