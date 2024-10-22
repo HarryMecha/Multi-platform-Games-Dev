@@ -1721,17 +1721,13 @@ PrefabInstance:
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 800354925}
-    - target: {fileID: 292110879298248483, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
-      propertyPath: interactRadius
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.694942
       objectReference: {fileID: 0}
     - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5955803
+      value: -1.8699999
       objectReference: {fileID: 0}
     - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1768,10 +1764,6 @@ PrefabInstance:
     - target: {fileID: 8472053547730587732, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
       propertyPath: m_Name
       value: Blast Traps
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472053547730587732, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2152,17 +2144,13 @@ PrefabInstance:
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 800354925}
-    - target: {fileID: 292110879298248483, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
-      propertyPath: interactRadius
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.061764
       objectReference: {fileID: 0}
     - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5955803
+      value: -1.87
       objectReference: {fileID: 0}
     - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2199,10 +2187,6 @@ PrefabInstance:
     - target: {fileID: 8472053547730587732, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
       propertyPath: m_Name
       value: Blast Traps (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8472053547730587732, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3058,7 +3042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5955803
+      value: -1.8699999
       objectReference: {fileID: 0}
     - target: {fileID: 423918492561857078, guid: 8909f4a7a40fd4146bb6353d17bcb9df, type: 3}
       propertyPath: m_LocalPosition.z
