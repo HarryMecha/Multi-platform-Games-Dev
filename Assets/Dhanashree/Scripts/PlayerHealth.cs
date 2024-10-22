@@ -7,13 +7,12 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth= 100;
     public int currentHealth;
     public Health_Bar healthBar;
-   // private int damageAmount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         currentHealth=maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        //healthBar.SetMaxHealth(maxHealth);
 
     }
 
@@ -38,11 +37,8 @@ public class PlayerHealth : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Enemy"))
             {
-                TakeDamage(10);
+                TakeDamage(20);
             }
-            else if(collision.gameObject.CompareTag("Projectile"))
-            {
-                TakeDamage(5);
-            }
+            
         }
 }

@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     public GameObject playerHandsObject;
     private HarpoonGun harpoonGun;
     private weaponSelection currentWeapon;
-    public PlayerHealth Damage;
+    private PlayerHealth Damage;
     public GameObject HUDCanvas;
 
     public enum groundType

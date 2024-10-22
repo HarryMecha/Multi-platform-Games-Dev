@@ -19,7 +19,6 @@ public class VillanAI : MonoBehaviour
     [Header("Attacking")]
     [SerializeField] private float timeBetweenAttacks; // Time delay between attacks
     [SerializeField] private float chaseSpeed;         // Speed at which the Villian moves while chasing
-    [SerializeField] private int damageAmount;         // Damage amount villian causes to the player
 
     // Variables for tracking different states
     [Header("States")]
