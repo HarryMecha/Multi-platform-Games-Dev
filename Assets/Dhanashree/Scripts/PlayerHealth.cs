@@ -24,7 +24,6 @@ public class PlayerHealth : MonoBehaviour
 
             if (currentHealth <= 0)
             {
-                currentHealth = 0;
                 Die();
             }
         }
@@ -40,7 +39,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 TakeDamage(10);
             }
-            else if(collision.gameObject.CompareTag("Projectile"))
+            else if (collision.gameObject.CompareTag("Projectile"))
             {
                 TakeDamage(5);
             }

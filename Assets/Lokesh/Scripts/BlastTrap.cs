@@ -20,23 +20,22 @@ public class BlastTrap : MonoBehaviour
     [SerializeField] private float interactRadius; // Radius in which objects will strat intreacting with player
     [SerializeField] private float explodeDelay;   // Time delay before exploding
 
-    private NavMeshAgent agent;        // Reference to the NavMeshAgent component to handle movement
-    private bool playerInTriggerRange; // Is the player within the trigger range
-    private Vector3 targetPosition;    // Current target position while roaming
-    private Vector3 movementCenter;    // The center of the movement area
-    private Collider explosionCollider;
+    private bool playerInTriggerRange;  // Is the player within the trigger range
+    private Vector3 targetPosition;     // Current target position while roaming
+    private Vector3 movementCenter;     // The center of the movement area
+    private Collider explosionCollider; // Refrence to the collider on the object
 
     // Start is called before the first frame update
     void Start()
-    {
-        // Get the NavMeshAgent component attached to this GameObject
-        agent = GetComponent<NavMeshAgent>();
-
+    {   
         // Assign spawn postion of the object as the center of the movement area
         movementCenter = transform.position;
 
+        // Get collider component attached to this GameObject
         explosionCollider = GetComponent<Collider>();
-        explosionCollider.enabled = false; 
+
+        // Disable the collider on start
+        explosionCollider.enabled = false;
     }
 
     // Update is called once per frame
@@ -49,14 +48,19 @@ public class BlastTrap : MonoBehaviour
 
         // If the player is trigger range, explode the object else move randomly
         if (playerInTriggerRange)
+        {
+            // Enable the collider
+            explosionCollider.enabled = true;
+
+            // Invoke the explode method after some delay
             Invoke(nameof(Explode), explodeDelay);
+        }
     }
 
     private void Explode()
     {
         Debug.Log("Object exploded!");
 
-        explosionCollider.enabled = true;
         // Destroy the explosive object
         Destroy(gameObject);
 
@@ -87,8 +91,16 @@ public class BlastTrap : MonoBehaviour
     // This method sets a new target position for the object to move towards.
     private void SetNewTarget()
     {
-        // Check if the player is the range of the object, if not set a new random tagert else set player as a new target
+        // Set a new random tagert
+        targetPosition = movementCenter + new Vector3(Random.Range(-movementRange, movementRange), Random.Range(-2, 2), Random.Range(-movementRange, movementRange));
+    }
 
-            targetPosition = movementCenter + new Vector3(Random.Range(-movementRange, movementRange), Random.Range(-2, 2), Random.Range(-movementRange, movementRange));
+    private void OnDrawGizmos()
+    {
+        // Set Gizmo color
+        Gizmos.color = Color.red;
+
+        // Draw a wireframe sphere at the object's position with the specified radius
+        Gizmos.DrawWireSphere(transform.position, interactRadius);
     }
 }
