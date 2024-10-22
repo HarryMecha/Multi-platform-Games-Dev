@@ -1,27 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.Port;
+using UnityEngine.UIElements.Experimental;
 
 public class BreakablePlatform : MonoBehaviour
 {
 
     private float startTime;
     private bool playerStanding = false;
-    private bool colliderDestroyed = false;
     private float currentOpacity = 1.0f;
     private MeshRenderer meshRenderer;
-    private float opacityLoss = 0.3f;
-    private Collider collider;
+    private float opacityLoss = 0.7f;
+    public Collider platformCollider;
     private Color currentColor;
 
     private void Awake()
     {
-        collider = GetComponent<Collider>();
+        platformCollider = GetComponent<Collider>();
         meshRenderer = GetComponent<MeshRenderer>();
+        currentColor = meshRenderer.material.color;
+        currentColor.a = currentOpacity;
+        meshRenderer.material.color = currentColor;
     }
 
     private void Update()
     {
+        /*If Player is standing on the platform it will slowly start to lose opacity until the vale hits zero, wherein which the collider is disabled
+         * causing the player object to fall through.*/
         if (playerStanding)
         {
             if (currentOpacity > 0)
@@ -33,11 +40,10 @@ public class BreakablePlatform : MonoBehaviour
             else
             {
                 playerStanding = false;
-                colliderDestroyed = true;
-                collider.enabled = false;
-                
+                platformCollider.enabled = false;
             }
         }
+        /*If the player is no longer standing on the platform it will regain it's opacity*/
         else
         {
             if (currentOpacity < 1.0f)
@@ -49,8 +55,7 @@ public class BreakablePlatform : MonoBehaviour
             }
             else
             {
-                colliderDestroyed = false;
-                collider.enabled = true;
+                platformCollider.enabled = true;
             }
         }
 
@@ -66,7 +71,6 @@ public class BreakablePlatform : MonoBehaviour
     }
     private void OnCollisionExit(Collision collision)
     {
-        Debug.Log("not standing");
         playerStanding = false;
     }
 }
