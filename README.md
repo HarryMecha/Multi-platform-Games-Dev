@@ -1,4 +1,4 @@
-#Game Prototype : Treasure Sea-Ker
+# Game Prototype : Treasure Sea-Ker
 
 This is an early-stage development project for a game being built in Unity. The game focuses on, player has to navigate to the over side of the level and collect the giant treasure collectible at the end. This prototype is designed to demonstrate core mechanics and gameplay ideas that may evolve in future iterations.
 
