@@ -50,6 +50,10 @@ This is an early-stage development project for a game being built in Unity. The 
       <td>Reset Level</td>
       <td>R</td>
     </tr>
+    <tr>
+      <td>Sprint</td>
+      <td>Shift</td>
+    </tr>
   </tbody>
 </table>
 
