@@ -1,12 +1,12 @@
 using UnityEngine;
-using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
 public class BlastTrap : MonoBehaviour
 {
     // Variables for references
     [Header("References")]
-    [SerializeField] private Transform playerObject; // Reference to the player's Transform component
+    [SerializeField] private Transform playerObject;  // Reference to the player's Transform component
+    [SerializeField] private Transform clusterCenter; //
+    [SerializeField] private SpawnFishes spawnFishes; //
 
     // Variables for movment behavior
     [Header("Movement")]
@@ -28,14 +28,17 @@ public class BlastTrap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        // Assign spawn postion of the object as the center of the movement area
-        movementCenter = transform.position;
+        // Assign postion of the cluster center as the center of the movement area
+        movementCenter = clusterCenter.transform.position;
 
         // Get collider component attached to this GameObject
-        explosionCollider = GetComponent<Collider>();
+        explosionCollider = GetComponent<CapsuleCollider>();
 
         // Disable the collider on start
         explosionCollider.enabled = false;
+
+        // System time-based unique seed
+        Random.InitState(System.Environment.TickCount);
     }
 
     // Update is called once per frame
@@ -92,15 +95,13 @@ public class BlastTrap : MonoBehaviour
     private void SetNewTarget()
     {
         // Set a new random tagert
-        targetPosition = movementCenter + new Vector3(Random.Range(-movementRange, movementRange), Random.Range(-2, 2), Random.Range(-movementRange, movementRange));
+        targetPosition = movementCenter + new Vector3(Random.Range(spawnFishes.clusterRangeHorizontal, spawnFishes.clusterRangeHorizontal), Random.Range(-spawnFishes.clusterRangeVertical, spawnFishes.clusterRangeVertical), Random.Range(spawnFishes.clusterRangeHorizontal, spawnFishes.clusterRangeHorizontal));
     }
 
     private void OnDrawGizmos()
     {
-        // Set Gizmo color
+        // Draw a gizmo at the object's position with the specified radius
         Gizmos.color = Color.red;
-
-        // Draw a wireframe sphere at the object's position with the specified radius
         Gizmos.DrawWireSphere(transform.position, interactRadius);
     }
 }
