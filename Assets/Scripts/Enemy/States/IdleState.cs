@@ -16,6 +16,8 @@ public class IdleState : BaseState
 
     public override void Update()
     {
-        base.Update();
+        Debug.Log("Idling");
+        if (enemyController.playerInSightRange()) enemyController.ChangeState(new ChaseState(enemyController));
+        else if (enemyController.playerInAttackRange()) enemyController.ChangeState(new AttackState(enemyController));
     }
 }

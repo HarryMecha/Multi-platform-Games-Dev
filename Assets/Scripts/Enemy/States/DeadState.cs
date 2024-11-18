@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeadState : MonoBehaviour
+public class DeadState : BaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    public DeadState(EnemyController enemyController) : base(enemyController) { }
+
+    public override void Enter()
     {
-        
+        Debug.Log("Entered Dead State");
+        enemyController.SetDeadAnimation(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Exit()
     {
-        
+        base.Exit();
+    }
+
+    public override void Update()
+    {
+        enemyController.Dead(Time.time);
+        Debug.Log("Destroyed GameObject");
     }
 }

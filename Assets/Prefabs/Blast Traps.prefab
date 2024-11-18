@@ -215,7 +215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c717e8059668a4bb09b43cd0c63eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 0}
+  playerObject: {fileID: 3047899335896845550, guid: da83393120e26a34e9e4639cbd451482, type: 3}
+  clusterCenter: {fileID: 885358399656926315, guid: 6ee4ead3da47a464b81a98c8d03045fc, type: 3}
+  spawnFishes: {fileID: 3792163112659057694, guid: 6ee4ead3da47a464b81a98c8d03045fc, type: 3}
   swimSpeed: 3
   turnSpeed: 1
   stoppingDistance: 0.5

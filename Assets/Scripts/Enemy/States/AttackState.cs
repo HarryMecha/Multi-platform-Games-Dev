@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackState : MonoBehaviour
+public class AttackState : BaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    public AttackState(EnemyController enemyController) : base(enemyController) { }
+
+    public override void Enter()
     {
-        
+        Debug.Log("Entered Attacking State");
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Exit()
     {
-        
+        Debug.Log("Exiting Attacking State");
+    }
+
+    public override void Update()
+    {
+        Debug.Log("Attacking");
     }
 }

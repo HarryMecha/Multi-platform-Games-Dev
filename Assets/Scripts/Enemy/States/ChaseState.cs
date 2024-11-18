@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseState : MonoBehaviour
+public class ChaseState : BaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    public ChaseState(EnemyController enemyController) : base(enemyController) { }
+
+    public override void Enter()
     {
-        
+        Debug.Log("Entered Chasing State");
+        enemyController.SetMotionSpeed(1f);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Exit()
     {
-        
+        Debug.Log("Exiting Chasing State");
+    }
+
+    public override void Update()
+    {
+        Debug.Log("Chasing");
     }
 }

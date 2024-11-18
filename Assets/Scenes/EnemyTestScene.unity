@@ -671,11 +671,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401536107}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!95 &1506275720 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2549154575646089566, guid: ca0a3fda2adc6fe4381c119fd1530c6f, type: 3}
-  m_PrefabInstance: {fileID: 1984262281696757206}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1668553653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,14 +1025,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GateKeeper
       objectReference: {fileID: 0}
-    - target: {fileID: 2549154575646089566, guid: ca0a3fda2adc6fe4381c119fd1530c6f, type: 3}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 9000000, guid: 6aa96d5121dc7e245bea64786dab789b, type: 3}
-    - target: {fileID: 6876777607323183047, guid: ca0a3fda2adc6fe4381c119fd1530c6f, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1506275720}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

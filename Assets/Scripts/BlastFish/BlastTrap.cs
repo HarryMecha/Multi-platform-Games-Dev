@@ -13,7 +13,6 @@ public class BlastTrap : MonoBehaviour
     [SerializeField] private float swimSpeed;        // Speed of roaming movement
     [SerializeField] private float turnSpeed;        // Speed at which the fish turns
     [SerializeField] private float stoppingDistance; // Distance to stop near a target position
-    [SerializeField] private float movementRange;    // Radius of the movement area
 
     // Variables for attacking behavior
     [Header("Attacking")]
@@ -29,7 +28,7 @@ public class BlastTrap : MonoBehaviour
     void Start()
     {   
         // Assign postion of the cluster center as the center of the movement area
-        movementCenter = clusterCenter.transform.position;
+        movementCenter = transform.position;
 
         // Get collider component attached to this GameObject
         explosionCollider = GetComponent<CapsuleCollider>();
@@ -38,7 +37,7 @@ public class BlastTrap : MonoBehaviour
         explosionCollider.enabled = false;
 
         // System time-based unique seed
-        Random.InitState(System.Environment.TickCount);
+        // Random.InitState(System.Environment.TickCount);
     }
 
     // Update is called once per frame
@@ -95,7 +94,7 @@ public class BlastTrap : MonoBehaviour
     private void SetNewTarget()
     {
         // Set a new random tagert
-        targetPosition = movementCenter + new Vector3(Random.Range(spawnFishes.clusterRangeHorizontal, spawnFishes.clusterRangeHorizontal), Random.Range(-spawnFishes.clusterRangeVertical, spawnFishes.clusterRangeVertical), Random.Range(spawnFishes.clusterRangeHorizontal, spawnFishes.clusterRangeHorizontal));
+        targetPosition = movementCenter + new Vector3(Random.Range(-spawnFishes.clusterRangeHorizontal, spawnFishes.clusterRangeHorizontal), Random.Range(-spawnFishes.clusterRangeVertical, spawnFishes.clusterRangeVertical), Random.Range(-spawnFishes.clusterRangeHorizontal, spawnFishes.clusterRangeHorizontal));
     }
 
     private void OnDrawGizmos()
