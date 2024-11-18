@@ -9,16 +9,21 @@ TagManager:
   - Swingable
   - Enemy
   - Checkpoint
+  - VillanAI
+  - Bounce
+  - Obstacle
+  - Projectile
+  - Trap
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - HUD
+  - Ground
   - Water
   - UI
   - Swingable
-  - 
-  - 
+  - HUD
+  - Player
   - 
   - 
   - 

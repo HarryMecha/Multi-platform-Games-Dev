@@ -3682,10 +3682,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1306177409}
     - target: {fileID: 4689038979944613213, guid: da83393120e26a34e9e4639cbd451482, type: 3}
+<<<<<<< HEAD
       propertyPath: HitDistance
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4689038979944613213, guid: da83393120e26a34e9e4639cbd451482, type: 3}
+=======
+>>>>>>> main
       propertyPath: bounceForce
       value: 20
       objectReference: {fileID: 0}
