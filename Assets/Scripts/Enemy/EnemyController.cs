@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections.Generic;
 
 public class EnemyController : MonoBehaviour
 {
     // Variables for references
     [Header("Refrences")]
     [SerializeField] private Transform playerObject; // Reference to the player's Transform component
+    [SerializeField] private LayerMask ground;       // Layer mask to identify what is considered the ground
 
     // Variables for tracking different states
     [Header("Define Range")]
@@ -21,12 +21,14 @@ public class EnemyController : MonoBehaviour
 
     // Variables for patrolling behavior
     [Header("Patrolling")]
-    [SerializeField] private List<Transform> waypoint; // Patroling Waypoints
     [SerializeField] private float patrollSpeed;       // Speed at which the Villian moves while patrolling
 
     private BaseState currentState; // Reference to state managers
     private Animator animator;      // Reference to animator component to handle animation
     private NavMeshAgent agent;     // Reference to the NavMeshAgent component to handle movement
+
+    private Vector3 walkPoint;        //
+    private bool waypointSet = false; //
 
     private void Awake()
     {
@@ -75,6 +77,23 @@ public class EnemyController : MonoBehaviour
         if(time >= 5f) Destroy(gameObject);
     }
 
+    public void Patrolling()
+    {
+        animator.SetFloat("Speed", 0.5f);
+        agent.speed = patrollSpeed;
+
+        if (!waypointSet) SearchWaypoint();
+        else agent.SetDestination(walkPoint);
+
+        if (Vector3.Distance(transform.position, walkPoint) < 1f) waypointSet = false;
+    }
+
+    public void SearchWaypoint()
+    {
+        walkPoint = transform.position + new Vector3(Random.Range(-30,30),0,0);
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, ground) && Vector3.Distance(walkPoint, transform.position) >= 6) waypointSet = true;
+    }
+
     public void Chasing()
     {
         agent.SetDestination(playerObject.position);
@@ -90,6 +109,7 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, sightRange);
+        Gizmos.DrawWireCube(transform.position, new Vector3(30, 1, 5));
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }

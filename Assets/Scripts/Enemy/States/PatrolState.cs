@@ -6,16 +6,17 @@ public class PatrolState : BaseState
 
     public override void Enter()
     {
-        base.Enter();
+        Debug.Log("Entered Patrol State");
     }
 
     public override void Exit()
     {
-        base.Exit();
+        Debug.Log("Exiting Patrol State");
     }
 
     public override void Update()
     {
-        base.Update();
+        Debug.Log("Patroling");
+        enemyController.Patrolling();
     }
 }
