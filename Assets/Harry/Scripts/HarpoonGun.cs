@@ -7,7 +7,7 @@ using UnityEngine;
 public class HarpoonGun : MonoBehaviour
 {
     public Camera PlayerCamera;
-    public float maxDistance = 100;
+    public float maxDistance;
     public LineRenderer lineRenderer;
     private Vector3 harpoonEnd;
     public Transform harpoonStart;
@@ -24,6 +24,7 @@ public class HarpoonGun : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        maxDistance = 15;
         lineRenderer = GetComponent<LineRenderer>();
         hookedObjectStartPos = Vector3.zero;
         hookedObjectEndPos = Vector3.zero;
