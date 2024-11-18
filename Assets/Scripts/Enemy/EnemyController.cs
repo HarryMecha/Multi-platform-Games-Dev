@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections.Generic;
 
 public class EnemyController : MonoBehaviour
 {
@@ -20,9 +21,8 @@ public class EnemyController : MonoBehaviour
 
     // Variables for patrolling behavior
     [Header("Patrolling")]
-    [SerializeField] private Vector3 walkPoint;    // Current target position for patrolling
-    [SerializeField] private float walkPointRange; // Range within which the villain will randomly patrol
-    [SerializeField] private float patrollSpeed;   // Speed at which the Villian moves while patrolling
+    [SerializeField] private List<Transform> waypoint; // Patroling Waypoints
+    [SerializeField] private float patrollSpeed;       // Speed at which the Villian moves while patrolling
 
     private BaseState currentState; // Reference to state managers
     private Animator animator;      // Reference to animator component to handle animation

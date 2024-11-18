@@ -144,9 +144,13 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   sightRange: 25
   attackRange: 3
-  timeBetweenAttacks: 0
-  chaseSpeed: 3.5
+  timeBetweenAttacks: 2
+  chaseSpeed: 4
   damageAmount: 0
+  waypoint:
+  - {fileID: 0}
+  - {fileID: 0}
+  patrollSpeed: 2
 --- !u!1001 &1542026021441866803
 PrefabInstance:
   m_ObjectHideFlags: 0
