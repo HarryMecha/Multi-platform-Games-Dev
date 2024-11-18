@@ -18,5 +18,8 @@ public class ChaseState : BaseState
     public override void Update()
     {
         Debug.Log("Chasing");
+        enemyController.Chasing();
+        if (!enemyController.playerInSightRange()) enemyController.ChangeState(new IdleState(enemyController));
+        else if (enemyController.playerInAttackRange()) enemyController.ChangeState(new AttackState(enemyController));
     }
 }

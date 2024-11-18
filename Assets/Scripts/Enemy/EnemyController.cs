@@ -1,19 +1,36 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    // Variables for references
     [Header("Refrences")]
-    [SerializeField] private Transform playerObject;
+    [SerializeField] private Transform playerObject; // Reference to the player's Transform component
 
+    // Variables for tracking different states
     [Header("Define Range")]
-    [SerializeField] private float sightRange;
-    [SerializeField] private float attackRange;
+    [SerializeField] private float sightRange;  // Range within which the villain can see the player
+    [SerializeField] private float attackRange; // Range within which the villain can attack the player
 
-    private BaseState currentState;
-    public Animator animator;
+    // Variables for attacking behavior
+    [Header("Attacking")]
+    [SerializeField] private float timeBetweenAttacks; // Time delay between attacks
+    [SerializeField] private float chaseSpeed;         // Speed at which the Villian moves while chasing
+    [SerializeField] private int damageAmount;         // Damage amount villian causes to the player
+
+    // Variables for patrolling behavior
+    [Header("Patrolling")]
+    [SerializeField] private Vector3 walkPoint;    // Current target position for patrolling
+    [SerializeField] private float walkPointRange; // Range within which the villain will randomly patrol
+    [SerializeField] private float patrollSpeed;   // Speed at which the Villian moves while patrolling
+
+    private BaseState currentState; // Reference to state managers
+    private Animator animator;      // Reference to animator component to handle animation
+    private NavMeshAgent agent;     // Reference to the NavMeshAgent component to handle movement
 
     private void Awake()
     {
+        agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         currentState = new IdleState(this);
         currentState.Enter();
@@ -56,5 +73,24 @@ public class EnemyController : MonoBehaviour
     public void Dead(float time)
     {
         if(time >= 5f) Destroy(gameObject);
+    }
+
+    public void Chasing()
+    {
+        agent.SetDestination(playerObject.position);
+        agent.speed = chaseSpeed;
+    }
+
+    public void Attacking()
+    {
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

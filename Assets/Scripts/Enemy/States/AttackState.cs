@@ -17,5 +17,6 @@ public class AttackState : BaseState
     public override void Update()
     {
         Debug.Log("Attacking");
+        enemyController.Attacking();
     }
 }
