@@ -20,6 +20,7 @@ public class HarpoonGun : MonoBehaviour
     public Transform harpoonStart;
     private SpringJoint swingJoint;
     private ConfigurableJoint joint;
+    private FixedJoint FixedJoint;
     public Transform player;
     private float lerpSpeed;
     private GameObject hookedObject;
@@ -78,6 +79,10 @@ public class HarpoonGun : MonoBehaviour
 
                         case ("Enemy"):
                             jointSetup();
+                            break;
+
+                        case ("Interactable"):
+                            interactableJointSetup(hit.transform.gameObject);
                             break;
 
                         default:
@@ -221,6 +226,13 @@ public class HarpoonGun : MonoBehaviour
         journeyLength = Vector3.Distance(hookedObjectStartPos, hookedObjectEndPos);
         joint = player.gameObject.AddComponent<ConfigurableJoint>();
         joint.connectedAnchor = harpoonEnd;
+        lineRenderer.positionCount = 2;
+    }
+
+    public void interactableJointSetup(GameObject interactable)
+    {
+        FixedJoint = player.gameObject.AddComponent<FixedJoint>();
+        FixedJoint.connectedBody = interactable.GetComponent<Rigidbody>();
         lineRenderer.positionCount = 2;
     }
 }
