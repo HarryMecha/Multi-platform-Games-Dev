@@ -56,7 +56,6 @@ public class HarpoonGun : MonoBehaviour
         
         if (harpoonEndInst)
         {
-            Debug.Log(journeyLength);
             float distCovered = (Time.time - startTime) * lerpSpeed;
 
             float fractionOfJourney = distCovered / journeyLength;
@@ -100,7 +99,6 @@ public class HarpoonGun : MonoBehaviour
         
         if (hookedObject)
         {
-            Debug.Log(hookedObject.ToString());
             float distCovered = (Time.time - startTime) * lerpSpeed;
 
             float fractionOfJourney = distCovered / journeyLength;
