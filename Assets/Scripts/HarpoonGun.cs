@@ -109,7 +109,6 @@ public class HarpoonGun : MonoBehaviour
 
             if (hookedObject.transform.position == hookedObjectEndPos)
             {
-                Debug.Log("this");
                 lineRenderer.positionCount = 0;
                 Destroy(joint);
                 Destroy(harpoonEndObject);
@@ -135,12 +134,10 @@ public class HarpoonGun : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, maxDistance))
             {
-                Debug.Log("Hit object: " + hit.transform.name);
                 harpoonEnd = hit.point;
             }
             else
             {
-                Debug.Log("No object hit. Shooting harpoon to max distance.");
                 harpoonEnd = harpoonStart.position + (ray.direction * maxDistance);
             }
 
