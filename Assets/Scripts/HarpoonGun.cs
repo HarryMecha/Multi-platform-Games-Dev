@@ -36,6 +36,7 @@ public class HarpoonGun : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        harpoonEndInst = false;
         harpoonEndPF = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/HarpoonEnd.prefab");
         maxDistance = 15f;
         lineRenderer = GetComponent<LineRenderer>();
@@ -55,6 +56,7 @@ public class HarpoonGun : MonoBehaviour
         
         if (harpoonEndInst)
         {
+            Debug.Log(journeyLength);
             float distCovered = (Time.time - startTime) * lerpSpeed;
 
             float fractionOfJourney = distCovered / journeyLength;
@@ -67,27 +69,38 @@ public class HarpoonGun : MonoBehaviour
                 lineRenderer.positionCount = 0;
                 Destroy(joint);
                 hookedObject = null;
-                switch (hit.transform.tag)
+                if (hit.transform != false)
                 {
-                    case ("Swingable"):
-                        swingJointSetup();
-                        break;
+                    switch (hit.transform.tag)
+                    {
+                        case ("Swingable"):
+                            swingJointSetup();
+                            break;
 
-                    case ("Enemy"):
-                        jointSetup();
-                        break;
+                        case ("Enemy"):
+                            jointSetup();
+                            break;
 
-                    default:
-                        Destroy(harpoonEndObject);
-                        break;
+                        default:
+                            Destroy(harpoonEndObject);
+                            break;
+                    }
+                    harpoonEndInst = false;
                 }
-                harpoonEndInst = false;
+                else
+                {
+                    lineRenderer.positionCount = 0;
+                    Destroy(joint);
+                    Destroy(harpoonEndObject);
+                    harpoonEndInst = false;
+                }
             }
 
         }
         
         if (hookedObject)
         {
+            Debug.Log(hookedObject.ToString());
             float distCovered = (Time.time - startTime) * lerpSpeed;
 
             float fractionOfJourney = distCovered / journeyLength;
@@ -98,6 +111,7 @@ public class HarpoonGun : MonoBehaviour
 
             if (hookedObject.transform.position == hookedObjectEndPos)
             {
+                Debug.Log("this");
                 lineRenderer.positionCount = 0;
                 Destroy(joint);
                 Destroy(harpoonEndObject);
@@ -114,17 +128,28 @@ public class HarpoonGun : MonoBehaviour
     public void shootRope()
     {
         Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
-        if (Physics.Raycast(ray, out hit, maxDistance))
+
+        if (!harpoonEndInst)
         {
-            if (!harpoonEndInst)
+            startTime = Time.time;
+            harpoonEndObject = Instantiate(harpoonEndPF, harpoonStart.position, Quaternion.identity);
+            harpoonEndInst = true;
+
+            if (Physics.Raycast(ray, out hit, maxDistance))
             {
-                startTime = Time.time;
+                Debug.Log("Hit object: " + hit.transform.name);
                 harpoonEnd = hit.point;
-                harpoonEndObject = Instantiate(harpoonEndPF, harpoonStart.position, Quaternion.identity);
-                harpoonEndInst = true;
-                journeyLength = Vector3.Distance(hookedObjectStartPos, harpoonEnd);
-                lineRenderer.positionCount = 2;
             }
+            else
+            {
+                Debug.Log("No object hit. Shooting harpoon to max distance.");
+                harpoonEnd = harpoonStart.position + (ray.direction * maxDistance);
+            }
+
+            journeyLength = Vector3.Distance(harpoonStart.position, harpoonEnd);
+            lineRenderer.positionCount = 2; // Ensure we can set both positions
+            lineRenderer.SetPosition(0, harpoonStart.position);
+            lineRenderer.SetPosition(1, harpoonEnd);
         }
     }
 
@@ -142,26 +167,25 @@ public class HarpoonGun : MonoBehaviour
     /* DrawRope just renders the line where the joint is attached at each end.*/
     void DrawRope()
     {
-        if ((harpoonEndInst))
-        {
-            lineRenderer.SetPosition(0, harpoonStart.position);
-            lineRenderer.SetPosition(1, harpoonEndObject.transform.position);
-        }
-        else
-        {
-            if (swingJoint)
-            {
+{
+    if (lineRenderer.positionCount < 2) return; // Prevent out-of-bounds errors
 
-                lineRenderer.SetPosition(0, harpoonStart.position);
-                lineRenderer.SetPosition(1, harpoonEnd);
-            }
-
-            if (joint)
-            {
-                lineRenderer.SetPosition(0, harpoonStart.position);
-                lineRenderer.SetPosition(1, harpoonEndObject.transform.position);
-            }
-        }
+    if (harpoonEndInst)
+    {
+        lineRenderer.SetPosition(0, harpoonStart.position);
+        lineRenderer.SetPosition(1, harpoonEndObject.transform.position);
+    }
+    else if (swingJoint)
+    {
+        lineRenderer.SetPosition(0, harpoonStart.position);
+        lineRenderer.SetPosition(1, harpoonEnd);
+    }
+    else if (joint)
+    {
+        lineRenderer.SetPosition(0, harpoonStart.position);
+        lineRenderer.SetPosition(1, harpoonEndObject.transform.position);
+    }
+}
     }
 
     /* isHooked is a getter method that returns whether there is an object assigned to the hookedObject field or not.*/
