@@ -28,7 +28,7 @@ public class HarpoonGun : MonoBehaviour
     private Vector3 harpoonEndStartPos;
     private float startTime;
     private float journeyLength;
-    private GameObject harpoonEndPF;
+    [SerializeField] private GameObject harpoonEndPF;
     private GameObject harpoonEndObject;
     private bool harpoonEndInst;
     private RaycastHit hit;
@@ -37,7 +37,7 @@ public class HarpoonGun : MonoBehaviour
     void Awake()
     {
         harpoonEndInst = false;
-        harpoonEndPF = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/HarpoonEnd.prefab");
+        //harpoonEndPF = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/HarpoonEnd.prefab");
         maxDistance = 15f;
         lineRenderer = GetComponent<LineRenderer>();
         hookedObjectStartPos = Vector3.zero;

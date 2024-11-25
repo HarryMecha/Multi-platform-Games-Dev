@@ -3689,6 +3689,10 @@ PrefabInstance:
       propertyPath: playerHandsObject
       value: 
       objectReference: {fileID: 1469621015}
+    - target: {fileID: 6775396336726581862, guid: da83393120e26a34e9e4639cbd451482, type: 3}
+      propertyPath: harpoonEndPF
+      value: 
+      objectReference: {fileID: 1272987627600144751, guid: d55ea7c89a7de5b40b865127bde69b3d, type: 3}
     - target: {fileID: 8471966990207101538, guid: da83393120e26a34e9e4639cbd451482, type: 3}
       propertyPath: m_IsActive
       value: 1
