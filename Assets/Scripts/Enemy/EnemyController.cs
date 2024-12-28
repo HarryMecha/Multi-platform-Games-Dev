@@ -21,7 +21,8 @@ public class EnemyController : MonoBehaviour
 
     // Variables for patrolling behavior
     [Header("Patrolling")]
-    [SerializeField] private float patrollSpeed;       // Speed at which the Villian moves while patrolling
+    [SerializeField] private float patrollSpeed; // Speed at which the Villian moves while patrolling
+    [SerializeField] private float patrollRange; //
 
     private BaseState currentState; // Reference to state managers
     private Animator animator;      // Reference to animator component to handle animation
@@ -90,7 +91,7 @@ public class EnemyController : MonoBehaviour
 
     public void SearchWaypoint()
     {
-        walkPoint = transform.position + new Vector3(Random.Range(-30,30),0,0);
+        walkPoint = transform.position + new Vector3(Random.Range(-patrollRange, patrollRange),0,0);
         if (Physics.Raycast(walkPoint, -transform.up, 2f, ground) && Vector3.Distance(walkPoint, transform.position) >= 6) waypointSet = true;
     }
 
@@ -102,14 +103,14 @@ public class EnemyController : MonoBehaviour
 
     public void Attacking()
     {
-
+        animator.SetBool("isAttack", true);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, sightRange);
-        Gizmos.DrawWireCube(transform.position, new Vector3(30, 1, 5));
+        Gizmos.DrawWireCube(transform.position, new Vector3(patrollRange, 1, 5));
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }

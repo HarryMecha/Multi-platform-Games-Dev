@@ -7,6 +7,7 @@ public class AttackState : BaseState
     public override void Enter()
     {
         Debug.Log("Entered Attacking State");
+        enemyController.SetMotionSpeed(0f);
     }
 
     public override void Exit()
