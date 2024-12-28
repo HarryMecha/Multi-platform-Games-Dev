@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Fields
     private Vector3 initalspawnLocation;
     private Vector3 spawnLocation;
     public Camera PlayerCamera;
@@ -29,13 +30,17 @@ public class PlayerController : MonoBehaviour
     private InputAction lookAction;
     private InputAction swapAction;
     private Vector3 cameraRotation;
-    private Dictionary<string, int> collectibleCount;
     public GameObject harpoonGunObject;
     public GameObject playerHandsObject;
     private HarpoonGun harpoonGun;
     private weaponSelection currentWeapon;
     private PlayerHealth Damage;
     public GameObject HUDCanvas;
+    private GameObject EnviromentManager;
+    [SerializeField] private bool menuOpen;
+    private GameObject lastInteractableHit = null;
+    private GameObject lastEnemyHit = null;
+    #endregion
 
     public enum groundType
     {
@@ -50,23 +55,26 @@ public class PlayerController : MonoBehaviour
 
     enum weaponSelection
     {
+        idle,
         fists,
         harpoonGun
     }
 
+
     private void Awake()
     {
+        EnviromentManager = GameObject.Find("EnviromentManager");
         currentMoveSpeed = moveSpeed;
         playerRigidbody = GetComponent<Rigidbody>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         currentGroundType = groundType.Jumping;
         lookValue = Vector3.zero;
-        collectibleCount = new Dictionary<string, int>();
         harpoonGun = harpoonGunObject.GetComponent<HarpoonGun>();
-        currentWeapon = weaponSelection.fists;
+        currentWeapon = weaponSelection.idle;
         spawnLocation = transform.position;
         initalspawnLocation = transform.position;
+        //menuOpen = false;
     }
 
     /* setGroundType function is called by this and other scripts in order to set the current groundType of the player object */
@@ -101,17 +109,50 @@ public class PlayerController : MonoBehaviour
     void OnScroll(InputValue value)
     {
         scrollValue = value.Get<Vector2>();
-        if (currentWeapon == weaponSelection.fists && scrollValue.y > 0)
+        switch (currentWeapon)
         {
-            currentWeapon = weaponSelection.harpoonGun;
-            playerHandsObject.SetActive(false);
-            harpoonGunObject.SetActive(true);
-        }
-        if (currentWeapon == weaponSelection.harpoonGun && scrollValue.y < 0 && currentGroundType != groundType.Swinging && harpoonGun.isHooked() == false)
-        {
-            currentWeapon = weaponSelection.fists;
-            harpoonGunObject.SetActive(false);
-            playerHandsObject.SetActive(true);
+            case (weaponSelection.idle):
+                if (scrollValue.y > 0 && EnviromentManager.GetComponent<PlayerManager>().FistsEquipped)
+                {
+                    currentWeapon = weaponSelection.fists;
+                    playerHandsObject.SetActive(true);
+                    harpoonGunObject.SetActive(false);
+                }
+                if (scrollValue.y < 0 && EnviromentManager.GetComponent<PlayerManager>().HarpoonEquipped)
+                {
+                    currentWeapon = weaponSelection.harpoonGun;
+                    playerHandsObject.SetActive(false);
+                    harpoonGunObject.SetActive(true);
+                }
+                break;
+            case (weaponSelection.fists):
+                if (scrollValue.y > 0 && EnviromentManager.GetComponent<PlayerManager>().HarpoonEquipped)
+                {
+                    currentWeapon = weaponSelection.harpoonGun;
+                    playerHandsObject.SetActive(false);
+                    harpoonGunObject.SetActive(true);
+                }
+                if (scrollValue.y < 0)
+                {
+                    currentWeapon = weaponSelection.idle;
+                    playerHandsObject.SetActive(false);
+                    harpoonGunObject.SetActive(false);
+                }
+                break;
+            case (weaponSelection.harpoonGun):
+                if (scrollValue.y < 0 && currentGroundType != groundType.Swinging && harpoonGun.isHooked() == false && EnviromentManager.GetComponent<PlayerManager>().FistsEquipped)
+                {
+                    currentWeapon = weaponSelection.fists;
+                    harpoonGunObject.SetActive(false);
+                    playerHandsObject.SetActive(true);
+                }
+                if (scrollValue.y > 0 && currentGroundType != groundType.Swinging && harpoonGun.isHooked() == false)
+                {
+                    currentWeapon = weaponSelection.idle;
+                    harpoonGunObject.SetActive(false);
+                    playerHandsObject.SetActive(false);
+                }
+                break;
         }
     }
 
@@ -152,17 +193,36 @@ public class PlayerController : MonoBehaviour
             harpoonGun.stopRope();
             currentGroundType = groundType.Jumping;
         }
-        if (currentGroundType != groundType.Jumping && currentGroundType != groundType.Swinging)
+        if (currentGroundType != groundType.Jumping && currentGroundType != groundType.Swinging && menuOpen == false)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
     }
 
     /* OnReset function is called when the InputSystem detects the R key is pressed, this will Reload the scene, effectively resetting the game.*/
-    void OnReset(InputValue value)
+  
+    void OnEscape(InputValue value)
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
+       // menuOpen = !menuOpen;
+       // HUDCanvas.GetComponent<PauseMenu>().ActivateMenu();
+    }
+
+    public void OnConfirm(InputValue value)
+    {
+        EnviromentManager.GetComponent<EnviromentManager>().onConfirmPress();
+    }
+
+    public void OnInteract(InputValue value)
+    {
+        if(lastInteractableHit != null)
+        {
+            if (lastInteractableHit.GetComponent<Collectible>() != null)
+            {
+                Collectible collectible = lastInteractableHit.GetComponent<Collectible>();
+                EnviromentManager.GetComponent<PlayerManager>().addToInventory(collectible);
+            }
+            lastInteractableHit.GetComponent<Interactable>().useInteractable();    
+        }
     }
 
     private void FixedUpdate()
@@ -172,28 +232,35 @@ public class PlayerController : MonoBehaviour
         cameraForward.Normalize();
         Vector3 cameraRight = PlayerCamera.transform.right;
 
-        /* These lines apply the movement force to the character */
-        Vector3 moveDirection = (cameraForward * moveValue.y + cameraRight * moveValue.x).normalized;
-        Vector3 velocity = moveDirection * currentMoveSpeed;
-        velocity.y = playerRigidbody.velocity.y; //keeps the y velocity the same, so is only affected by jump
-        playerRigidbody.velocity = velocity;
+        if (menuOpen == false)
+        {
+            /* These lines apply the movement force to the character */
+            Vector3 moveDirection = (cameraForward * moveValue.y + cameraRight * moveValue.x).normalized;
+            Vector3 velocity = moveDirection * currentMoveSpeed;
+            velocity.y = playerRigidbody.velocity.y; //keeps the y velocity the same, so is only affected by jump
+            playerRigidbody.velocity = velocity;
+        }
     }
 
     void Update()
     {
-        /* These lines allign the camera and player object to the current position of the mouse */
-        cameraRotation.x += lookValue.y * cameraSensitivity;
-        cameraRotation.y += lookValue.x * cameraSensitivity;
-        cameraRotation.x = Mathf.Clamp(cameraRotation.x, -90f, 90f);
-        PlayerCamera.transform.localRotation = Quaternion.Euler(-cameraRotation.x, 0.0f, 0.0f);
-        playerRigidbody.transform.localRotation = Quaternion.Euler(0f, cameraRotation.y, 0.0f);
-
+        if (menuOpen == false)
+        {
+            /* These lines allign the camera and player object to the current position of the mouse */
+            cameraRotation.x += lookValue.y * cameraSensitivity;
+            cameraRotation.y += lookValue.x * cameraSensitivity;
+            cameraRotation.x = Mathf.Clamp(cameraRotation.x, -90f, 90f);
+            PlayerCamera.transform.localRotation = Quaternion.Euler(-cameraRotation.x, 0.0f, 0.0f);
+            playerRigidbody.transform.localRotation = Quaternion.Euler(0f, cameraRotation.y, 0.0f);
+        }
         /*This is the condition which determines whether the character is out of bounds, this will result the the Player object returning to the last
          * checkpoint they visited */
         if (transform.position.y < -10)
         {
             transform.position = spawnLocation;
         }
+
+        lookingAtInteractable();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -213,16 +280,8 @@ public class PlayerController : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case ("Collectible"):
-                if (collectibleCount.ContainsKey((string)collision.gameObject.name))
-                {
-                    collectibleCount[collision.gameObject.name] += 1;
-                }
-                else collectibleCount.Add(collision.gameObject.name, 1);
+                EnviromentManager.GetComponent<PlayerManager>().addToInventory(collision.gameObject.GetComponent<Collectible>());
                 Destroy(collision.gameObject);
-                if (collision.gameObject.name == "Win")
-                {
-                    WinCondition();
-                }
                 break;
 
             case ("Checkpoint"):
@@ -269,5 +328,67 @@ public class PlayerController : MonoBehaviour
         HUDCanvas.transform.GetChild(0).gameObject.SetActive(false);
         HUDCanvas.transform.GetChild(1).gameObject.SetActive(true);
     }
+
+    public void setMenuOpen()
+    {
+        menuOpen = true;
+    }
+
+    public void setMenuClosed()
+    {
+        menuOpen = false;
+    }
+
+    public Vector2 getMoveValue()
+    {
+        return moveValue;
+    }
+
+    private void lookingAtInteractable()
+    {
+        Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+        RaycastHit hit;
+        Debug.DrawRay(ray.origin, ray.direction, Color.red);
+        if (Physics.Raycast(ray, out hit, 5f))
+        {
+            if (hit.transform.tag == "Interactable")
+            {
+                if (hit.transform.gameObject != lastInteractableHit)
+                {
+                    if (lastInteractableHit != null)
+                    {
+                        lastInteractableHit.GetComponent<Interactable>().hideInteractText();
+                    }
+                    lastInteractableHit = hit.transform.gameObject;
+                    lastInteractableHit.GetComponent<Interactable>().showInteractText();
+                }
+            }
+            if (hit.transform.tag == "Enemy")
+            {
+                if (hit.transform.gameObject != lastEnemyHit)
+                {
+                    if (lastEnemyHit != null)
+                    {
+                        lastEnemyHit.GetComponent<EnemyHealth>().hideHealthBar();
+                    }
+                    lastEnemyHit = hit.transform.gameObject;
+                    lastEnemyHit.GetComponent<EnemyHealth>().showHealthBar();
+                }
+            }
+        }
+        else
+        {
+             if(lastInteractableHit != null)
+                    {
+                    lastInteractableHit.GetComponent<Interactable>().hideInteractText();
+                }
+            if (lastEnemyHit != null)
+            {
+                lastEnemyHit.GetComponent<EnemyHealth>().hideHealthBar();
+            }
+            lastEnemyHit = null;
+        }
+    }
+
 }
 

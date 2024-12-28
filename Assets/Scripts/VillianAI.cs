@@ -36,6 +36,8 @@ public class VillanAI : MonoBehaviour
     {
         // Get the NavMeshAgent component attached to this GameObject
         agent = GetComponent<NavMeshAgent>();
+
+        playerObject = GameObject.FindWithTag("Player").transform;
     }
 
     void Update()

@@ -14,6 +14,8 @@ TagManager:
   - Obstacle
   - Projectile
   - Trap
+  - Interactable
+  - Light
   layers:
   - Default
   - TransparentFX
