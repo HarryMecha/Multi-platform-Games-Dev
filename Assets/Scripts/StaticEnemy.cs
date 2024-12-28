@@ -17,7 +17,10 @@ public class StaticEnemy : MonoBehaviour
     private bool alreadyAttacked = false; // Whether the villain has already attacked and is waiting for cooldown
     private bool playerInAttackRange;     // Is the player within the villain's attack range
 
-
+    private void Start()
+    {
+        playerObject = GameObject.FindWithTag("Player").transform;
+    }
     // FixedUpdate is called once per frame
     void FixedUpdate()
     {

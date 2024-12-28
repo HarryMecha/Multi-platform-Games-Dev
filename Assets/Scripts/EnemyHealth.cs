@@ -9,11 +9,19 @@ public class EnemyHealth : MonoBehaviour
 
     private int currentHealth; // Current health of the player
 
+    public Health_Bar healthBar;
+
+    private GameObject healthBarGO;
+
+    [SerializeField] private GameObject replace;
+
     // Start is called before the first frame update
     void Start()
     {
         // Set player's health to the maximum at the start
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        healthBarGO = healthBar.gameObject;
     }
 
     // Function to deal damage to the player
@@ -21,6 +29,7 @@ public class EnemyHealth : MonoBehaviour
     {
         // Reduce current health by damage amount
         currentHealth -= damageAmount;
+        healthBar.SetHealth(currentHealth);
 
         Debug.Log("Enemy took damage. Current Health: " + currentHealth);
 
@@ -36,7 +45,25 @@ public class EnemyHealth : MonoBehaviour
     {
         Debug.Log("Enemy died.");
 
+        if (replace != null)
+        {
+            replace.SetActive(true);
+        }
+
         // Destory the enemy
         Destroy(gameObject);
     }
+
+    public void showHealthBar()
+    {
+        if (!healthBarGO.activeSelf)
+        {
+            healthBarGO.SetActive(true);
+        }
+    }
+    public void hideHealthBar()
+    {
+        healthBarGO.SetActive(false);
+    }
+
 }

@@ -80,7 +80,9 @@ public class HarpoonGun : MonoBehaviour
                         case ("Enemy"):
                             jointSetup();
                             break;
-
+                        case ("Collectible"):
+                            jointSetup();
+                            break;
                         case ("Interactable"):
                             interactableJointSetup(hit.transform.gameObject);
                             break;

@@ -38,6 +38,8 @@ public class BlastTrap : MonoBehaviour
 
         // System time-based unique seed
         // Random.InitState(System.Environment.TickCount);
+
+        playerObject = GameObject.FindWithTag("Player").transform;
     }
 
     // Update is called once per frame
