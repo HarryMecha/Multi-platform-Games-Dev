@@ -19,5 +19,6 @@ public class PatrolState : BaseState
         Debug.Log("Patroling");
         enemyController.Patrolling();
         if (enemyController.playerInSightRange()) enemyController.ChangeState(new ChaseState(enemyController));
+        
     }
 }

@@ -19,5 +19,6 @@ public class AttackState : BaseState
     {
         Debug.Log("Attacking");
         enemyController.Attacking();
+        if (!enemyController.playerInAttackRange()) enemyController.ChangeState(new ChaseState(enemyController));
     }
 }

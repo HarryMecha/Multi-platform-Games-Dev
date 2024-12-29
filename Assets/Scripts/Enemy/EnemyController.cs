@@ -65,6 +65,7 @@ public class EnemyController : MonoBehaviour
 
     public void SetMotionSpeed(float speed)
     {
+        animator.SetBool("isAttack", false);
         animator.SetFloat("Speed", speed);
     }
 
@@ -104,6 +105,7 @@ public class EnemyController : MonoBehaviour
     public void Attacking()
     {
         animator.SetBool("isAttack", true);
+        agent.velocity = Vector3.zero;
     }
 
     private void OnDrawGizmos()

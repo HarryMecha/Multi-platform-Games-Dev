@@ -72,7 +72,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: f3e739dd31cafec4989a696cc3250729, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   sightRange: 25
-  attackRange: 2
+  attackRange: 2.5
   timeBetweenAttacks: 2
   chaseSpeed: 6
   damageAmount: 0
