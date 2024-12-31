@@ -62,6 +62,7 @@ public class EnviromentManager : MonoBehaviour
                     curveHUDTransform.gameObject.SetActive(false);
                 }
                 Controller.setMenuOpen();
+                Controller.setTutorialOn();
 
                 GameObject ConsoleFixed = GameObject.Find("ConsoleFixed");
                 ConsoleFixed.SetActive(false);
@@ -176,7 +177,7 @@ public class EnviromentManager : MonoBehaviour
                 transition.SetTrigger("Start");
                 yield return new WaitForSeconds(1);
                 break;
-            /*
+            
             default:
                 Manager.addToInventory(DivingSuit);
                 Manager.addToInventory(HarpoonGun);
@@ -185,7 +186,7 @@ public class EnviromentManager : MonoBehaviour
                 Manager.HarpoonEquipped = Manager.searchInventory("Harpoon Gun");
                 Debug.Log(Manager.HarpoonEquipped);
                 break;
-            */
+            
         }
     }
 }

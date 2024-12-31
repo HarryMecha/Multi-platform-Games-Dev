@@ -1855,17 +1855,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8001387629814571656, guid: 88542d7bd0f21a2488631beb37cebb67, type: 3}
   m_PrefabInstance: {fileID: 1700529593}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &423239075 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2428398755112290385, guid: 88542d7bd0f21a2488631beb37cebb67, type: 3}
-  m_PrefabInstance: {fileID: 1700529593}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d619145808ebcac408239af748668e1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &426326742
 GameObject:
   m_ObjectHideFlags: 0
@@ -8510,6 +8499,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 302250886}
   m_SourcePrefab: {fileID: 100100000, guid: ca4c13ab2937a57468b3c6b92a8c4e11, type: 3}
+--- !u!114 &750366406 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2428398755112290385, guid: 88542d7bd0f21a2488631beb37cebb67, type: 3}
+  m_PrefabInstance: {fileID: 1700529593}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d619145808ebcac408239af748668e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &756316502
 GameObject:
   m_ObjectHideFlags: 0
@@ -13497,7 +13497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
-  healthBar: {fileID: 423239075}
+  healthBar: {fileID: 750366406}
   replace: {fileID: 1242762498}
 --- !u!65 &1655482345
 BoxCollider:
