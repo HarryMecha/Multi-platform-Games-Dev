@@ -182,9 +182,9 @@ public class EnviromentManager : MonoBehaviour
                 Manager.addToInventory(DivingSuit);
                 Manager.addToInventory(HarpoonGun);
                 Manager.FistsEquipped = Manager.searchInventory("Diving Suit");
-                Debug.Log(Manager.FistsEquipped);
+                //Debug.Log(Manager.FistsEquipped);
                 Manager.HarpoonEquipped = Manager.searchInventory("Harpoon Gun");
-                Debug.Log(Manager.HarpoonEquipped);
+                //Debug.Log(Manager.HarpoonEquipped);
                 break;
             
         }
