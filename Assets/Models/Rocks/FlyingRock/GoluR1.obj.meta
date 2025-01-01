@@ -3,7 +3,12 @@ guid: 43d86ae7ddc5d5842aaed8722e91f73a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GoluR1_Group33854Mat
+    second: {fileID: 2100000, guid: 8a71f1aeb5db1024683cccbb203b06df, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
