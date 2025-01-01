@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         currentWeapon = weaponSelection.idle;
         spawnLocation = transform.position;
         initalspawnLocation = transform.position;
-        //menuOpen = false;
+        menuOpen = false;
     }
 
     /* setGroundType function is called by this and other scripts in order to set the current groundType of the player object */
@@ -204,8 +204,9 @@ public class PlayerController : MonoBehaviour
   
     void OnEscape(InputValue value)
     {
-       // menuOpen = !menuOpen;
-       // HUDCanvas.GetComponent<PauseMenu>().ActivateMenu();
+        Debug.Log("HELLO");
+        menuOpen = !menuOpen;
+        HUDCanvas.GetComponent<PauseMenu>().ActivateMenu();
     }
 
     public void OnConfirm(InputValue value)
