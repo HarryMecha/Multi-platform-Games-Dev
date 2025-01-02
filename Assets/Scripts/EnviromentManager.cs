@@ -189,7 +189,17 @@ public class EnviromentManager : MonoBehaviour
                 Manager.setHarpoonEquipped(Manager.isInInventory("Harpoon Gun"));
                 //Debug.Log(Manager.HarpoonEquipped);
                 break;
-            
+
+            case ("Level102"):
+                DialougeCanvas.SetActive(false);
+                Controller.setMenuClosed();
+                Manager.addToInventory(DivingSuit);
+                Manager.addToInventory(HarpoonGun);
+                Manager.setFistsEquipped(Manager.isInInventory("Diving Suit"));
+                //Debug.Log(Manager.FistsEquipped);
+                Manager.setHarpoonEquipped(Manager.isInInventory("Harpoon Gun"));
+                //Debug.Log(Manager.HarpoonEquipped);
+                break;
         }
     }
 }
