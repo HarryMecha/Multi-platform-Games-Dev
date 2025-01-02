@@ -1218,7 +1218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cbb329007a5e234d9b7b13b88a0a6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playertemp: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &421416161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6465,9 +6465,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 650370377520826870, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 831870808164015423, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 831870808164015423, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 1529142913384997242, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
       propertyPath: m_Layer
@@ -6477,6 +6485,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2014193794256563941, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 2322749943619606413, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -6484,6 +6496,10 @@ PrefabInstance:
     - target: {fileID: 2428207282056332472, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428207282056332472, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 2891985842956888664, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
       propertyPath: m_Layer
@@ -6505,6 +6521,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6087423500061167460, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 6193705163115437137, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -6513,9 +6533,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6657633489692979889, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 7025145717284796819, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7025145717284796819, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 8049363249230444044, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
       propertyPath: m_Layer
@@ -6525,13 +6553,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8116544053444398771, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 9025314560312299807, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 9025314560312299807, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 9209203422637688278, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209203422637688278, guid: 7eb2579eae626fb48bc7b7509a60bf4b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
