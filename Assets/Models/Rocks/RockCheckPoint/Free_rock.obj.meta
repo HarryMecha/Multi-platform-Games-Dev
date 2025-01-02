@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: fca3330ab73063f49bb77c80d60e1919
+guid: 7acdcacb5b9b76644852da76b9666dc6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Free_rockMat
+    second: {fileID: 2100000, guid: f7d03c0877d0b414a9ac1cae5dd45be8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
