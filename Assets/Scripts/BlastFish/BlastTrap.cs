@@ -5,8 +5,8 @@ public class BlastTrap : MonoBehaviour
     // Variables for references
     [Header("References")]
     [SerializeField] private Transform playerObject;  // Reference to the player's Transform component
-    [SerializeField] private Transform clusterCenter; //
-    [SerializeField] private SpawnFishes spawnFishes; //
+    [SerializeField] private Transform clusterCenter; // Refrence to the center of the Cluster
+    [SerializeField] private SpawnFishes spawnFishes; // Refrence to the cluster script to control movement distance
 
     // Variables for movment behavior
     [Header("Movement")]

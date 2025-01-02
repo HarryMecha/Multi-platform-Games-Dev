@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3457cc7884db9e84c8703b7d0c673413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishesDensity: 50
-  clusterRangeHorizontal: 15
-  clusterRangeVertical: 3
+  fishesDensity: 10
+  clusterRangeHorizontal: 7
+  clusterRangeVertical: 5
   minSpawnDistance: 5
   blastTrapsPrefab: {fileID: 6198877965354016393, guid: 4bffc27eaa2a6354b9ee46ba10fe6708, type: 3}
