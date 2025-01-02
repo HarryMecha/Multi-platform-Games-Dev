@@ -16,7 +16,10 @@ public class InventoryMenuManager : MonoBehaviour
     private Collectible swappingObject1;
     private Collectible swappingObject2;
 
-
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
     private void Awake()
     {
         playerManager = GameObject.Find("EnviromentManager").GetComponent<PlayerManager>();

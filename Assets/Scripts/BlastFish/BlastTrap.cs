@@ -31,7 +31,7 @@ public class BlastTrap : MonoBehaviour
         movementCenter = transform.position;
 
         // Get collider component attached to this GameObject
-        explosionCollider = GetComponent<SphereCollider>();
+        explosionCollider = GetComponent<CapsuleCollider>();
 
         // Disable the collider on start
         explosionCollider.enabled = false;

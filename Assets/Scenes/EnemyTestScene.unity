@@ -2419,6 +2419,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4236923233191083351, guid: e2f9c3f0929f2984ebf16e7b9b6af7c5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7534679412423681600, guid: e2f9c3f0929f2984ebf16e7b9b6af7c5, type: 3}
       propertyPath: m_Name
       value: Static Enemy
