@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 spawnLocation;
     public Camera PlayerCamera;
     public float cameraSensitivity;
+    private float initialCameraSensitivity;
     public float HitDistance;
     public float jumpForce;
     public float bounceForce;
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private PlayerHealth Damage;
     public GameObject HUDCanvas;
     private GameObject EnviromentManager;
-    private bool menuOpen;
+    [SerializeField] public bool menuOpen;
     private bool tutorial;
     private GameObject lastInteractableHit = null;
     private GameObject lastEnemyHit = null;
@@ -74,8 +75,7 @@ public class PlayerController : MonoBehaviour
         harpoonGun = harpoonGunObject.GetComponent<HarpoonGun>();
         currentWeapon = weaponSelection.idle;
         spawnLocation = transform.position;
-        initalspawnLocation = transform.position;
-        menuOpen = false;
+        initialCameraSensitivity = cameraSensitivity;
     }
 
     /* setGroundType function is called by this and other scripts in order to set the current groundType of the player object */
@@ -109,51 +109,54 @@ public class PlayerController : MonoBehaviour
      * this  will determine which weapon the player is holding, which will have different properties when the Fire key is pressed.*/
     void OnScroll(InputValue value)
     {
-        scrollValue = value.Get<Vector2>();
-        switch (currentWeapon)
+        if (!menuOpen)
         {
-            case (weaponSelection.idle):
-                if (scrollValue.y > 0 && EnviromentManager.GetComponent<PlayerManager>().FistsEquipped)
-                {
-                    currentWeapon = weaponSelection.fists;
-                    playerHandsObject.SetActive(true);
-                    harpoonGunObject.SetActive(false);
-                }
-                if (scrollValue.y < 0 && EnviromentManager.GetComponent<PlayerManager>().HarpoonEquipped)
-                {
-                    currentWeapon = weaponSelection.harpoonGun;
-                    playerHandsObject.SetActive(false);
-                    harpoonGunObject.SetActive(true);
-                }
-                break;
-            case (weaponSelection.fists):
-                if (scrollValue.y > 0 && EnviromentManager.GetComponent<PlayerManager>().HarpoonEquipped)
-                {
-                    currentWeapon = weaponSelection.harpoonGun;
-                    playerHandsObject.SetActive(false);
-                    harpoonGunObject.SetActive(true);
-                }
-                if (scrollValue.y < 0)
-                {
-                    currentWeapon = weaponSelection.idle;
-                    playerHandsObject.SetActive(false);
-                    harpoonGunObject.SetActive(false);
-                }
-                break;
-            case (weaponSelection.harpoonGun):
-                if (scrollValue.y < 0 && currentGroundType != groundType.Swinging && harpoonGun.isHooked() == false && EnviromentManager.GetComponent<PlayerManager>().FistsEquipped)
-                {
-                    currentWeapon = weaponSelection.fists;
-                    harpoonGunObject.SetActive(false);
-                    playerHandsObject.SetActive(true);
-                }
-                if (scrollValue.y > 0 && currentGroundType != groundType.Swinging && harpoonGun.isHooked() == false)
-                {
-                    currentWeapon = weaponSelection.idle;
-                    harpoonGunObject.SetActive(false);
-                    playerHandsObject.SetActive(false);
-                }
-                break;
+            scrollValue = value.Get<Vector2>();
+            switch (currentWeapon)
+            {
+                case (weaponSelection.idle):
+                    if (scrollValue.y > 0 && EnviromentManager.GetComponent<PlayerManager>().FistsEquipped)
+                    {
+                        currentWeapon = weaponSelection.fists;
+                        playerHandsObject.SetActive(true);
+                        harpoonGunObject.SetActive(false);
+                    }
+                    if (scrollValue.y < 0 && EnviromentManager.GetComponent<PlayerManager>().HarpoonEquipped)
+                    {
+                        currentWeapon = weaponSelection.harpoonGun;
+                        playerHandsObject.SetActive(false);
+                        harpoonGunObject.SetActive(true);
+                    }
+                    break;
+                case (weaponSelection.fists):
+                    if (scrollValue.y > 0 && EnviromentManager.GetComponent<PlayerManager>().HarpoonEquipped)
+                    {
+                        currentWeapon = weaponSelection.harpoonGun;
+                        playerHandsObject.SetActive(false);
+                        harpoonGunObject.SetActive(true);
+                    }
+                    if (scrollValue.y < 0)
+                    {
+                        currentWeapon = weaponSelection.idle;
+                        playerHandsObject.SetActive(false);
+                        harpoonGunObject.SetActive(false);
+                    }
+                    break;
+                case (weaponSelection.harpoonGun):
+                    if (scrollValue.y < 0 && currentGroundType != groundType.Swinging && harpoonGun.isHooked() == false && EnviromentManager.GetComponent<PlayerManager>().FistsEquipped)
+                    {
+                        currentWeapon = weaponSelection.fists;
+                        harpoonGunObject.SetActive(false);
+                        playerHandsObject.SetActive(true);
+                    }
+                    if (scrollValue.y > 0 && currentGroundType != groundType.Swinging && harpoonGun.isHooked() == false)
+                    {
+                        currentWeapon = weaponSelection.idle;
+                        harpoonGunObject.SetActive(false);
+                        playerHandsObject.SetActive(false);
+                    }
+                    break;
+            }
         }
     }
 
@@ -162,26 +165,29 @@ public class PlayerController : MonoBehaviour
      * if Harpoon Gun is selected it will call a function from the HarpoonGun class attatched to the Player*/
     void OnFire(InputValue value)
     {
-        switch (currentWeapon)
+        if (menuOpen == false)
         {
-            case (weaponSelection.fists):
-                Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, HitDistance))
-                {
-                    if (hit.transform.tag == "Enemy")
+            switch (currentWeapon)
+            {
+                case (weaponSelection.fists):
+                    Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit, HitDistance))
                     {
-                        hit.transform.GetComponent<EnemyHealth>().TakeDamage(10);
+                        if (hit.transform.tag == "Enemy")
+                        {
+                            hit.transform.GetComponent<EnemyHealth>().TakeDamage(10);
+                        }
                     }
-                }
-                break;
+                    break;
 
 
-            case (weaponSelection.harpoonGun):
-                if ((gameObject.GetComponent<SpringJoint>() == null) && (gameObject.GetComponent<ConfigurableJoint>() == null))
-                    harpoonGun.shootRope();
+                case (weaponSelection.harpoonGun):
+                    if ((gameObject.GetComponent<SpringJoint>() == null) && (gameObject.GetComponent<ConfigurableJoint>() == null))
+                        harpoonGun.shootRope();
 
-                break;
+                    break;
+            }
         }
     }
 
@@ -204,9 +210,10 @@ public class PlayerController : MonoBehaviour
   
     void OnEscape(InputValue value)
     {
-        Debug.Log("HELLO");
-        menuOpen = !menuOpen;
-        HUDCanvas.GetComponent<PauseMenu>().ActivateMenu();
+        if (HUDCanvas.activeInHierarchy && menuOpen == false)
+        {
+            HUDCanvas.GetComponent<PauseMenu>().ActivateMenu();
+        }
     }
 
     public void OnConfirm(InputValue value)
@@ -218,14 +225,25 @@ public class PlayerController : MonoBehaviour
     {
         if(lastInteractableHit != null)
         {
-            if (lastInteractableHit.GetComponent<Collectible>() != null)
+            Transform PUC = lastInteractableHit.transform.Find("PopUp Canvas");
+            if (lastInteractableHit.GetComponent<Collectible>() != null && PUC.Find("Text (TMP)").gameObject.activeSelf)
             {
                 Collectible collectible = lastInteractableHit.GetComponent<Collectible>();
                 EnviromentManager.GetComponent<PlayerManager>().addToInventory(collectible);
             }
-            lastInteractableHit.GetComponent<Interactable>().useInteractable();    
+            lastInteractableHit.GetComponent<Interactable>().useInteractable();
+            lastInteractableHit = null;
         }
     }
+
+    public void OnInventory(InputValue value)
+    {
+        if (HUDCanvas.activeInHierarchy)
+        {
+            HUDCanvas.GetComponent<PauseMenu>().ActivateInventoryMenu();
+        }
+    }
+
 
     private void FixedUpdate()
     {
@@ -242,6 +260,7 @@ public class PlayerController : MonoBehaviour
             velocity.y = playerRigidbody.velocity.y; //keeps the y velocity the same, so is only affected by jump
             playerRigidbody.velocity = velocity;
         }
+
     }
 
     void Update()
@@ -281,9 +300,9 @@ public class PlayerController : MonoBehaviour
          * Checkpoints will ammend the players spawning location, bounce will apply a upwards force to the player. */
         switch (collision.gameObject.tag)
         {
-            case ("Collectible"):
-                EnviromentManager.GetComponent<PlayerManager>().addToInventory(collision.gameObject.GetComponent<Collectible>());
-                Destroy(collision.gameObject);
+            case ("Collectible"): 
+                EnviromentManager.GetComponent<PlayerManager>().addToInventory(collision.transform.GetComponent<Collectible>());
+                collision.transform.GetChild(0).gameObject.SetActive(false);
                 break;
 
             case ("Checkpoint"):
@@ -333,11 +352,15 @@ public class PlayerController : MonoBehaviour
 
     public void setMenuOpen()
     {
+        Debug.Log("Menu Open");
         menuOpen = true;
+        Debug.Log(menuOpen);
     }
 
     public void setMenuClosed()
     {
+        Debug.Log("Menu Closed");
+       
         menuOpen = false;
     }
 
@@ -354,6 +377,17 @@ public class PlayerController : MonoBehaviour
     public Vector2 getMoveValue()
     {
         return moveValue;
+    }
+
+    public float getInputSensitivity()
+    {
+        return cameraSensitivity;
+    }
+
+    public void setInputSensitivity(float sensitivity)
+    {
+        cameraSensitivity = initialCameraSensitivity * sensitivity;
+        //Debug.Log(cameraSensitivity);
     }
 
     private void lookingAtInteractable()

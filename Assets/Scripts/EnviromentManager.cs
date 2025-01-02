@@ -109,9 +109,10 @@ public class EnviromentManager : MonoBehaviour
                 DialougePanelText.ActivateText();
                 yield return new WaitUntil(() => DialougePanelText.isFinished);
                 DialougePanelText.isFinished = false;
-
-                yield return new WaitUntil(() => Manager.searchInventory("Diving Suit"));
                 Manager.TakeDamage(40);
+                yield return new WaitUntil(() => Manager.isInInventory("Diving Suit"));
+                Manager.setFistsEquipped(Manager.isInInventory("Diving Suit"));
+                
 
                 DialougePanelText.addToItemInfo("Looking good Captain --BZZT-- Now that that's sorted let's get to fixing that navigational terminal, it seems to be on the fritz, use the scroll wheel to select the fists option, giving it a good" +
                     " smack should sort it out,  use left click to punch it until it starts cooperating again!");
@@ -128,7 +129,7 @@ public class EnviromentManager : MonoBehaviour
                 DialougePanelText.ActivateText();
                 yield return new WaitUntil(() => DialougePanelText.isFinished);
                 DialougePanelText.isFinished = false;
-                yield return new WaitForSeconds(5);
+                yield return new WaitForSeconds(3);
 
                 DialougePanelText.addToItemInfo("Ah seems like it's just out of reach... --BZZT-- hmmmmmm --BZZT-- Oh I know why don't you grab one of those Harpoon guns from the cabinet that'll " +
                     "give you the distance you need!");
@@ -137,8 +138,8 @@ public class EnviromentManager : MonoBehaviour
                 yield return new WaitUntil(() => DialougePanelText.isFinished);
                 DialougePanelText.isFinished = false;
 
-                yield return new WaitUntil(() => Manager.searchInventory("Harpoon Gun"));
-                Manager.HarpoonEquipped = true;
+                yield return new WaitUntil(() => Manager.isInInventory("Harpoon Gun"));
+                Manager.setHarpoonEquipped(Manager.isInInventory("Harpoon Gun"));
 
                 DialougePanelText.addToItemInfo("Now move your scroll wheel until you see the Harpoon Gun, then aim well and fire and that can should be yours!");
                 DialougePanelText.incrimentText();
@@ -146,7 +147,7 @@ public class EnviromentManager : MonoBehaviour
                 yield return new WaitUntil(() => DialougePanelText.isFinished);
                 DialougePanelText.isFinished = false;
 
-                yield return new WaitUntil(() => Manager.searchInventory("Soda Can"));
+                yield return new WaitUntil(() => Manager.isInInventory("Soda Can"));
 
                 DialougePanelText.addToItemInfo("I'm sure that hit the spot, now just sit back, relax and enjoy the views of the ocean we should arrive at our destination in --BZZT--  2 hours. [PRESS 'Enter']");
                 DialougePanelText.incrimentText();
@@ -179,11 +180,12 @@ public class EnviromentManager : MonoBehaviour
                 break;
             
             default:
+                Controller.setMenuClosed();
                 Manager.addToInventory(DivingSuit);
                 Manager.addToInventory(HarpoonGun);
-                Manager.FistsEquipped = Manager.searchInventory("Diving Suit");
+                Manager.setFistsEquipped(Manager.isInInventory("Diving Suit"));
                 //Debug.Log(Manager.FistsEquipped);
-                Manager.HarpoonEquipped = Manager.searchInventory("Harpoon Gun");
+                Manager.setHarpoonEquipped(Manager.isInInventory("Harpoon Gun"));
                 //Debug.Log(Manager.HarpoonEquipped);
                 break;
             
