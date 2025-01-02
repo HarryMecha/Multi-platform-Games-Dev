@@ -33,6 +33,7 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
+        playerObject = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         currentState = new IdleState(this);

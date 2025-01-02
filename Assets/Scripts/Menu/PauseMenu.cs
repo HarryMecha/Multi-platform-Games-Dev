@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour
 
         }
         else { 
-            pauseMenu.SetActive(true);
+        pauseMenu.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
          }       

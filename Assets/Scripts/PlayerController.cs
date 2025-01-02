@@ -37,7 +37,8 @@ public class PlayerController : MonoBehaviour
     private PlayerHealth Damage;
     public GameObject HUDCanvas;
     private GameObject EnviromentManager;
-    [SerializeField] private bool menuOpen;
+    private bool menuOpen;
+    private bool tutorial;
     private GameObject lastInteractableHit = null;
     private GameObject lastEnemyHit = null;
     #endregion
@@ -74,7 +75,7 @@ public class PlayerController : MonoBehaviour
         currentWeapon = weaponSelection.idle;
         spawnLocation = transform.position;
         initalspawnLocation = transform.position;
-        //menuOpen = false;
+        menuOpen = false;
     }
 
     /* setGroundType function is called by this and other scripts in order to set the current groundType of the player object */
@@ -193,7 +194,7 @@ public class PlayerController : MonoBehaviour
             harpoonGun.stopRope();
             currentGroundType = groundType.Jumping;
         }
-        if (currentGroundType != groundType.Jumping && currentGroundType != groundType.Swinging && menuOpen == false)
+        if (currentGroundType != groundType.Jumping && currentGroundType != groundType.Swinging && (menuOpen == false && tutorial == false))
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
@@ -203,8 +204,9 @@ public class PlayerController : MonoBehaviour
   
     void OnEscape(InputValue value)
     {
-       // menuOpen = !menuOpen;
-       // HUDCanvas.GetComponent<PauseMenu>().ActivateMenu();
+        Debug.Log("HELLO");
+        menuOpen = !menuOpen;
+        HUDCanvas.GetComponent<PauseMenu>().ActivateMenu();
     }
 
     public void OnConfirm(InputValue value)
@@ -337,6 +339,16 @@ public class PlayerController : MonoBehaviour
     public void setMenuClosed()
     {
         menuOpen = false;
+    }
+
+    public void setTutorialOn()
+    {
+        tutorial = true;
+    }
+
+    public void setTutorialOff()
+    {
+        tutorial = false;
     }
 
     public Vector2 getMoveValue()

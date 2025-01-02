@@ -5,6 +5,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -33,6 +34,7 @@ public class HarpoonGun : MonoBehaviour
     private GameObject harpoonEndObject;
     private bool harpoonEndInst;
     private RaycastHit hit;
+    private List<GameObject> activeHarpoons = new List<GameObject>();
 
     // Start is called before the first frame update
     void Awake()
@@ -88,7 +90,14 @@ public class HarpoonGun : MonoBehaviour
                             break;
 
                         default:
-                            Destroy(harpoonEndObject);
+                            if(activeHarpoons.Count >= 5)
+                            {
+                               GameObject harpoonToDestroy = activeHarpoons[0];
+                                activeHarpoons.RemoveAt(0);
+                                Destroy(harpoonToDestroy);
+                            }
+                            activeHarpoons.Add(harpoonEndObject);
+                            harpoonEndObject.transform.parent = hit.transform;
                             break;
                     }
                     harpoonEndInst = false;
@@ -136,7 +145,7 @@ public class HarpoonGun : MonoBehaviour
         if (!harpoonEndInst)
         {
             startTime = Time.time;
-            harpoonEndObject = Instantiate(harpoonEndPF, harpoonStart.position, Quaternion.identity);
+            harpoonEndObject = Instantiate(harpoonEndPF, harpoonStart.position, PlayerCamera.transform.rotation);
             harpoonEndInst = true;
 
             if (Physics.Raycast(ray, out hit, maxDistance))
