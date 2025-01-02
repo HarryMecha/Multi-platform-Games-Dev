@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.15251563, g: 0.67169935, b: 0.9150943, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.001
+  m_FogDensity: 0.002
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -27,7 +27,7 @@ RenderSettings:
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 897e1f2ec9856b0439b0d8bdcd21b22f, type: 2}
-  m_HaloStrength: 0.5
+  m_HaloStrength: 1
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
@@ -342,6 +342,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7acdcacb5b9b76644852da76b9666dc6, type: 3}
   m_PrefabInstance: {fileID: 82020787}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &102306158 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8749174939171861818, guid: 0695c99347421c74db882b138752a11f, type: 3}
+  m_PrefabInstance: {fileID: 111628603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d619145808ebcac408239af748668e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &111628603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4420,6 +4431,10 @@ PrefabInstance:
       propertyPath: HarpoonGun
       value: 
       objectReference: {fileID: 613929586}
+    - target: {fileID: 4783040959253228061, guid: cea4fdb647c01834ba20af0efd346916, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 102306158}
     - target: {fileID: 5199362011984024122, guid: cea4fdb647c01834ba20af0efd346916, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5096255
