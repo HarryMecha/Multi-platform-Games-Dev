@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 
 public class BreakablePlatform : MonoBehaviour
 {
@@ -11,7 +7,7 @@ public class BreakablePlatform : MonoBehaviour
     private bool playerStanding = false;
     private float currentOpacity = 1.0f;
     private MeshRenderer meshRenderer;
-    private float opacityLoss = 0.7f;
+    private float opacityLoss;
     public Collider platformCollider;
     private Color currentColor;
 
@@ -22,6 +18,7 @@ public class BreakablePlatform : MonoBehaviour
         currentColor = meshRenderer.material.color;
         currentColor.a = currentOpacity;
         meshRenderer.material.color = currentColor;
+        opacityLoss = Random.Range(0.2f, 0.8f);
     }
 
     private void Update()
