@@ -33,8 +33,15 @@ public class PauseMenu : MonoBehaviour
     /*
      * CloseMenu() close the pause menu GUI element.
      */
+
+    public void test()
+    {
+
+        Debug.Log("Test");
+    }
     public void ActivateMenu()
     {
+        Debug.Log("Button Clicked");
         if (pauseMenu.activeSelf)
         {
             Controller.setMenuClosed();
@@ -43,11 +50,12 @@ public class PauseMenu : MonoBehaviour
             pauseMenu.SetActive(false);
 
         }
-        else { 
-        pauseMenu.SetActive(true);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        Controller.setMenuOpen();
+        else 
+        { 
+            pauseMenu.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Controller.setMenuOpen();
          }       
     }
 
@@ -95,7 +103,7 @@ public class PauseMenu : MonoBehaviour
 
     public void quitButton()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("MainMenu");
     }
 
 

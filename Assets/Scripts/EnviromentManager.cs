@@ -7,19 +7,25 @@ using TMPro;
 using UnityEngine.InputSystem;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class EnviromentManager : MonoBehaviour
 {
     private Scene currentScene;
     private string currentSceneName;
+    private string previousSceneName = null;
     public GameObject Player;
     public PlayerController Controller;
     public PlayerManager Manager;
     private GameObject DialougeCanvas;
     private bool confirmPressed;
+    private bool inventoryOpen;
     [SerializeField] private Collectible DivingSuit;
     [SerializeField] private Collectible HarpoonGun;
     public Animator transition;
+   [SerializeField] private List<Camera> additionalSceneCameras;
+     private Camera playerCamera;
+
 
     public enum sceneType
     {
@@ -34,18 +40,16 @@ public class EnviromentManager : MonoBehaviour
         confirmPressed = true;
     }
 
+    public void onInventoryOpen()
+    {
+        inventoryOpen = !inventoryOpen;
+    }
+
 
     // Start is called before the first frame update
     void Awake()
     {
-        currentScene = SceneManager.GetActiveScene();
-        currentSceneName = currentScene.name;
-        Player = GameObject.FindWithTag("Player");
-        Controller = Player.GetComponent<PlayerController>();
-        Manager = transform.GetComponent<PlayerManager>();
-        DialougeCanvas = GameObject.Find("Dialouge Canvas");
-        confirmPressed = false;
-        StartCoroutine(ScriptedEvent());
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     
@@ -55,6 +59,8 @@ public class EnviromentManager : MonoBehaviour
         switch (currentSceneName)
         {
             case ("TutorialScene"):
+                previousSceneName = currentSceneName;
+                Debug.Log("Cooroutine");
                 // Disable CurveHUD
                 GameObject curveHUDTransform = GameObject.Find("CurveHUD");
                 if (curveHUDTransform != null)
@@ -149,6 +155,18 @@ public class EnviromentManager : MonoBehaviour
 
                 yield return new WaitUntil(() => Manager.isInInventory("Soda Can"));
 
+                DialougePanelText.addToItemInfo("Great, looks like you've hooked one, make sure to grab both in order to restore your health to full, --BZZT--, now press 'I' to open up your inventory and use those items, to refill your health");
+                DialougePanelText.incrimentText();
+                DialougePanelText.ActivateText();
+                yield return new WaitUntil(() => DialougePanelText.isFinished);
+                DialougePanelText.isFinished = false;
+
+                yield return new WaitUntil(() => inventoryOpen);
+                DialougePanel.SetActive(false);
+                yield return new WaitUntil(() => Manager.currentHealth == 100);
+                yield return new WaitUntil(() => inventoryOpen);
+
+                DialougePanel.SetActive(true);
                 DialougePanelText.addToItemInfo("I'm sure that hit the spot, now just sit back, relax and enjoy the views of the ocean we should arrive at our destination in --BZZT--  2 hours. [PRESS 'Enter']");
                 DialougePanelText.incrimentText();
                 DialougePanelText.ActivateText();
@@ -158,7 +176,7 @@ public class EnviromentManager : MonoBehaviour
                 yield return new WaitUntil(() => confirmPressed);
                 DialougePanel.SetActive(false);
                 confirmPressed = false;
-                yield return new WaitForSeconds(20);
+                yield return new WaitForSeconds(10);
 
                 GameObject[] lightList = GameObject.FindGameObjectsWithTag("Light");
                 foreach (GameObject light in lightList)
@@ -174,16 +192,30 @@ public class EnviromentManager : MonoBehaviour
                 DialougePanelText.isFinished = false;
                 yield return new WaitForSeconds(7);
                 DialougePanel.SetActive(false);
-                yield return new WaitForSeconds(3);
                 transition.SetTrigger("Start");
                 yield return new WaitForSeconds(1);
+                playerCamera.enabled = false;
+                additionalSceneCameras[0].enabled = true;
+                Animator animator = GameObject.Find("MiniSub").GetComponent<Animator>();
+                animator.SetTrigger("TutorialFinished");
+                yield return new WaitForSeconds(1.8f);
+                SceneManager.LoadScene("Level101");
+                StopCoroutine(ScriptedEvent());
                 break;
 
             case ("Level101"):
-                DialougeCanvas.SetActive(false);
+                DialougePanel = DialougeCanvas.transform.GetChild(0).gameObject;
+                DialougePanelText = DialougePanel.transform.GetChild(0).GetComponent<AnimatedText>();
+                DialougePanel.SetActive(false);
                 Controller.setMenuClosed();
-                Manager.addToInventory(DivingSuit);
-                Manager.addToInventory(HarpoonGun);
+                if (!Manager.isInInventory("Diving Suit"))
+                {
+                    Manager.addToInventory(DivingSuit);
+                }
+                if (!Manager.isInInventory("Harpoon Gun"))
+                {
+                    Manager.addToInventory(HarpoonGun);
+                }
                 Manager.setFistsEquipped(Manager.isInInventory("Diving Suit"));
                 //Debug.Log(Manager.FistsEquipped);
                 Manager.setHarpoonEquipped(Manager.isInInventory("Harpoon Gun"));
@@ -191,7 +223,9 @@ public class EnviromentManager : MonoBehaviour
                 break;
 
             case ("Level102"):
-                DialougeCanvas.SetActive(false);
+                DialougePanel = DialougeCanvas.transform.GetChild(0).gameObject;
+                DialougePanelText = DialougePanel.transform.GetChild(0).GetComponent<AnimatedText>();
+                 DialougePanel.SetActive(false);
                 Controller.setMenuClosed();
                 Manager.addToInventory(DivingSuit);
                 Manager.addToInventory(HarpoonGun);
@@ -202,4 +236,45 @@ public class EnviromentManager : MonoBehaviour
                 break;
         }
     }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log(scene.name);
+        if (scene.name == "MainMenu")
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        setupPlayer();
+        Debug.Log("This");
+        StartCoroutine(ScriptedEvent());
+
+    }
+
+    private void setupPlayer()
+    {
+        Debug.Log("Player Setup");
+        currentScene = SceneManager.GetActiveScene();
+        currentSceneName = currentScene.name;
+        Player = GameObject.FindWithTag("Player");
+        Controller = Player.GetComponent<PlayerController>();
+        Manager = transform.GetComponent<PlayerManager>();
+        DialougeCanvas = GameObject.Find("Dialouge Canvas");
+        confirmPressed = false;
+        inventoryOpen = false;
+        additionalSceneCameras = GameObject.FindObjectsByType<Camera>(FindObjectsSortMode.None).ToList<Camera>();
+        playerCamera = Player.transform.Find("Main Camera").GetComponent<Camera>();
+        additionalSceneCameras.Remove(playerCamera);
+        foreach (Camera camera in additionalSceneCameras)
+        {
+            camera.enabled = false;
+        }
+        Manager.setupHealthBar();
+        Debug.Log(Manager.Inventory);
+        foreach (InventoryItem item in Manager.Inventory)
+        {
+            Debug.Log(item.getCollectible().Name);
+        }
+    }
+
 }

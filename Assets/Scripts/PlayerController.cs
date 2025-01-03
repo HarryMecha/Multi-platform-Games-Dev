@@ -238,6 +238,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnInventory(InputValue value)
     {
+        EnviromentManager.GetComponent<EnviromentManager>().onInventoryOpen();
         if (HUDCanvas.activeInHierarchy)
         {
             HUDCanvas.GetComponent<PauseMenu>().ActivateInventoryMenu();

@@ -11,7 +11,7 @@ public class InventoryMenuManager : MonoBehaviour
     
     [SerializeField] private GameObject HighLightedItem;
     private PlayerManager playerManager;
-    private List<InventoryItem> Inventory = new List<InventoryItem>();
+    private List<InventoryItem> Inventory;
     private GameObject selectedObject;
     private Collectible swappingObject1;
     private Collectible swappingObject2;
@@ -32,6 +32,7 @@ public class InventoryMenuManager : MonoBehaviour
     {
         for (int i = 0; i < InventorySlots.Count; i++)
         {
+            Debug.Log(Inventory.Count);
             if (i < Inventory.Count)
             {
                 InventorySlots[i].GetComponent<InventoryItem>().setCollectible(Inventory[i].getCollectible());
@@ -106,7 +107,7 @@ public class InventoryMenuManager : MonoBehaviour
                 HighLightedItem.transform.Find("Use Item Button").gameObject.SetActive(false);
             }
 
-            if (swappingObject1 != null && selectedObject.gameObject.GetComponent<InventoryItem>() != swappingObject1)
+            if (swappingObject1 != null && selectedObject.gameObject.GetComponent<InventoryItem>().getCollectible() != swappingObject1)
             {
                 swappingObject2 = selectedObject.gameObject.GetComponent<InventoryItem>().getCollectible();
                 playerManager.swapItems(swappingObject1, swappingObject2);

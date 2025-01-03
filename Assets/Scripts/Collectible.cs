@@ -18,6 +18,14 @@ public class Collectible : MonoBehaviour
 
     [CustomEditor(typeof(Collectible))]
 
+    public Collectible(string name, string description, Sprite sprite, bool useable)
+    {
+        Name = name;
+        Description = description;
+        InventoryPicture = sprite;
+        isUseable = useable;
+    }
+
     public class Collectible_Editor : Editor
     {
         public override void OnInspectorGUI()
