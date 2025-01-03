@@ -16,6 +16,7 @@ TagManager:
   - Trap
   - Interactable
   - Light
+  - OutOfBounds
   layers:
   - Default
   - TransparentFX

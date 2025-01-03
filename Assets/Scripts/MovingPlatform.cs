@@ -55,4 +55,25 @@ public class MovingPlatform : MonoBehaviour
             startTime = Time.time;
         }
     }
-}
+
+    private void OnCollisionStay(Collision collision)
+    {
+        switch (direction)
+        {
+            case (movementDirection.UpDwn):
+                endPosition = (startingPosition + (Vector3.up * movementScalar));
+                break;
+            case (movementDirection.FwdBck):
+                endPosition = (startingPosition + (Vector3.forward * movementScalar));
+                break;
+            case (movementDirection.LR):
+                endPosition = (startingPosition + (Vector3.left * movementScalar));
+                break;
+        }
+    }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            
+        }
+    }

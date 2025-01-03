@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         Ground,
         Checkpoint,
+        OutOfBounds,
         Ice,
         Bounce,
         Jumping,
@@ -275,12 +276,6 @@ public class PlayerController : MonoBehaviour
             PlayerCamera.transform.localRotation = Quaternion.Euler(-cameraRotation.x, 0.0f, 0.0f);
             playerRigidbody.transform.localRotation = Quaternion.Euler(0f, cameraRotation.y, 0.0f);
         }
-        /*This is the condition which determines whether the character is out of bounds, this will result the the Player object returning to the last
-         * checkpoint they visited */
-        if (transform.position.y < -10)
-        {
-            transform.position = spawnLocation;
-        }
 
         lookingAtInteractable();
     }
@@ -314,6 +309,12 @@ public class PlayerController : MonoBehaviour
 
                 playerRigidbody.AddForce(Vector3.up * bounceForce, ForceMode.VelocityChange);
 
+                break;
+            /*This is the condition which determines whether the character is out of bounds, this will result the the Player object returning to the last
+             * checkpoint they visited */
+            case ("OutOfBounds"):
+                transform.position = spawnLocation;
+                EnviromentManager.GetComponent<PlayerManager>().TakeDamage(10);
                 break;
         }
 
