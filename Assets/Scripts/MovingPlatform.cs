@@ -1,79 +1,96 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    private Vector3 startingPosition;
-    private Vector3 endPosition;
-    public enum movementDirection
+    private Vector3 startingLocalPosition;
+    private Vector3 endLocalPosition;
+    private Vector3 previousLocalPlatformPosition;
+    public enum MovementDirection
     {
         UpDwn,
         LR,
         FwdBck
     }
-    public movementDirection direction;
+    public MovementDirection direction;
     public float movementScalar;
     public float speed;
     private float startTime;
     private float journeyDistance;
 
+    private List<Transform> objectsOnPlatform = new List<Transform>();
 
     void Awake()
     {
         startTime = Time.time;
-        startingPosition = transform.position;
+        startingLocalPosition = transform.localPosition;
+        previousLocalPlatformPosition = startingLocalPosition;
 
-        /*switch statement calculates the moving platforms end position based on the direction set.*/
+        /* Calculate the platform's end position based on the direction set, in local space. */
         switch (direction)
         {
-            case (movementDirection.UpDwn):
-                endPosition = (startingPosition + (Vector3.up * movementScalar));
+            case MovementDirection.UpDwn:
+                endLocalPosition = (startingLocalPosition + (Vector3.up * movementScalar));
                 break;
-            case (movementDirection.FwdBck):
-                endPosition = (startingPosition + (Vector3.forward * movementScalar));
+            case MovementDirection.FwdBck:
+                endLocalPosition = (startingLocalPosition + (Vector3.forward * movementScalar));
                 break;
-            case (movementDirection.LR):
-                endPosition = (startingPosition + (Vector3.left * movementScalar));
+            case MovementDirection.LR:
+                endLocalPosition = (startingLocalPosition + (Vector3.left * movementScalar));
                 break;
         }
-        journeyDistance = Vector3.Distance(startingPosition, endPosition);
+
+        journeyDistance = Vector3.Distance(startingLocalPosition, endLocalPosition);
     }
 
     void Update()
     {
-        /*This handles the movement of the platform using linear interpolation, moving the platform from start to end position and then reset in the opposite direction.*/
+        /* Handles the movement of the platform using linear interpolation in local space. */
         float distanceCovered = (Time.time - startTime) * speed;
         float fractionOfJourney = distanceCovered / journeyDistance;
-        transform.position = Vector3.Lerp(startingPosition, endPosition, fractionOfJourney);
-        if (transform.position == endPosition)
+        transform.localPosition = Vector3.Lerp(startingLocalPosition, endLocalPosition, fractionOfJourney);
+
+        // Check if we reached the end, then reverse direction
+        if (transform.localPosition == endLocalPosition)
         {
-            Vector3 prevStartPosition = startingPosition;
-            startingPosition = endPosition;
-            endPosition = prevStartPosition;
+            Vector3 prevStartPosition = startingLocalPosition;
+            startingLocalPosition = endLocalPosition;
+            endLocalPosition = prevStartPosition;
             startTime = Time.time;
         }
+
+        // Calculate the platform's global position delta
+        Vector3 globalPlatformDelta = transform.position - transform.parent.TransformPoint(previousLocalPlatformPosition);
+
+        // Update the global position of objects on the platform
+        foreach (var obj in objectsOnPlatform)
+        {
+            if (obj != null)
+            {
+                obj.position += globalPlatformDelta;
+            }
+        }
+
+        // Update the previous platform position in local space
+        previousLocalPlatformPosition = transform.localPosition;
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        switch (direction)
+        Transform obj = collision.collider.transform;
+        if (!objectsOnPlatform.Contains(obj))
         {
-            case (movementDirection.UpDwn):
-                endPosition = (startingPosition + (Vector3.up * movementScalar));
-                break;
-            case (movementDirection.FwdBck):
-                endPosition = (startingPosition + (Vector3.forward * movementScalar));
-                break;
-            case (movementDirection.LR):
-                endPosition = (startingPosition + (Vector3.left * movementScalar));
-                break;
+            objectsOnPlatform.Add(obj);
         }
     }
 
-        private void OnCollisionExit(Collision collision)
+    private void OnCollisionExit(Collision collision)
+    {
+        Transform obj = collision.collider.transform;
+        if (objectsOnPlatform.Contains(obj))
         {
-            
+            objectsOnPlatform.Remove(obj);
         }
     }
+}

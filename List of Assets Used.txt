@@ -11,3 +11,7 @@ Electrical Sound: https://www.youtube.com/watch?v=RnfvLOjKEGg&ab_channel=KokaKol
 Submarine Floor Texture: https://www.tilingtextures.com/wp-content/uploads/2019/02/0087.jpg
 
 Sonar Sound: https://www.youtube.com/watch?v=Ky1c_pF5qoc&ab_channel=MrDildoh
+
+Screen Texture: https://media.istockphoto.com/id/1219565719/vector/blue-radar-screen-scanning-surrounding-and-incoming-aerial-traffic.jpg?s=612x612&w=0&k=20&c=Sd74M0cSiLULbmPiXsnZ8D58_wQ79HSRvgAYDCMAo4s=
+
+Alert Sound: https://www.youtube.com/watch?v=BQI1Fvp6rBw&ab_channel=labubblegum9
