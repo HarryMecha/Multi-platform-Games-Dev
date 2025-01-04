@@ -25,7 +25,7 @@ public class EnviromentManager : MonoBehaviour
     public Animator transition;
    [SerializeField] private List<Camera> additionalSceneCameras;
      private Camera playerCamera;
-
+    [SerializeField] public Difficulty difficulty;
 
 
     public enum sceneType
@@ -35,6 +35,11 @@ public class EnviromentManager : MonoBehaviour
         Main
     }
 
+    public enum Difficulty
+    {
+        Easy,
+        Hard
+    }
 
     public void onConfirmPress()
     {
@@ -50,6 +55,11 @@ public class EnviromentManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        if (GameObject.Find("DifficultyHandler"))
+        {
+            difficulty = (Difficulty)GameObject.Find("DifficultyHandler").GetComponent<DifficultyHandler>().getDifficulty();
+            Destroy(GameObject.Find("DifficultyHandler"));
+        }  
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 

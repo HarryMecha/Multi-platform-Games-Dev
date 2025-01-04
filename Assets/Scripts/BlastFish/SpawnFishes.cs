@@ -14,6 +14,14 @@ public class SpawnFishes : MonoBehaviour
     // Update is called once per frame
     private void Start()
     {
+        GameObject enviromentManagerObject = GameObject.Find("EnviromentManager");
+        EnviromentManager enviromentManager = enviromentManagerObject.GetComponent<EnviromentManager>();
+        switch (enviromentManager.difficulty)
+        {
+            case (EnviromentManager.Difficulty.Easy):
+                fishesDensity = fishesDensity / 2;
+                break;
+        }
         // system time-based unique seed
         Random.InitState(System.Environment.TickCount);
 
