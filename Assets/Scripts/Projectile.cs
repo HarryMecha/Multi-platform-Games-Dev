@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // Health system implementation
+            GameObject EnviromentManager = GameObject.Find("EnviromentManager");
+            EnviromentManager.GetComponent<PlayerManager>().TakeDamage(10);
 
             // Destroy the projectile
             Destroy(gameObject);
