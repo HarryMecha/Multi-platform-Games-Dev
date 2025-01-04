@@ -1205,6 +1205,7 @@ MonoBehaviour:
   InventoryPicture: {fileID: 21300000, guid: 9ddf1d217d486a54ba4b29c16b6a5d17, type: 3}
   isUseable: 1
   isEquippable: 0
+  EquipType: 0
   HealthIncrease: 20
 --- !u!54 &257829356
 Rigidbody:
@@ -1437,7 +1438,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 719514424e58ee64aa4ba40e660df2ac, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1654,6 +1655,7 @@ MonoBehaviour:
   InventoryPicture: {fileID: 0}
   isUseable: 0
   isEquippable: 0
+  EquipType: 0
   HealthIncrease: 0
 --- !u!1 &340519199
 GameObject:
@@ -9083,7 +9085,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 719514424e58ee64aa4ba40e660df2ac, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -11166,7 +11168,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 719514424e58ee64aa4ba40e660df2ac, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -11697,6 +11699,7 @@ MonoBehaviour:
   InventoryPicture: {fileID: 21300000, guid: 9ddf1d217d486a54ba4b29c16b6a5d17, type: 3}
   isUseable: 1
   isEquippable: 0
+  EquipType: 0
   HealthIncrease: 20
 --- !u!54 &1275830260
 Rigidbody:
@@ -13107,6 +13110,7 @@ MonoBehaviour:
   InventoryPicture: {fileID: 0}
   isUseable: 0
   isEquippable: 0
+  EquipType: 0
   HealthIncrease: 0
 --- !u!4 &1646504476 stripped
 Transform:
@@ -13166,6 +13170,7 @@ MonoBehaviour:
   InventoryPicture: {fileID: 0}
   isUseable: 0
   isEquippable: 0
+  EquipType: 0
   HealthIncrease: 0
 --- !u!1 &1646639523
 GameObject:
@@ -13371,7 +13376,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 719514424e58ee64aa4ba40e660df2ac, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -13513,6 +13518,7 @@ MonoBehaviour:
   InventoryPicture: {fileID: 0}
   isUseable: 0
   isEquippable: 0
+  EquipType: 0
   HealthIncrease: 0
 --- !u!224 &1650114368 stripped
 RectTransform:
@@ -14208,6 +14214,7 @@ MonoBehaviour:
   InventoryPicture: {fileID: 21300000, guid: 9ddf1d217d486a54ba4b29c16b6a5d17, type: 3}
   isUseable: 1
   isEquippable: 0
+  EquipType: 0
   HealthIncrease: 20
 --- !u!114 &1729654986
 MonoBehaviour:
@@ -19927,6 +19934,7 @@ MonoBehaviour:
   InventoryPicture: {fileID: 21300000, guid: 2b7a55c616ada3d49ba19c6e68cd5c5a, type: 3}
   isUseable: 0
   isEquippable: 0
+  EquipType: 0
   HealthIncrease: 0
 --- !u!4 &1899598921 stripped
 Transform:
@@ -19992,6 +20000,7 @@ MonoBehaviour:
   InventoryPicture: {fileID: 21300000, guid: 2b7a55c616ada3d49ba19c6e68cd5c5a, type: 3}
   isUseable: 0
   isEquippable: 0
+  EquipType: 0
   HealthIncrease: 0
 --- !u!1 &1920267361
 GameObject:
@@ -20651,6 +20660,7 @@ MonoBehaviour:
   InventoryPicture: {fileID: 21300000, guid: 9ddf1d217d486a54ba4b29c16b6a5d17, type: 3}
   isUseable: 1
   isEquippable: 0
+  EquipType: 0
   HealthIncrease: 20
 --- !u!54 &2095235179
 Rigidbody:
@@ -20770,6 +20780,7 @@ MonoBehaviour:
   InventoryPicture: {fileID: 0}
   isUseable: 0
   isEquippable: 0
+  EquipType: 0
   HealthIncrease: 0
 --- !u!23 &4539702727391332084
 MeshRenderer:

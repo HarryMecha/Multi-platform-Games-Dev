@@ -113,11 +113,15 @@ public class InventoryMenuManager : MonoBehaviour
                     case (Collectible.equipType.harpoon):
                         if (playerManager.currentHarpoonEquipped == selectedCollectible.Name)
                         {
+                            Debug.Log("Hello");
                             HighLightedItem.transform.Find("Unequip Item Button").gameObject.SetActive(true);
+                            HighLightedItem.transform.Find("Equip Item Button").gameObject.SetActive(false);
                         }
                         else
                         {
+                            Debug.Log("Hello2");
                             HighLightedItem.transform.Find("Equip Item Button").gameObject.SetActive(true);
+                            HighLightedItem.transform.Find("Unequip Item Button").gameObject.SetActive(false);
                         }
                         break;
 

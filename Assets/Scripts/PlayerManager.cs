@@ -14,15 +14,20 @@ public class PlayerManager : MonoBehaviour
     public bool FistsEquipped;
     public bool HarpoonEquipped;
     public string currentHarpoonEquipped;
+    private EnviromentManager enviromentManager;
     // private int damageAmount = 0;
 
+    private void Start()
+    {
+        currentHarpoonEquipped = "none";
+        enviromentManager = transform.GetComponent<EnviromentManager>();
+    }
     public void setupHealthBar()
     {
         playerHealthBar = GameObject.Find("Player Health Bar");
         healthBar = playerHealthBar.GetComponent<Health_Bar>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-        currentHarpoonEquipped = "none";
     }
 
     public void TakeDamage(float damage)
@@ -49,7 +54,8 @@ public class PlayerManager : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Player died.");
+        enviromentManager.Controller.HUDCanvas.GetComponent<PauseMenu>().ActivateDeathMenu();
+        IncreaseHealth(100);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -157,11 +163,14 @@ public class PlayerManager : MonoBehaviour
 
     public void equipItem(Collectible collectible)
     {
+        Debug.Log("euipping");
         if (collectible.isEquippable == true)
         {
+            Debug.Log("first check");
             switch (collectible.EquipType)
             {
                 case (Collectible.equipType.harpoon):
+                    Debug.Log("second check");
                     currentHarpoonEquipped = collectible.Name;
                     break;
 

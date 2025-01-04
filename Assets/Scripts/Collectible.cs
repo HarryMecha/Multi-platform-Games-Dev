@@ -19,7 +19,7 @@ public class Collectible : MonoBehaviour
     {
         none,
         harpoon,
-        diviingsuit
+        divingsuit
     }
    
 

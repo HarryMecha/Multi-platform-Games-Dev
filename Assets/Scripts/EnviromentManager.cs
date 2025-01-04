@@ -241,17 +241,26 @@ public class EnviromentManager : MonoBehaviour
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        
         Debug.Log(scene.name);
         if (scene.name == "MainMenu")
         {
-            Destroy(this.gameObject);
+            StopAllCoroutines();
             return;
         }
+        
+        if (this.gameObject != null)
+        {
+            setupPlayer();
+            Debug.Log("This");
+            StartCoroutine(ScriptedEvent());
+        }
 
-        setupPlayer();
-        Debug.Log("This");
-        StartCoroutine(ScriptedEvent());
+    }
 
+    public void unsubscribeSceneManager()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void setupPlayer()

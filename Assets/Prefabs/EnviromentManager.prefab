@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5199362011984024122}
   - component: {fileID: 4091599577515320964}
   - component: {fileID: 4783040959253228061}
-  - component: {fileID: 4060976371542185549}
+  - component: {fileID: 6274891362664537258}
   m_Layer: 0
   m_Name: EnviromentManager
   m_TagString: Untagged
@@ -52,6 +52,7 @@ MonoBehaviour:
   DivingSuit: {fileID: 0}
   HarpoonGun: {fileID: 0}
   transition: {fileID: 0}
+  additionalSceneCameras: []
 --- !u!114 &4783040959253228061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,10 +68,12 @@ MonoBehaviour:
   Inventory: []
   maxHealth: 100
   currentHealth: 0
+  playerHealthBar: {fileID: 0}
   healthBar: {fileID: 0}
   FistsEquipped: 0
   HarpoonEquipped: 0
---- !u!114 &4060976371542185549
+  currentHarpoonEquipped: 
+--- !u!114 &6274891362664537258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
