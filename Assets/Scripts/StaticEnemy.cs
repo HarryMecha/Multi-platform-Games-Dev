@@ -29,6 +29,7 @@ public class StaticEnemy : MonoBehaviour
     void Start()
     {
         playerObject = GameObject.FindWithTag("Player").transform;
+
         // Store the starting position of the object
         startPosition = transform.position;
     }
