@@ -6052,7 +6052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b4a684f183edf47b26c8c864554281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 897251227}
   replace: {fileID: 0}
 --- !u!1001 &662949911
 PrefabInstance:
@@ -6472,6 +6472,18 @@ PrefabInstance:
     - target: {fileID: 4000012795208846, guid: cee7f8869159e9243b02abd6bc771b7d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64000010021942574, guid: cee7f8869159e9243b02abd6bc771b7d, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64000010400601612, guid: cee7f8869159e9243b02abd6bc771b7d, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897427287018568170, guid: cee7f8869159e9243b02abd6bc771b7d, type: 3}
+      propertyPath: m_Center.y
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7085,6 +7097,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cea4fdb647c01834ba20af0efd346916, type: 3}
+--- !u!114 &897251227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4069608341827909065, guid: ca0a3fda2adc6fe4381c119fd1530c6f, type: 3}
+  m_PrefabInstance: {fileID: 775557310}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d619145808ebcac408239af748668e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &911177426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8835,7 +8858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3792163112659057694, guid: 6ee4ead3da47a464b81a98c8d03045fc, type: 3}
       propertyPath: fishesDensity
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3792163112659057694, guid: 6ee4ead3da47a464b81a98c8d03045fc, type: 3}
       propertyPath: clusterRangeVertical
@@ -8906,11 +8929,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6591838664372790819, guid: 0695c99347421c74db882b138752a11f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.1
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 6591838664372790819, guid: 0695c99347421c74db882b138752a11f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 144.34
+      value: 348.3
       objectReference: {fileID: 0}
     - target: {fileID: 6591838664372790819, guid: 0695c99347421c74db882b138752a11f, type: 3}
       propertyPath: m_LocalRotation.w

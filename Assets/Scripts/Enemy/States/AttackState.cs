@@ -12,6 +12,7 @@ public class AttackState : BaseState
     {
         Debug.Log("Entered Attacking State");
         enemyController.SetMotionSpeed(0f);
+        enemyController.PlayAttackAudio();
     }
 
     // Method called when the state is exited

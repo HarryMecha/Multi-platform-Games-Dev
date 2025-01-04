@@ -12,6 +12,7 @@ public class ChaseState : BaseState
     {
         Debug.Log("Entered Chasing State");
         enemyController.SetMotionSpeed(1f);
+        enemyController.PlayRoarAudio();
     }
 
     // Method called when the state is exited

@@ -25,13 +25,21 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float patrollSpeed; // Speed at which the Villian moves while patrolling
     [SerializeField] private float patrollRange; // Patrolling Range of Villian
 
+    // Variables for Audio Source
+    [Header("Audio")]
+    [SerializeField] private AudioClip roarAudio;   // Audio clip for the roar
+    [SerializeField] private AudioClip attackAudio; // Audio clip for the attack
+
     private BaseState currentState; // The current state of the enemy
     private Animator animator;      // Animator component to control enemy animations
     private NavMeshAgent agent;     // NavMeshAgent component to handle enemy navigation
 
-    private Vector3 walkPoint;            // Target point for patrolling
-    private bool waypointSet = false;     // Flag to check if a waypoint has been set
-    public bool waypointDirection = true; // Determines the direction of patrolling
+    private Vector3 walkPoint;             // Target point for patrolling
+    private bool waypointSet = false;      // Flag to check if a waypoint has been set
+    private bool waypointDirection = true; // Determines the direction of patrolling
+    private AudioSource audioSource;       // Reference to the audio source
+    private bool hasRoared = false;        // To ensure roar audio plays only once per detection
+
 
     private void Awake()
     {
@@ -39,10 +47,12 @@ public class EnemyController : MonoBehaviour
         playerObject = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
         // Initialize the enemy's state to Idle
         currentState = new IdleState(this);
         currentState.Enter();
+
     }
 
     private void Update()
@@ -139,6 +149,28 @@ public class EnemyController : MonoBehaviour
         animator.SetBool("isAttack", true); // Play the attack animation
         agent.velocity = Vector3.zero; // Stop the enemy's movement
     }
+
+    // Handle starting roar audio when villian start chasing
+    public void PlayRoarAudio()
+    {
+        if (roarAudio != null)
+        {
+            audioSource.clip = roarAudio;
+            audioSource.Play();
+            hasRoared = true;
+        }
+    }
+
+    // Handle attack roar audio when villian start attacking
+    public void PlayAttackAudio()
+    {
+        if (attackAudio != null && !audioSource.isPlaying)
+        {
+            audioSource.clip = attackAudio;
+            audioSource.Play();
+        }
+    }
+
 
     // Visualize the sight and attack ranges in the editor
     private void OnDrawGizmos()
