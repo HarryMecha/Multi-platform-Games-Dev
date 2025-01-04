@@ -289,7 +289,10 @@ public class EnviromentManager : MonoBehaviour
         additionalSceneCameras.Remove(playerCamera);
         foreach (Camera camera in additionalSceneCameras)
         {
-            camera.enabled = false;
+            if (camera.gameObject.name != "MiniMapCamera")
+            {
+                camera.enabled = false;
+            }
         }
         Manager.setupHealthBar();
         Debug.Log(Manager.Inventory);
