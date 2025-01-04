@@ -106,6 +106,28 @@ public class InventoryMenuManager : MonoBehaviour
             {
                 HighLightedItem.transform.Find("Use Item Button").gameObject.SetActive(false);
             }
+            if (selectedCollectible.isEquippable)
+            {
+                switch (selectedCollectible.EquipType)
+                {
+                    case (Collectible.equipType.harpoon):
+                        if (playerManager.currentHarpoonEquipped == selectedCollectible.Name)
+                        {
+                            HighLightedItem.transform.Find("Unequip Item Button").gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            HighLightedItem.transform.Find("Equip Item Button").gameObject.SetActive(true);
+                        }
+                        break;
+
+                }
+            }
+            else
+            {
+                HighLightedItem.transform.Find("Equip Item Button").gameObject.SetActive(false);
+                HighLightedItem.transform.Find("Unequip Item Button").gameObject.SetActive(false);
+            }
 
             if (swappingObject1 != null && selectedObject.gameObject.GetComponent<InventoryItem>().getCollectible() != swappingObject1)
             {
@@ -133,6 +155,36 @@ public class InventoryMenuManager : MonoBehaviour
         if (selectedObject.gameObject.GetComponent<InventoryItem>().getCollectible() != null)
         {
             playerManager.useItem(selectedObject.gameObject.GetComponent<InventoryItem>().getCollectible());
+            inventorySetup();
+            slotSelected(selectedObject);
+
+        }
+    }
+
+    public void equipSelectedObject()
+    {
+        if (selectedObject.gameObject.GetComponent<InventoryItem>() == null)
+        {
+            return;
+        }
+        if (selectedObject.gameObject.GetComponent<InventoryItem>().getCollectible() != null)
+        {
+            playerManager.equipItem(selectedObject.gameObject.GetComponent<InventoryItem>().getCollectible());
+            inventorySetup();
+            slotSelected(selectedObject);
+
+        }
+    }
+
+    public void unequipSelectedObject()
+    {
+        if (selectedObject.gameObject.GetComponent<InventoryItem>() == null)
+        {
+            return;
+        }
+        if (selectedObject.gameObject.GetComponent<InventoryItem>().getCollectible() != null)
+        {
+            playerManager.unequipItem(selectedObject.gameObject.GetComponent<InventoryItem>().getCollectible());
             inventorySetup();
             slotSelected(selectedObject);
 

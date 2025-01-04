@@ -27,6 +27,7 @@ public class EnviromentManager : MonoBehaviour
      private Camera playerCamera;
 
 
+
     public enum sceneType
     {
         Tutorial,
@@ -118,7 +119,8 @@ public class EnviromentManager : MonoBehaviour
                 Manager.TakeDamage(40);
                 yield return new WaitUntil(() => Manager.isInInventory("Diving Suit"));
                 Manager.setFistsEquipped(Manager.isInInventory("Diving Suit"));
-                
+                curveHUDTransform.gameObject.GetComponent<AudioSource>().Play();
+
 
                 DialougePanelText.addToItemInfo("Looking good Captain --BZZT-- Now that that's sorted let's get to fixing that navigational terminal, it seems to be on the fritz, use the scroll wheel to select the fists option, giving it a good" +
                     " smack should sort it out,  use left click to punch it until it starts cooperating again!");
@@ -193,6 +195,7 @@ public class EnviromentManager : MonoBehaviour
                 yield return new WaitForSeconds(7);
                 DialougePanel.SetActive(false);
                 transition.SetTrigger("Start");
+                curveHUDTransform.gameObject.SetActive(false);
                 yield return new WaitForSeconds(1);
                 playerCamera.enabled = false;
                 additionalSceneCameras[0].enabled = true;

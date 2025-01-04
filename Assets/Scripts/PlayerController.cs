@@ -296,9 +296,11 @@ public class PlayerController : MonoBehaviour
          * Checkpoints will ammend the players spawning location, bounce will apply a upwards force to the player. */
         switch (collision.gameObject.tag)
         {
-            case ("Collectible"): 
+            case ("Collectible"):
                 EnviromentManager.GetComponent<PlayerManager>().addToInventory(collision.transform.GetComponent<Collectible>());
                 collision.transform.GetChild(0).gameObject.SetActive(false);
+                if (collision.transform.GetComponent<BoxCollider>())
+                    collision.transform.GetComponent<BoxCollider>().enabled = false;
                 break;
 
             case ("Checkpoint"):

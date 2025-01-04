@@ -1204,6 +1204,7 @@ MonoBehaviour:
   Description: A refreshing beverage that will quench your thirst, heals 20 HP.
   InventoryPicture: {fileID: 21300000, guid: 9ddf1d217d486a54ba4b29c16b6a5d17, type: 3}
   isUseable: 1
+  isEquippable: 0
   HealthIncrease: 20
 --- !u!54 &257829356
 Rigidbody:
@@ -1431,12 +1432,12 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276205562}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 719514424e58ee64aa4ba40e660df2ac, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1652,6 +1653,7 @@ MonoBehaviour:
   Description: 
   InventoryPicture: {fileID: 0}
   isUseable: 0
+  isEquippable: 0
   HealthIncrease: 0
 --- !u!1 &340519199
 GameObject:
@@ -9076,14 +9078,14 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781007229}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 719514424e58ee64aa4ba40e660df2ac, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.25
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -11159,12 +11161,12 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062214976}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 719514424e58ee64aa4ba40e660df2ac, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -11694,6 +11696,7 @@ MonoBehaviour:
   Description: A refreshing beverage that will quench your thirst, heals 20 HP.
   InventoryPicture: {fileID: 21300000, guid: 9ddf1d217d486a54ba4b29c16b6a5d17, type: 3}
   isUseable: 1
+  isEquippable: 0
   HealthIncrease: 20
 --- !u!54 &1275830260
 Rigidbody:
@@ -13103,6 +13106,7 @@ MonoBehaviour:
   Description: 
   InventoryPicture: {fileID: 0}
   isUseable: 0
+  isEquippable: 0
   HealthIncrease: 0
 --- !u!4 &1646504476 stripped
 Transform:
@@ -13161,6 +13165,7 @@ MonoBehaviour:
   Description: 
   InventoryPicture: {fileID: 0}
   isUseable: 0
+  isEquippable: 0
   HealthIncrease: 0
 --- !u!1 &1646639523
 GameObject:
@@ -13361,12 +13366,12 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646639523}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 719514424e58ee64aa4ba40e660df2ac, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -13507,6 +13512,7 @@ MonoBehaviour:
   Description: 
   InventoryPicture: {fileID: 0}
   isUseable: 0
+  isEquippable: 0
   HealthIncrease: 0
 --- !u!224 &1650114368 stripped
 RectTransform:
@@ -14201,6 +14207,7 @@ MonoBehaviour:
   Description: A refreshing beverage that will quench your thirst, heals 20 HP.
   InventoryPicture: {fileID: 21300000, guid: 9ddf1d217d486a54ba4b29c16b6a5d17, type: 3}
   isUseable: 1
+  isEquippable: 0
   HealthIncrease: 20
 --- !u!114 &1729654986
 MonoBehaviour:
@@ -19919,6 +19926,7 @@ MonoBehaviour:
     of the ocean.
   InventoryPicture: {fileID: 21300000, guid: 2b7a55c616ada3d49ba19c6e68cd5c5a, type: 3}
   isUseable: 0
+  isEquippable: 0
   HealthIncrease: 0
 --- !u!4 &1899598921 stripped
 Transform:
@@ -19983,6 +19991,7 @@ MonoBehaviour:
     of the ocean.
   InventoryPicture: {fileID: 21300000, guid: 2b7a55c616ada3d49ba19c6e68cd5c5a, type: 3}
   isUseable: 0
+  isEquippable: 0
   HealthIncrease: 0
 --- !u!1 &1920267361
 GameObject:
@@ -20641,6 +20650,7 @@ MonoBehaviour:
   Description: A refreshing beverage that will quench your thirst, heals 20 HP.
   InventoryPicture: {fileID: 21300000, guid: 9ddf1d217d486a54ba4b29c16b6a5d17, type: 3}
   isUseable: 1
+  isEquippable: 0
   HealthIncrease: 20
 --- !u!54 &2095235179
 Rigidbody:
@@ -20759,6 +20769,7 @@ MonoBehaviour:
   Description: 
   InventoryPicture: {fileID: 0}
   isUseable: 0
+  isEquippable: 0
   HealthIncrease: 0
 --- !u!23 &4539702727391332084
 MeshRenderer:

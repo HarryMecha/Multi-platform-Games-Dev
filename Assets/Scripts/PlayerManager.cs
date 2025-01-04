@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     public Health_Bar healthBar;
     public bool FistsEquipped;
     public bool HarpoonEquipped;
+    public string currentHarpoonEquipped;
     // private int damageAmount = 0;
 
     public void setupHealthBar()
@@ -21,6 +22,7 @@ public class PlayerManager : MonoBehaviour
         healthBar = playerHealthBar.GetComponent<Health_Bar>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        currentHarpoonEquipped = "none";
     }
 
     public void TakeDamage(float damage)
@@ -90,6 +92,8 @@ public class PlayerManager : MonoBehaviour
         collectibleToAdd.Description = collectible.Description;
         collectibleToAdd.InventoryPicture = collectible.InventoryPicture;
         collectibleToAdd.isUseable = collectible.isUseable;
+        collectibleToAdd.isEquippable = collectible.isEquippable;
+        collectibleToAdd.EquipType = collectible.EquipType;
         if (collectibleToAdd.isUseable)
         {
             if (collectible.HealthIncrease > 0)
@@ -125,6 +129,7 @@ public class PlayerManager : MonoBehaviour
                 IncreaseHealth(collectible.HealthIncrease);
             }
         }
+
         int index = 0;
         foreach (InventoryItem collected in Inventory)
         {
@@ -150,7 +155,36 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    
+    public void equipItem(Collectible collectible)
+    {
+        if (collectible.isEquippable == true)
+        {
+            switch (collectible.EquipType)
+            {
+                case (Collectible.equipType.harpoon):
+                    currentHarpoonEquipped = collectible.Name;
+                    break;
+
+            }
+        }
+
+    }
+
+    public void unequipItem(Collectible collectible)
+    {
+        if (collectible.isEquippable == true)
+        {
+            switch (collectible.EquipType)
+            {
+                case (Collectible.equipType.harpoon):
+                    currentHarpoonEquipped = "none";
+                    break;
+
+            }
+        }
+
+    }
+
     public void swapItems(Collectible item1, Collectible item2)
     {
         Debug.Log(item1.Name);

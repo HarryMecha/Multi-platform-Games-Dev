@@ -30,15 +30,20 @@ public class HarpoonGun : MonoBehaviour
     private Vector3 harpoonEndStartPos;
     private float startTime;
     private float journeyLength;
+    [SerializeField] private List<GameObject> harpoonEndPFList;
     [SerializeField] private GameObject harpoonEndPF;
     private GameObject harpoonEndObject;
     private bool harpoonEndInst;
     private RaycastHit hit;
     private List<GameObject> activeHarpoons = new List<GameObject>();
+    private GameObject EnviromentManager;
+    private string currentHarpoonType;
 
     // Start is called before the first frame update
     void Awake()
     {
+        EnviromentManager = GameObject.Find("EnviromentManager");
+        currentHarpoonType = EnviromentManager.GetComponent<PlayerManager>().currentHarpoonEquipped;
         harpoonEndInst = false;
         //harpoonEndPF = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/HarpoonEnd.prefab");
         maxDistance = 15f;
@@ -145,6 +150,16 @@ public class HarpoonGun : MonoBehaviour
         if (!harpoonEndInst)
         {
             startTime = Time.time;
+            currentHarpoonType = EnviromentManager.GetComponent<PlayerManager>().currentHarpoonEquipped;
+            switch (currentHarpoonType)
+            {
+                case ("none"):
+                    harpoonEndPF = harpoonEndPFList[0];
+                    break;
+                case ("Barbed Harpoon"):
+                    harpoonEndPF = harpoonEndPFList[1];
+                    break;
+            }
             harpoonEndObject = Instantiate(harpoonEndPF, harpoonStart.position, PlayerCamera.transform.rotation);
             harpoonEndInst = true;
 
