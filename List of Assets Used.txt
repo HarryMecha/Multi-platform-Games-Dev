@@ -1,25 +1,30 @@
-List of Assets Used:
+-------------------------------------------------------------- 3D Models --------------------------------------------------------------
 
+JashanJDG
+Alex - https://www.cgtrader.com/free-3d-models/exterior/landscape/rocky-hills-environment-light-pack
+icekazim - https://www.cgtrader.com/free-3d-models/plant/other/free-rock-e680afe2-0816-464e-8fb1-244b9f96962e
+dpotatoes - https://www.cgtrader.com/free-3d-models/architectural/other/ancient-altar-a041f356-5e58-4439-ae86-067f9e4c5bde
+Mistfire3D - https://www.cgtrader.com/free-3d-models/architectural/decoration/column-9b85e47f-edba-4998-8a80-1910cf2783fe
+zirakopkop - https://www.cgtrader.com/free-3d-models/animals/fish/angler-fish-3d
+Shabnam-iskandarova - https://www.cgtrader.com/free-3d-models/animals/fish/kraken-c8d7e461-bee5-461e-b5d6-0c1387125637
+dogheart - https://www.cgtrader.com/free-3d-models/character/fantasy-character/mutant-with-open-brain
+jose-mariano013 - https://www.cgtrader.com/free-3d-models/furniture/cabinet/treasure-chest-610b96f8-c54d-47f7-8d4d-78b0c03d54e3
 Kaldrin - Cell Door: https://sketchfab.com/3d-models/50s-prison-door-adafa99cc1424a7cb51add3abd237f4b
-
 RIGModels - Diver: https://rigmodels.com/model.php?view=Deep_Sea_Diver-3d-model__71781b8eabb44185b2d5d65bf39e6832
-
 Marc Mons - Can: https://www.turbosquid.com/3d-models/refreshment-can-1066852
-
-KokaKolja - Electrical Sound: https://www.youtube.com/watch?v=RnfvLOjKEGg&ab_channel=KokaKolja
-
-Submarine Floor Texture: https://www.tilingtextures.com/wp-content/uploads/2019/02/0087.jpg
-
-Sonar Sound: https://www.youtube.com/watch?v=Ky1c_pF5qoc&ab_channel=MrDildoh
-
-Grace Maina - Screen Texture: https://media.istockphoto.com/id/1219565719/vector/blue-radar-screen-scanning-surrounding-and-incoming-aerial-traffic.jpg?s=612x612&w=0&k=20&c=Sd74M0cSiLULbmPiXsnZ8D58_wQ79HSRvgAYDCMAo4s=
-
-labubblegum9 - Alert Sound: https://www.youtube.com/watch?v=BQI1Fvp6rBw&ab_channel=labubblegum9
-
 martagarzia - Glass Dome: https://sketchfab.com/3d-models/glass-dome-722f070e8cf04cf682223869a61a8533
-
 frkndgr - Spearfun ( with Arms): https://sketchfab.com/3d-models/speargun-with-arms-b5654f3b36d143349eb92e513707172c
 
+--------------------------------------------------------------- Audio ------------------------------------------------------------------
+
+KokaKolja - Electrical Sound: https://www.youtube.com/watch?v=RnfvLOjKEGg&ab_channel=KokaKolja
+Sonar Sound: https://www.youtube.com/watch?v=Ky1c_pF5qoc&ab_channel=MrDildoh
+labubblegum9 - Alert Sound: https://www.youtube.com/watch?v=BQI1Fvp6rBw&ab_channel=labubblegum9
 Boom Sounds - Air Suction Sound Effect: https://www.youtube.com/watch?v=TRdokz_BOko&ab_channel=BoomSounds
 
+
+--------------------------------------------------------------- Textures ------------------------------------------------------------------
+
+Submarine Floor Texture: https://www.tilingtextures.com/wp-content/uploads/2019/02/0087.jpg
+Grace Maina - Screen Texture: https://media.istockphoto.com/id/1219565719/vector/blue-radar-screen-scanning-surrounding-and-incoming-aerial-traffic.jpg?s=612x612&w=0&k=20&c=Sd74M0cSiLULbmPiXsnZ8D58_wQ79HSRvgAYDCMAo4s=
 Andrey Kuzmin - Sumbarine Wall Texture: https://t4.ftcdn.net/jpg/01/96/48/85/240_F_196488567_3yUPAMjl0Q5MaMGId4LX4hGjq6Oisz2l.jpg
