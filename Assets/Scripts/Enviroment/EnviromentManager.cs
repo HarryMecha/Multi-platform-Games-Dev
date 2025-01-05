@@ -179,7 +179,7 @@ public class EnviromentManager : MonoBehaviour
                 yield return new WaitUntil(() => inventoryOpen);
 
                 DialougePanel.SetActive(true);
-                DialougePanelText.addToItemInfo("I'm sure that hit the spot, now just sit back, relax and enjoy the views of the ocean we should arrive at our destination in --BZZT--  2 hours. [PRESS 'Enter']");
+                DialougePanelText.addToItemInfo("I'm sure that hit the spot, I wonder if it could be used in other situation possibly to cross large gaps, keep an eye out for any floating platforms  --BZZT--, now just sit back and relax we should arrive at our destination in --BZZT--  2 hours. [PRESS 'Enter']");
                 DialougePanelText.incrimentText();
                 DialougePanelText.ActivateText();
                 yield return new WaitUntil(() => DialougePanelText.isFinished);
