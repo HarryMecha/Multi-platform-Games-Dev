@@ -20,4 +20,8 @@ public class RotatingPuzzle : MonoBehaviour
         canRotate = target.GetComponent<TargetCollision>().askIsHit();
     }
 
+    public bool getCanRotate()
+    {
+        return canRotate;
+    }
 }

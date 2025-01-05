@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth; // Public variable to set player's health in the inspector
+    private int maxHealth; // Public variable to set player's health in the inspector
 
     private int currentHealth; // Current health of the player
 
@@ -18,6 +18,16 @@ public class EnemyHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EnviromentManager enviromentManager = GameObject.Find("EnviromentManager").GetComponent<EnviromentManager>();
+        switch (enviromentManager.difficulty)
+        {
+            case (EnviromentManager.Difficulty.Easy):
+                maxHealth = 10;
+                break;
+            case (EnviromentManager.Difficulty.Hard):
+                maxHealth = 20;
+                break;
+        }
         // Set player's health to the maximum at the start
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);

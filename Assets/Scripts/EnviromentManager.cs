@@ -7,19 +7,26 @@ using TMPro;
 using UnityEngine.InputSystem;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class EnviromentManager : MonoBehaviour
 {
     private Scene currentScene;
     private string currentSceneName;
+    private string previousSceneName = null;
     public GameObject Player;
     public PlayerController Controller;
     public PlayerManager Manager;
     private GameObject DialougeCanvas;
     private bool confirmPressed;
+    private bool inventoryOpen;
     [SerializeField] private Collectible DivingSuit;
     [SerializeField] private Collectible HarpoonGun;
     public Animator transition;
+   [SerializeField] private List<Camera> additionalSceneCameras;
+     private Camera playerCamera;
+    [SerializeField] public Difficulty difficulty;
+
 
     public enum sceneType
     {
@@ -28,24 +35,32 @@ public class EnviromentManager : MonoBehaviour
         Main
     }
 
+    public enum Difficulty
+    {
+        Easy,
+        Hard
+    }
 
     public void onConfirmPress()
     {
         confirmPressed = true;
     }
 
+    public void onInventoryOpen()
+    {
+        inventoryOpen = !inventoryOpen;
+    }
+
 
     // Start is called before the first frame update
     void Awake()
     {
-        currentScene = SceneManager.GetActiveScene();
-        currentSceneName = currentScene.name;
-        Player = GameObject.FindWithTag("Player");
-        Controller = Player.GetComponent<PlayerController>();
-        Manager = transform.GetComponent<PlayerManager>();
-        DialougeCanvas = GameObject.Find("Dialouge Canvas");
-        confirmPressed = false;
-        StartCoroutine(ScriptedEvent());
+        if (GameObject.Find("DifficultyHandler"))
+        {
+            difficulty = (Difficulty)GameObject.Find("DifficultyHandler").GetComponent<DifficultyHandler>().getDifficulty();
+            Destroy(GameObject.Find("DifficultyHandler"));
+        }  
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     
@@ -55,6 +70,8 @@ public class EnviromentManager : MonoBehaviour
         switch (currentSceneName)
         {
             case ("TutorialScene"):
+                previousSceneName = currentSceneName;
+                Debug.Log("Cooroutine");
                 // Disable CurveHUD
                 GameObject curveHUDTransform = GameObject.Find("CurveHUD");
                 if (curveHUDTransform != null)
@@ -112,7 +129,8 @@ public class EnviromentManager : MonoBehaviour
                 Manager.TakeDamage(40);
                 yield return new WaitUntil(() => Manager.isInInventory("Diving Suit"));
                 Manager.setFistsEquipped(Manager.isInInventory("Diving Suit"));
-                
+                curveHUDTransform.gameObject.GetComponent<AudioSource>().Play();
+
 
                 DialougePanelText.addToItemInfo("Looking good Captain --BZZT-- Now that that's sorted let's get to fixing that navigational terminal, it seems to be on the fritz, use the scroll wheel to select the fists option, giving it a good" +
                     " smack should sort it out,  use left click to punch it until it starts cooperating again!");
@@ -149,6 +167,18 @@ public class EnviromentManager : MonoBehaviour
 
                 yield return new WaitUntil(() => Manager.isInInventory("Soda Can"));
 
+                DialougePanelText.addToItemInfo("Great, looks like you've hooked one, make sure to grab both in order to restore your health to full, --BZZT--, now press 'I' to open up your inventory and use those items, to refill your health");
+                DialougePanelText.incrimentText();
+                DialougePanelText.ActivateText();
+                yield return new WaitUntil(() => DialougePanelText.isFinished);
+                DialougePanelText.isFinished = false;
+
+                yield return new WaitUntil(() => inventoryOpen);
+                DialougePanel.SetActive(false);
+                yield return new WaitUntil(() => Manager.currentHealth == 100);
+                yield return new WaitUntil(() => inventoryOpen);
+
+                DialougePanel.SetActive(true);
                 DialougePanelText.addToItemInfo("I'm sure that hit the spot, now just sit back, relax and enjoy the views of the ocean we should arrive at our destination in --BZZT--  2 hours. [PRESS 'Enter']");
                 DialougePanelText.incrimentText();
                 DialougePanelText.ActivateText();
@@ -158,7 +188,7 @@ public class EnviromentManager : MonoBehaviour
                 yield return new WaitUntil(() => confirmPressed);
                 DialougePanel.SetActive(false);
                 confirmPressed = false;
-                yield return new WaitForSeconds(20);
+                yield return new WaitForSeconds(10);
 
                 GameObject[] lightList = GameObject.FindGameObjectsWithTag("Light");
                 foreach (GameObject light in lightList)
@@ -174,13 +204,41 @@ public class EnviromentManager : MonoBehaviour
                 DialougePanelText.isFinished = false;
                 yield return new WaitForSeconds(7);
                 DialougePanel.SetActive(false);
-                yield return new WaitForSeconds(3);
                 transition.SetTrigger("Start");
+                curveHUDTransform.gameObject.SetActive(false);
                 yield return new WaitForSeconds(1);
+                playerCamera.enabled = false;
+                additionalSceneCameras[0].enabled = true;
+                Animator animator = GameObject.Find("MiniSub").GetComponent<Animator>();
+                animator.SetTrigger("TutorialFinished");
+                yield return new WaitForSeconds(1.8f);
+                SceneManager.LoadScene("Level101");
+                StopCoroutine(ScriptedEvent());
                 break;
 
             case ("Level101"):
-                DialougeCanvas.SetActive(false);
+                DialougePanel = DialougeCanvas.transform.GetChild(0).gameObject;
+                DialougePanelText = DialougePanel.transform.GetChild(0).GetComponent<AnimatedText>();
+                DialougePanel.SetActive(false);
+                Controller.setMenuClosed();
+                if (!Manager.isInInventory("Diving Suit"))
+                {
+                    Manager.addToInventory(DivingSuit);
+                }
+                if (!Manager.isInInventory("Harpoon Gun"))
+                {
+                    Manager.addToInventory(HarpoonGun);
+                }
+                Manager.setFistsEquipped(Manager.isInInventory("Diving Suit"));
+                //Debug.Log(Manager.FistsEquipped);
+                Manager.setHarpoonEquipped(Manager.isInInventory("Harpoon Gun"));
+                //Debug.Log(Manager.HarpoonEquipped);
+                break;
+
+            case ("Level102"):
+                DialougePanel = DialougeCanvas.transform.GetChild(0).gameObject;
+                DialougePanelText = DialougePanel.transform.GetChild(0).GetComponent<AnimatedText>();
+                 DialougePanel.SetActive(false);
                 Controller.setMenuClosed();
                 Manager.addToInventory(DivingSuit);
                 Manager.addToInventory(HarpoonGun);
@@ -189,7 +247,58 @@ public class EnviromentManager : MonoBehaviour
                 Manager.setHarpoonEquipped(Manager.isInInventory("Harpoon Gun"));
                 //Debug.Log(Manager.HarpoonEquipped);
                 break;
-            
         }
     }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        
+        Debug.Log(scene.name);
+        if (scene.name == "MainMenu")
+        {
+            StopAllCoroutines();
+            return;
+        }
+        
+        if (this.gameObject != null)
+        {
+            setupPlayer();
+            StartCoroutine(ScriptedEvent());
+        }
+
+    }
+
+    public void unsubscribeSceneManager()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void setupPlayer()
+    {
+        Debug.Log("Player Setup");
+        currentScene = SceneManager.GetActiveScene();
+        currentSceneName = currentScene.name;
+        Player = GameObject.FindWithTag("Player");
+        Controller = Player.GetComponent<PlayerController>();
+        Manager = transform.GetComponent<PlayerManager>();
+        DialougeCanvas = GameObject.Find("Dialouge Canvas");
+        confirmPressed = false;
+        inventoryOpen = false;
+        additionalSceneCameras = GameObject.FindObjectsByType<Camera>(FindObjectsSortMode.None).ToList<Camera>();
+        playerCamera = Player.transform.Find("Main Camera").GetComponent<Camera>();
+        additionalSceneCameras.Remove(playerCamera);
+        foreach (Camera camera in additionalSceneCameras)
+        {
+            if (camera.gameObject.name != "MiniMapCamera")
+            {
+                camera.enabled = false;
+            }
+        }
+        Manager.setupHealthBar();
+        Debug.Log(Manager.Inventory);
+        foreach (InventoryItem item in Manager.Inventory)
+        {
+            Debug.Log(item.getCollectible().Name);
+        }
+    }
+
 }

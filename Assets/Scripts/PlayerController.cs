@@ -42,12 +42,14 @@ public class PlayerController : MonoBehaviour
     private bool tutorial;
     private GameObject lastInteractableHit = null;
     private GameObject lastEnemyHit = null;
+    private GameObject lastBarrierHit = null;
     #endregion
 
     public enum groundType
     {
         Ground,
         Checkpoint,
+        OutOfBounds,
         Ice,
         Bounce,
         Jumping,
@@ -238,6 +240,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnInventory(InputValue value)
     {
+        EnviromentManager.GetComponent<EnviromentManager>().onInventoryOpen();
         if (HUDCanvas.activeInHierarchy)
         {
             HUDCanvas.GetComponent<PauseMenu>().ActivateInventoryMenu();
@@ -274,12 +277,6 @@ public class PlayerController : MonoBehaviour
             PlayerCamera.transform.localRotation = Quaternion.Euler(-cameraRotation.x, 0.0f, 0.0f);
             playerRigidbody.transform.localRotation = Quaternion.Euler(0f, cameraRotation.y, 0.0f);
         }
-        /*This is the condition which determines whether the character is out of bounds, this will result the the Player object returning to the last
-         * checkpoint they visited */
-        if (transform.position.y < -10)
-        {
-            transform.position = spawnLocation;
-        }
 
         lookingAtInteractable();
     }
@@ -300,9 +297,11 @@ public class PlayerController : MonoBehaviour
          * Checkpoints will ammend the players spawning location, bounce will apply a upwards force to the player. */
         switch (collision.gameObject.tag)
         {
-            case ("Collectible"): 
+            case ("Collectible"):
                 EnviromentManager.GetComponent<PlayerManager>().addToInventory(collision.transform.GetComponent<Collectible>());
                 collision.transform.GetChild(0).gameObject.SetActive(false);
+                if (collision.transform.GetComponent<BoxCollider>())
+                    collision.transform.GetComponent<BoxCollider>().enabled = false;
                 break;
 
             case ("Checkpoint"):
@@ -313,6 +312,12 @@ public class PlayerController : MonoBehaviour
 
                 playerRigidbody.AddForce(Vector3.up * bounceForce, ForceMode.VelocityChange);
 
+                break;
+            /*This is the condition which determines whether the character is out of bounds, this will result the the Player object returning to the last
+             * checkpoint they visited */
+            case ("OutOfBounds"):
+                transform.position = spawnLocation;
+                EnviromentManager.GetComponent<PlayerManager>().TakeDamage(10);
                 break;
         }
 
@@ -421,18 +426,37 @@ public class PlayerController : MonoBehaviour
                     lastEnemyHit.GetComponent<EnemyHealth>().showHealthBar();
                 }
             }
+            if (hit.transform.tag == "Barrier")
+            {
+                if (hit.transform.gameObject != lastBarrierHit)
+                {
+                    if (lastBarrierHit != null)
+                    {
+                        lastBarrierHit.GetComponent<ProgressionBarrier>().hideInteractText();
+                    }
+                    lastBarrierHit = hit.transform.gameObject;
+                    lastBarrierHit.GetComponent<ProgressionBarrier>().showInteractText();
+                }
+            }
         }
         else
         {
              if(lastInteractableHit != null)
-                    {
-                    lastInteractableHit.GetComponent<Interactable>().hideInteractText();
-                }
+             {
+                lastInteractableHit.GetComponent<Interactable>().hideInteractText();
+             }
+
             if (lastEnemyHit != null)
             {
                 lastEnemyHit.GetComponent<EnemyHealth>().hideHealthBar();
             }
             lastEnemyHit = null;
+
+            if (lastBarrierHit != null)
+            {
+                lastBarrierHit.GetComponent<ProgressionBarrier>().hideInteractText();
+            }
+            lastBarrierHit = null;
         }
     }
 

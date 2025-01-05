@@ -8,6 +8,7 @@ public class WarningLight : MonoBehaviour
     
     public void warningLightActive()
     {
+       LightSource.GetComponent<AudioSource>().Play();
        LightSource.GetComponent<Animator>().enabled = true;
     }
 }

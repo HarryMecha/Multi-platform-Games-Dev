@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class InventoryItem : MonoBehaviour
 {
-    [SerializeField] private Collectible collectible;
-    [SerializeField] private int count;
+    private Collectible collectible;
+    private int count;
 
-    public InventoryItem(Collectible collectible, int count)
+    public InventoryItem(Collectible collectibleToAdd, int count)
     {
-        this.collectible = collectible;
+        collectible = collectibleToAdd;
         this.count = count;
     }
 
