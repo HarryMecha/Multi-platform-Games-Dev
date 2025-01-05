@@ -60,15 +60,15 @@ public class MovingPlatform : MonoBehaviour
             startTime = Time.time;
         }
 
-        // Calculate the platform's global position delta
-        Vector3 globalPlatformDelta = transform.position - transform.parent.TransformPoint(previousLocalPlatformPosition);
+        
+        Vector3 platformPosition = transform.position - transform.parent.TransformPoint(previousLocalPlatformPosition);
 
         // Update the global position of objects on the platform
         foreach (var obj in objectsOnPlatform)
         {
             if (obj != null)
             {
-                obj.position += globalPlatformDelta;
+                obj.position += platformPosition;
             }
         }
 
