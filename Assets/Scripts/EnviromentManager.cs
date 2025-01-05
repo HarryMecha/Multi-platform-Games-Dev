@@ -262,7 +262,6 @@ public class EnviromentManager : MonoBehaviour
         if (this.gameObject != null)
         {
             setupPlayer();
-            Debug.Log("This");
             StartCoroutine(ScriptedEvent());
         }
 

@@ -1,17 +1,25 @@
 List of Assets Used:
 
-Cell Door: https://sketchfab.com/3d-models/50s-prison-door-adafa99cc1424a7cb51add3abd237f4b
+Kaldrin - Cell Door: https://sketchfab.com/3d-models/50s-prison-door-adafa99cc1424a7cb51add3abd237f4b
 
-Diver: https://rigmodels.com/model.php?view=Deep_Sea_Diver-3d-model__71781b8eabb44185b2d5d65bf39e6832
+RIGModels - Diver: https://rigmodels.com/model.php?view=Deep_Sea_Diver-3d-model__71781b8eabb44185b2d5d65bf39e6832
 
-Can: https://www.turbosquid.com/3d-models/refreshment-can-1066852
+Marc Mons - Can: https://www.turbosquid.com/3d-models/refreshment-can-1066852
 
-Electrical Sound: https://www.youtube.com/watch?v=RnfvLOjKEGg&ab_channel=KokaKolja
+KokaKolja - Electrical Sound: https://www.youtube.com/watch?v=RnfvLOjKEGg&ab_channel=KokaKolja
 
 Submarine Floor Texture: https://www.tilingtextures.com/wp-content/uploads/2019/02/0087.jpg
 
 Sonar Sound: https://www.youtube.com/watch?v=Ky1c_pF5qoc&ab_channel=MrDildoh
 
-Screen Texture: https://media.istockphoto.com/id/1219565719/vector/blue-radar-screen-scanning-surrounding-and-incoming-aerial-traffic.jpg?s=612x612&w=0&k=20&c=Sd74M0cSiLULbmPiXsnZ8D58_wQ79HSRvgAYDCMAo4s=
+Grace Maina - Screen Texture: https://media.istockphoto.com/id/1219565719/vector/blue-radar-screen-scanning-surrounding-and-incoming-aerial-traffic.jpg?s=612x612&w=0&k=20&c=Sd74M0cSiLULbmPiXsnZ8D58_wQ79HSRvgAYDCMAo4s=
 
-Alert Sound: https://www.youtube.com/watch?v=BQI1Fvp6rBw&ab_channel=labubblegum9
+labubblegum9 - Alert Sound: https://www.youtube.com/watch?v=BQI1Fvp6rBw&ab_channel=labubblegum9
+
+martagarzia - Glass Dome: https://sketchfab.com/3d-models/glass-dome-722f070e8cf04cf682223869a61a8533
+
+frkndgr - Spearfun ( with Arms): https://sketchfab.com/3d-models/speargun-with-arms-b5654f3b36d143349eb92e513707172c
+
+Boom Sounds - Air Suction Sound Effect: https://www.youtube.com/watch?v=TRdokz_BOko&ab_channel=BoomSounds
+
+Andrey Kuzmin - Sumbarine Wall Texture: https://t4.ftcdn.net/jpg/01/96/48/85/240_F_196488567_3yUPAMjl0Q5MaMGId4LX4hGjq6Oisz2l.jpg

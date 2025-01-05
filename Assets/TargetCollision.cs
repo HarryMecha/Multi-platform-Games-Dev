@@ -11,11 +11,6 @@ public class TargetCollision : MonoBehaviour
         notHit = true;
     }
 
-    private void Update()
-    {
-        Debug.Log(notHit);
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("hit");

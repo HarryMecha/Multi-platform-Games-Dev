@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     private bool tutorial;
     private GameObject lastInteractableHit = null;
     private GameObject lastEnemyHit = null;
+    private GameObject lastBarrierHit = null;
     #endregion
 
     public enum groundType
@@ -425,18 +426,37 @@ public class PlayerController : MonoBehaviour
                     lastEnemyHit.GetComponent<EnemyHealth>().showHealthBar();
                 }
             }
+            if (hit.transform.tag == "Barrier")
+            {
+                if (hit.transform.gameObject != lastBarrierHit)
+                {
+                    if (lastBarrierHit != null)
+                    {
+                        lastBarrierHit.GetComponent<ProgressionBarrier>().hideInteractText();
+                    }
+                    lastBarrierHit = hit.transform.gameObject;
+                    lastBarrierHit.GetComponent<ProgressionBarrier>().showInteractText();
+                }
+            }
         }
         else
         {
              if(lastInteractableHit != null)
-                    {
-                    lastInteractableHit.GetComponent<Interactable>().hideInteractText();
-                }
+             {
+                lastInteractableHit.GetComponent<Interactable>().hideInteractText();
+             }
+
             if (lastEnemyHit != null)
             {
                 lastEnemyHit.GetComponent<EnemyHealth>().hideHealthBar();
             }
             lastEnemyHit = null;
+
+            if (lastBarrierHit != null)
+            {
+                lastBarrierHit.GetComponent<ProgressionBarrier>().hideInteractText();
+            }
+            lastBarrierHit = null;
         }
     }
 

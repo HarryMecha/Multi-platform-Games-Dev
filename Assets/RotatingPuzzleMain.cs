@@ -25,7 +25,6 @@ public class RotatingPuzzleMain : MonoBehaviour
             }
 
         }
-        Debug.Log(RotatingPuzzles.Count);
     }
 
     // Update is called once per frame

@@ -234,6 +234,19 @@ public class PlayerManager : MonoBehaviour
         return false;
     }
 
+    public int getItemCount(string collectibleName)
+    {
+        foreach (InventoryItem collected in Inventory)
+        {
+            if (collected.getCollectible().Name == collectibleName)
+            {
+                return collected.getCount();
+            }
+
+        }
+        return 0;
+    }
+
     public List<InventoryItem> getInventory()
     {
 

@@ -88,12 +88,16 @@ public class HarpoonGun : MonoBehaviour
                             switch (currentHarpoonType)
                             {
                                 case ("none"):
+                                    jointSetup();
                                     break;
                                 case ("Barbed Harpoon"):
                                     hit.transform.GetComponent<EnemyHealth>().TakeDamage(10);
+                                    lineRenderer.positionCount = 0;
+                                    Destroy(joint);
+                                    Destroy(harpoonEndObject);
+                                    harpoonEndInst = false;
                                     break;
                             }
-                            jointSetup();
                             break;
                         case ("Collectible"):
                             jointSetup();
