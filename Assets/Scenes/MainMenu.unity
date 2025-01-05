@@ -129,7 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 72297759}
-  - component: {fileID: 72297758}
+  - component: {fileID: 72297760}
   m_Layer: 0
   m_Name: DifficultyHandler
   m_TagString: Untagged
@@ -137,19 +137,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &72297758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 72297757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4acd46bf8ee2afd4f8808b06f811e553, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  difficulty: 0
 --- !u!4 &72297759
 Transform:
   m_ObjectHideFlags: 0
@@ -165,6 +152,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &72297760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72297757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c426e85c4649a584686aac34c2399ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficulty: 0
 --- !u!1 &328827029
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,7 +543,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 72297758}
+      - m_Target: {fileID: 72297760}
         m_TargetAssemblyTypeName: DifficultyHandler, Assembly-CSharp
         m_MethodName: setSceneName
         m_Mode: 5
@@ -645,7 +645,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 72297758}
+      - m_Target: {fileID: 72297760}
         m_TargetAssemblyTypeName: DifficultyHandler, Assembly-CSharp
         m_MethodName: setDifficultyEasy
         m_Mode: 1
@@ -657,7 +657,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 72297758}
+      - m_Target: {fileID: 72297760}
         m_TargetAssemblyTypeName: DifficultyHandler, Assembly-CSharp
         m_MethodName: changeScene
         m_Mode: 1
@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 72297758}
+      - m_Target: {fileID: 72297760}
         m_TargetAssemblyTypeName: DifficultyHandler, Assembly-CSharp
         m_MethodName: setDifficultyHard
         m_Mode: 1
@@ -1133,7 +1133,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 72297758}
+      - m_Target: {fileID: 72297760}
         m_TargetAssemblyTypeName: DifficultyHandler, Assembly-CSharp
         m_MethodName: changeScene
         m_Mode: 1
@@ -2074,7 +2074,7 @@ PrefabInstance:
     - target: {fileID: 2055459556085223799, guid: 0d4d95dc88d5a3941850602b5ce3b5d2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 72297758}
+      objectReference: {fileID: 72297760}
     - target: {fileID: 2055459556085223799, guid: 0d4d95dc88d5a3941850602b5ce3b5d2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -2142,7 +2142,7 @@ PrefabInstance:
     - target: {fileID: 2667701322144323979, guid: 0d4d95dc88d5a3941850602b5ce3b5d2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 72297758}
+      objectReference: {fileID: 72297760}
     - target: {fileID: 2667701322144323979, guid: 0d4d95dc88d5a3941850602b5ce3b5d2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -2206,7 +2206,7 @@ PrefabInstance:
     - target: {fileID: 4072314727848148345, guid: 0d4d95dc88d5a3941850602b5ce3b5d2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 72297758}
+      objectReference: {fileID: 72297760}
     - target: {fileID: 4072314727848148345, guid: 0d4d95dc88d5a3941850602b5ce3b5d2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
