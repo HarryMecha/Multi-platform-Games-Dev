@@ -44,7 +44,7 @@ public class Collectible : MonoBehaviour
 
             script.Name = EditorGUILayout.TextField("Name",script.Name);
             script.Description = EditorGUILayout.TextField("Description", script.Description);
-            script.InventoryPicture = EditorGUILayout.ObjectField("Inventory Picture", script.InventoryPicture, typeof(Sprite)) as Sprite;
+            script.InventoryPicture = EditorGUILayout.ObjectField("Inventory Picture", script.InventoryPicture, typeof(Sprite), true) as Sprite;
             script.isUseable = EditorGUILayout.Toggle("is Usable?", script.isUseable);
 
             if (script.isUseable == false)

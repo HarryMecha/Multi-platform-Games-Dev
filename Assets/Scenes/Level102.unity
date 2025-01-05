@@ -7029,6 +7029,7 @@ Transform:
   m_Children:
   - {fileID: 740337630}
   - {fileID: 1522100703}
+  - {fileID: 1271663734}
   - {fileID: 393234248}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7580,11 +7581,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139650650}
   m_CullTransparentMesh: 1
---- !u!1 &1147078561 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 40fe8093da29a6249a10a80d1912367e, type: 3}
-  m_PrefabInstance: {fileID: 1522100702}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1159267329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7759,6 +7755,73 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43d86ae7ddc5d5842aaed8722e91f73a, type: 3}
   m_PrefabInstance: {fileID: 1210359441}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1271663733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1271663734}
+  - component: {fileID: 1271663736}
+  - component: {fileID: 1271663735}
+  m_Layer: 3
+  m_Name: LevelProgress
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1271663734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271663733}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.32, y: 1.69, z: -0.43}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 864098851}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1271663735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271663733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c2a8878253ed840839d6652dea4d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelName: CreditScene
+--- !u!65 &1271663736
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271663733}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.2698975, y: 2.2875824, z: 1.8817139}
+  m_Center: {x: 0.3725586, y: -0.6437912, z: 0.44085693}
 --- !u!4 &1305265469 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43d86ae7ddc5d5842aaed8722e91f73a, type: 3}
@@ -8431,53 +8494,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 40fe8093da29a6249a10a80d1912367e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1522100706}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 40fe8093da29a6249a10a80d1912367e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1522100707}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40fe8093da29a6249a10a80d1912367e, type: 3}
 --- !u!4 &1522100703 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 40fe8093da29a6249a10a80d1912367e, type: 3}
   m_PrefabInstance: {fileID: 1522100702}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1522100706
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147078561}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.009867235, y: 0.005904815, z: 0.007988603}
-  m_Center: {x: -0.00009436519, y: 0.00005084265, z: 0.003994304}
---- !u!114 &1522100707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147078561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0c2a8878253ed840839d6652dea4d30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelName: CreditScene
 --- !u!1 &1530270110
 GameObject:
   m_ObjectHideFlags: 0

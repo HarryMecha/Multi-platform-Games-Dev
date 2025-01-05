@@ -1,62 +1,20 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class EndCredits : MonoBehaviour
+public class AutoSceneChanger : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private Text uiText;
-    [SerializeField] private TextMeshProUGUI textMeshPro;
-    [SerializeField] private float duration;
+    [SerializeField] private string sceneName; // Name of the scene to load
+    [SerializeField] private float delay;      // Delay in seconds before changing the scene
 
-    public void AnimateOpacity(float targetOpacity)
+    void Start()
     {
-        if (uiText != null)
-        {
-            StartCoroutine(FadeTextOpacity(uiText, targetOpacity, duration));
-        }
-        else if (textMeshPro != null)
-        {
-            StartCoroutine(FadeTextMeshProOpacity(textMeshPro, targetOpacity, duration));
-        }
+        // Invoke the method to change the scene after the specified delay
+        Invoke("ChangeScene", delay);
     }
 
-    private IEnumerator FadeTextOpacity(Text text, float targetOpacity, float duration)
+    void ChangeScene()
     {
-        Color color = text.color;
-        float startOpacity = color.a;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            color.a = Mathf.Lerp(startOpacity, targetOpacity, elapsedTime / duration);
-            text.color = color;
-            yield return null; // Wait for the next frame
-        }
-
-        // Ensure the final value is set
-        color.a = targetOpacity;
-        text.color = color;
-    }
-
-    private IEnumerator FadeTextMeshProOpacity(TextMeshProUGUI tmp, float targetOpacity, float duration)
-    {
-        Color color = tmp.color;
-        float startOpacity = color.a;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            color.a = Mathf.Lerp(startOpacity, targetOpacity, elapsedTime / duration);
-            tmp.color = color;
-            yield return null; // Wait for the next frame
-        }
-
-        // Ensure the final value is set
-        color.a = targetOpacity;
-        tmp.color = color;
+        // Load the specified scene
+        SceneManager.LoadScene(sceneName);
     }
 }
