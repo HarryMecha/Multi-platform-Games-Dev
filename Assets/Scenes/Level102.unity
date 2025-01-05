@@ -6805,7 +6805,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 775782899667486100, guid: ca0a3fda2adc6fe4381c119fd1530c6f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 247.07199
+      value: 248.05
       objectReference: {fileID: 0}
     - target: {fileID: 775782899667486100, guid: ca0a3fda2adc6fe4381c119fd1530c6f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6813,7 +6813,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775782899667486100, guid: ca0a3fda2adc6fe4381c119fd1530c6f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 369.2
+      value: 361.24
       objectReference: {fileID: 0}
     - target: {fileID: 775782899667486100, guid: ca0a3fda2adc6fe4381c119fd1530c6f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6846,6 +6846,10 @@ PrefabInstance:
     - target: {fileID: 1038300492032791572, guid: ca0a3fda2adc6fe4381c119fd1530c6f, type: 3}
       propertyPath: m_Name
       value: GateKeeper
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876777607323183047, guid: ca0a3fda2adc6fe4381c119fd1530c6f, type: 3}
+      propertyPath: sightRange
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 6876777607323183047, guid: ca0a3fda2adc6fe4381c119fd1530c6f, type: 3}
       propertyPath: playerObject
@@ -8431,6 +8435,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 40fe8093da29a6249a10a80d1912367e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1522100706}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 40fe8093da29a6249a10a80d1912367e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1522100707}
   m_SourcePrefab: {fileID: 100100000, guid: 40fe8093da29a6249a10a80d1912367e, type: 3}
 --- !u!4 &1522100703 stripped
 Transform:
@@ -8458,6 +8465,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.009867235, y: 0.005904815, z: 0.007988603}
   m_Center: {x: -0.00009436519, y: 0.00005084265, z: 0.003994304}
+--- !u!114 &1522100707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147078561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c2a8878253ed840839d6652dea4d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelName: CreditScene
 --- !u!1 &1530270110
 GameObject:
   m_ObjectHideFlags: 0
@@ -8929,11 +8949,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6591838664372790819, guid: 0695c99347421c74db882b138752a11f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 33
+      value: 11.2
       objectReference: {fileID: 0}
     - target: {fileID: 6591838664372790819, guid: 0695c99347421c74db882b138752a11f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 348.3
+      value: 144.3
       objectReference: {fileID: 0}
     - target: {fileID: 6591838664372790819, guid: 0695c99347421c74db882b138752a11f, type: 3}
       propertyPath: m_LocalRotation.w
