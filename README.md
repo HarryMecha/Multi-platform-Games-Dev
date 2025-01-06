@@ -47,8 +47,12 @@ This is an early-stage development project for a game being built in Unity. The 
       <td>Space</td>
     </tr>
     <tr>
-      <td>Reset Level</td>
-      <td>R</td>
+      <td>Open Pause Menu (when diving suit equipped)</td>
+      <td>Escape</td>
+    </tr>
+    <tr>
+      <td>Open Inventory Menu (when diving suit equipped)</td>
+      <td>i</td>
     </tr>
     <tr>
       <td>Sprint</td>
