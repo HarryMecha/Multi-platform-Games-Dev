@@ -1,12 +1,20 @@
 # Game Prototype : Treasure Sea-Ker
 
-This is an early-stage development project for a game being built in Unity. The game focuses on, player has to navigate to the over side of the level and collect the giant treasure collectible at the end. This prototype is designed to demonstrate core mechanics and gameplay ideas that may evolve in future iterations.
+Welcome to **Treasure Sea-Ker**, a thrilling 3D platformer game set beneath the waves! Explore a underwater world, solve puzzles, avoid dangerous sea creatures, and collect treasures as you navigate the depths of the ocean.
 
-<h2>Gameplay Concept:</h2>
+<h3>Gameplay Concept:</h3>
 <ul>
   <li><b>Genre:</b> First Person Platformer</li>
   <li><b>Core Mechanics:</b> Physics based movements, Combat and Navigation</li>
-  <li><b>Prototype Goals:</b> Testing core mechincs and gameplay experience for future iterations</li>
+  <li><b>Target Audience:</b> 12+</li>
+</ul>
+
+<h3>Gameplay Mechanics:</h3>
+<ul>
+  <li><b>Movement:</b> Navigate your character using smooth swimming and platforming controls.</li>
+  <li><b>Treasure Hunting:</b> Gather coins, artifacts, and other collectibles to earn points.</li>
+  <li><b>Enemies and Hazards:</b> Avoid jellyfish, sharks, and other threats.</li>
+  <li><b>Level Progression:</b> Explore diverse underwater biomes (coral reefs, deep trenches, shipwrecks).</li>
 </ul>
 
 <h2>Controls:</h2>
