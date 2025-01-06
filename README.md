@@ -1,4 +1,4 @@
-# Game Prototype : Treasure Sea-Ker
+# Game : Treasure Sea-Ker
 
 Welcome to **Treasure Sea-Ker**, a thrilling 3D platformer game set beneath the waves! Explore a underwater world, solve puzzles, avoid dangerous sea creatures, and collect treasures as you navigate the depths of the ocean.
 
