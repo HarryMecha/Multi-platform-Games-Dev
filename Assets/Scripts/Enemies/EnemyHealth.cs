@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EnemyHealth : MonoBehaviour
 {
+    #region Fields
     private int maxHealth; // Public variable to set player's health in the inspector
 
     private int currentHealth; // Current health of the player
@@ -14,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
     private GameObject healthBarGO;
 
     [SerializeField] private GameObject replace;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class EnemyHealth : MonoBehaviour
         EnviromentManager enviromentManager = GameObject.Find("EnviromentManager").GetComponent<EnviromentManager>();
         switch (enviromentManager.difficulty)
         {
+            //will change based on current difficulty
             case (EnviromentManager.Difficulty.Easy):
                 maxHealth = 10;
                 break;
@@ -63,7 +66,8 @@ public class EnemyHealth : MonoBehaviour
         // Destory the enemy
         Destroy(gameObject);
     }
-
+    
+    // will show health bar attached to object when enemy is looked at
     public void showHealthBar()
     {
         if (!healthBarGO.activeSelf)
@@ -71,6 +75,8 @@ public class EnemyHealth : MonoBehaviour
             healthBarGO.SetActive(true);
         }
     }
+
+    //will hide health bar attached to object when player looks away
     public void hideHealthBar()
     {
         healthBarGO.SetActive(false);

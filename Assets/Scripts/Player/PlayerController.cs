@@ -218,11 +218,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /* OnConfirm function is called when the InputSystem detects the Enter key is pressed, this is used to progress dialouge in the tutorial scene.*/
     public void OnConfirm(InputValue value)
     {
         EnviromentManager.GetComponent<EnviromentManager>().onConfirmPress();
     }
 
+    /* OnInteract function is called when the InputSystem detects the E key is pressed, this will check if the object the player is looking at holds
+     * a collectible script within it and if it does it adds that item to the players inventory and will also use the interactable whether it is a collectible or not.*/
     public void OnInteract(InputValue value)
     {
         if(lastInteractableHit != null)
@@ -238,6 +241,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /* OnInventory function is called when the InputSystem detects the I key is pressed, this will lock open the inventory menu.*/
     public void OnInventory(InputValue value)
     {
         EnviromentManager.GetComponent<EnviromentManager>().onInventoryOpen();
@@ -294,7 +298,8 @@ public class PlayerController : MonoBehaviour
         }
 
         /* This switch case will determine special cases for player collision determined by object tag, collectibles will be added to players Dictionary field,
-         * Checkpoints will ammend the players spawning location, bounce will apply a upwards force to the player. */
+         * Checkpoints will ammend the players spawning location, bounce will apply a upwards force to the player, collectible will add the current collided item
+         * into the players inventory and then set it's collider to false so it can no longer be interacted with. */
         switch (collision.gameObject.tag)
         {
             case ("Collectible"):
@@ -354,7 +359,7 @@ public class PlayerController : MonoBehaviour
         HUDCanvas.transform.GetChild(0).gameObject.SetActive(false);
         HUDCanvas.transform.GetChild(1).gameObject.SetActive(true);
     }
-
+    /* Setter method for the menuOpen boolean, determines if the menu is open which will lock off certain player functions*/
     public void setMenuOpen()
     {
         Debug.Log("Menu Open");
@@ -362,6 +367,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(menuOpen);
     }
 
+    /* Setter method for the menuOpen boolean, determines if the menu is closed which will lock off certain player functions*/
     public void setMenuClosed()
     {
         Debug.Log("Menu Closed");
@@ -369,32 +375,41 @@ public class PlayerController : MonoBehaviour
         menuOpen = false;
     }
 
+    /* Setter method for the tutorial boolean, determines if the menu is open which will lock off certain player functions*/
     public void setTutorialOn()
     {
         tutorial = true;
     }
 
+    /* Setter method for the tutorial boolean, determines if the menu is open which will lock off certain player functions*/
     public void setTutorialOff()
     {
         tutorial = false;
     }
 
+    /* Getter method for the current move value*/
     public Vector2 getMoveValue()
     {
         return moveValue;
     }
 
+    /* Getter method for the current input sensitivity*/
     public float getInputSensitivity()
     {
         return cameraSensitivity;
     }
 
+    /* Setter method for the current input sensitivity*/
     public void setInputSensitivity(float sensitivity)
     {
         cameraSensitivity = initialCameraSensitivity * sensitivity;
         //Debug.Log(cameraSensitivity);
     }
 
+    /* The lookingAtInteractable function is called in Update(), it shoots a ray from the middle of the viewport and detects the tag of that GameObject
+     * it will then display the text object or healthbar attached to that object to signal to the player they are currently looking at it, it will then also
+     * close that menu when the player looks away or at another object.
+     */
     private void lookingAtInteractable()
     {
         Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));

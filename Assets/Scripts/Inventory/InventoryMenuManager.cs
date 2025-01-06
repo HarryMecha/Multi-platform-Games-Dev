@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class InventoryMenuManager : MonoBehaviour
 {
+    #region Fields
     [SerializeField] private List<GameObject> InventorySlots;
     
     [SerializeField] private GameObject HighLightedItem;
@@ -15,6 +16,7 @@ public class InventoryMenuManager : MonoBehaviour
     private GameObject selectedObject;
     private Collectible swappingObject1;
     private Collectible swappingObject2;
+    #endregion
 
     private void Start()
     {
@@ -28,6 +30,11 @@ public class InventoryMenuManager : MonoBehaviour
         slotSelected(selectedObject);
     }
 
+    /*
+     * This code setsup the GUI for the inventory menu, first it checks the current size of the inventory, it then populates this many of the inventory slots inventory item components, setting the rest to null.
+     * It then goes through this list checks each of the slots and edits the displayed values based on the currently populated, or unpopulated, invetory item component, it's name, description, image and current count.
+     * these are set to empty if no item exists.
+     */
     public void inventorySetup()
     {
         for (int i = 0; i < InventorySlots.Count; i++)
@@ -79,7 +86,12 @@ public class InventoryMenuManager : MonoBehaviour
             }
         }
     }
-
+    /*
+     * This code will be run when the button attached to each of the slots is pressed, this will open up the inventories side menu and populate it with information about the item in that slot.
+     * It will also activate or deactive certain buttons dependant on the type of item it is, useable and equippable items.
+     * However if the move item button has been pressed it considers this button press as a selection of a second item and will call the swapItems function in playerMnager which swap their positions in the inventory
+     * this will be graphically displayed to the user.
+     */
     public void slotSelected(GameObject selectedSlot)
     {
         selectedObject = selectedSlot;
@@ -113,13 +125,13 @@ public class InventoryMenuManager : MonoBehaviour
                     case (Collectible.equipType.harpoon):
                         if (playerManager.currentHarpoonEquipped == selectedCollectible.Name)
                         {
-                            Debug.Log("Hello");
+                            //Debug.Log("Hello");
                             HighLightedItem.transform.Find("Unequip Item Button").gameObject.SetActive(true);
                             HighLightedItem.transform.Find("Equip Item Button").gameObject.SetActive(false);
                         }
                         else
                         {
-                            Debug.Log("Hello2");
+                            //Debug.Log("Hello2");
                             HighLightedItem.transform.Find("Equip Item Button").gameObject.SetActive(true);
                             HighLightedItem.transform.Find("Unequip Item Button").gameObject.SetActive(false);
                         }
@@ -149,6 +161,10 @@ public class InventoryMenuManager : MonoBehaviour
             HighLightedItem.transform.parent.gameObject.SetActive(false);
         }
     }
+    /*
+     * This code will be run when a useable item is selected and the Use Item Button is pressed, it will then call the useItem function in the playerManager and will then refresh
+     * the GUI to reflect a decrease of an items count or removal of that item from the inventory
+     */
 
     public void useSelectedObject()
     {
@@ -165,6 +181,10 @@ public class InventoryMenuManager : MonoBehaviour
         }
     }
 
+    /*
+     * This code will be run when a equippable item is selected and the Use Item Button is pressed, it will then call the equipItem function in the playerManager and will then refresh
+     * the GUI to set the equip button to unequip
+     */
     public void equipSelectedObject()
     {
         if (selectedObject.gameObject.GetComponent<InventoryItem>() == null)
@@ -180,6 +200,10 @@ public class InventoryMenuManager : MonoBehaviour
         }
     }
 
+    /*
+     * This code will be run when a equippable item is selected and the Use Item Button is pressed, it will then call the unequipItem function in the playerManager and will then refresh
+     * the GUI to set the equip button to equip
+     */
     public void unequipSelectedObject()
     {
         if (selectedObject.gameObject.GetComponent<InventoryItem>() == null)
@@ -195,6 +219,9 @@ public class InventoryMenuManager : MonoBehaviour
         }
     }
 
+    /*
+     * This code will be run when the Move Item Button is pressed, it will set the currently selected item as the first of two items required to switch their places
+     */
     public void moveSelectedObject()
     {
         if (selectedObject.gameObject.GetComponent<InventoryItem>() == null)

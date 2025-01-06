@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class WarningLight : MonoBehaviour
 {
-    [SerializeField] GameObject LightSource;
+    #region Fields
     
+    [SerializeField] GameObject LightSource;
+    #endregion
+
+    /* This function is simply an activator for the lightsources letting them play audio and animate
+     */
     public void warningLightActive()
     {
        LightSource.GetComponent<AudioSource>().Play();

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DifficultyHandler : MonoBehaviour
 {
-
+    #region Fields
     private string SceneName;
     public Difficulty difficulty;
 
@@ -14,7 +14,12 @@ public class DifficultyHandler : MonoBehaviour
         Easy,
         Hard
     }
+    #endregion
 
+
+    /*
+     * This script is just a getter for the difficulty in menu and then returns that value to the EnviromentManager which will dictate specific conditions in switch cases within other scipts
+     */
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);

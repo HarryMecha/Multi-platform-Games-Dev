@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class OptionMenu : MonoBehaviour
 {
-
-
-    // Start is called before the first frame update
+    #region Fields
     [SerializeField] private Dictionary<AudioSource,float> sourcesAndInitial = new Dictionary<AudioSource,float>();
+    #endregion
 
-    
 
-    // Update is called once per frame
+    /*
+     * The OnSliderChange funtion takes a value, based on the current position of the slider and find all the audio sources within a scene, checking if they no longer exist in the scene and multiply their current volume by this slider value.
+     */
     public void OnSliderChange(float value)
     {
         

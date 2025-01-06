@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+    #region Fields
     private Vector3 startingLocalPosition;
     private Vector3 endLocalPosition;
     private Vector3 previousLocalPlatformPosition;
@@ -20,7 +21,7 @@ public class MovingPlatform : MonoBehaviour
     private float journeyDistance;
 
     private List<Transform> objectsOnPlatform = new List<Transform>();
-
+    #endregion
     void Awake()
     {
         startTime = Time.time;
@@ -76,6 +77,10 @@ public class MovingPlatform : MonoBehaviour
         previousLocalPlatformPosition = transform.localPosition;
     }
 
+    /* This checks if an object is on the platform and adds it to the objectsOnPlatform list so that it can apply the transformation to all
+     * objects currently standing on top of it.
+     */
+
     private void OnCollisionEnter(Collision collision)
     {
         Transform obj = collision.collider.transform;
@@ -85,6 +90,8 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
+    /* This checks if an object has left the platform and removes it to the objectsOnPlatform list. 
+     */
     private void OnCollisionExit(Collision collision)
     {
         Transform obj = collision.collider.transform;

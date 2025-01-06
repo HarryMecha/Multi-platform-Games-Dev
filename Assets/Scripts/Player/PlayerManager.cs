@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    #region Fields
     public List<InventoryItem> Inventory;
     public float maxHealth = 100;
     public float currentHealth;
@@ -13,12 +14,16 @@ public class PlayerManager : MonoBehaviour
     public string currentHarpoonEquipped;
     private EnviromentManager enviromentManager;
     // private int damageAmount = 0;
+    #endregion
 
     private void Start()
     {
+        // Initialize variables at the beginning of the scene
         currentHarpoonEquipped = "none";
         enviromentManager = transform.GetComponent<EnviromentManager>();
     }
+
+    // Sets up the player's health bar with maximum health at the beginning of a scene
     public void setupHealthBar()
     {
         playerHealthBar = GameObject.Find("Player Health Bar");
@@ -27,6 +32,7 @@ public class PlayerManager : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
+    // Called when the player takes damage, updates the health bar and checks if health reaches zero
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
@@ -38,6 +44,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    // Increases the player's health and updates the health bar
     public void IncreaseHealth(float increase)
     {
         currentHealth += increase;
@@ -49,12 +56,14 @@ public class PlayerManager : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
+    // Called when the player dies, activates the death menu and resets health
     void Die()
     {
         enviromentManager.Controller.HUDCanvas.GetComponent<PauseMenu>().ActivateDeathMenu();
         IncreaseHealth(100);
     }
 
+    // Handles collisions with different objects and applies corresponding damage
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -71,6 +80,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    // Adds a collectible item to the player's inventory, creating a new entry if it doesn't already exist
     public void addToInventory(Collectible collectible)
     {
         Debug.Log(collectible);
@@ -80,16 +90,17 @@ public class PlayerManager : MonoBehaviour
         {
             if (collected.getCollectible().Name == collectible.Name)
             {
-                collected.addToCount();  // Increase the count of the item in the inventory
+                // If the item exists, increase its count and exit the method
+                collected.addToCount();
                 Debug.Log("Additional Item Added, Item Count : " + collected.getCount());
-                return;  // Exit the method as the item already exists
+                return;
             }
         }
 
-        // If the item doesn't exist in the inventory, create a new GameObject for it
+        // Create a new inventory item if it doesn't exist
         GameObject newInventoryItemObject = new GameObject("InventoryItem_" + collectible.Name);
 
-        // Add the Collectible component to the new GameObject
+        // Copy the properties of the collectible into the new object
         Collectible collectibleToAdd = newInventoryItemObject.AddComponent<Collectible>();
         collectibleToAdd.Name = collectible.Name;
         collectibleToAdd.Description = collectible.Description;
@@ -97,40 +108,30 @@ public class PlayerManager : MonoBehaviour
         collectibleToAdd.isUseable = collectible.isUseable;
         collectibleToAdd.isEquippable = collectible.isEquippable;
         collectibleToAdd.EquipType = collectible.EquipType;
-        if (collectibleToAdd.isUseable)
+        if (collectibleToAdd.isUseable && collectible.HealthIncrease > 0)
         {
-            if (collectible.HealthIncrease > 0)
-            {
-                collectibleToAdd.HealthIncrease = collectible.HealthIncrease;
-            }
+            collectibleToAdd.HealthIncrease = collectible.HealthIncrease;
         }
 
-        // Add the InventoryItem component to the new GameObject
+        // Add the collectible to the inventory as a new item
         InventoryItem inventoryItem = newInventoryItemObject.AddComponent<InventoryItem>();
-        inventoryItem.setCollectible(collectibleToAdd);  // Set the collectible on the InventoryItem
-        inventoryItem.setCount(1);  // Initialize count to 1 for the new item
-
-        // Add the new InventoryItem to the inventory list
+        inventoryItem.setCollectible(collectibleToAdd);
+        inventoryItem.setCount(1);
         Inventory.Add(inventoryItem);
 
-        // Optional: Parent the new InventoryItem object to the current GameObject
+        // Parent the new object to the player's transform
         newInventoryItemObject.transform.parent = transform;
 
         Debug.Log("Item Added: " + inventoryItem.getCollectible().Name);
     }
 
+    // Uses an item from the inventory and applies its effect
     public void useItem(Collectible collectible)
     {
-        if (collectible.isUseable == true)
+        if (collectible.isUseable && collectible.HealthIncrease > 0)
         {
-            if (collectible.HealthIncrease > 0)
-            {
-                if(currentHealth == 100)
-                {
-                    return;
-                }else
-                IncreaseHealth(collectible.HealthIncrease);
-            }
+            if (currentHealth == 100) return;
+            IncreaseHealth(collectible.HealthIncrease);
         }
 
         int index = 0;
@@ -140,6 +141,7 @@ public class PlayerManager : MonoBehaviour
             {
                 if (collected.getCount() > 0)
                 {
+                    // Reduce the count of the item and remove it if the count reaches zero
                     collected.removeFromCount();
 
                     if (collected.getCount() <= 0)
@@ -147,50 +149,50 @@ public class PlayerManager : MonoBehaviour
                         Inventory.RemoveAt(index);
                         return;
                     }
-                    else
-                    {
-                        return;
-                    }
-                }
 
+                    return;
+                }
             }
             index++;
         }
     }
 
+    // Equips an item if it is equippable, based on its type
     public void equipItem(Collectible collectible)
     {
-        Debug.Log("euipping");
-        if (collectible.isEquippable == true)
+        Debug.Log("equipping");
+        if (collectible.isEquippable)
         {
             Debug.Log("first check");
             switch (collectible.EquipType)
             {
                 case (Collectible.equipType.harpoon):
+                    // If the item is a harpoon, set it as the currently equipped item
                     Debug.Log("second check");
                     currentHarpoonEquipped = collectible.Name;
                     break;
 
             }
         }
-
     }
 
+    // Unequips an item if it is equippable, resetting the equipped state
     public void unequipItem(Collectible collectible)
     {
-        if (collectible.isEquippable == true)
+        if (collectible.isEquippable)
         {
             switch (collectible.EquipType)
             {
                 case (Collectible.equipType.harpoon):
+                    // If the item is a harpoon, reset the equipped harpoon to "none"
                     currentHarpoonEquipped = "none";
                     break;
 
             }
         }
-
     }
 
+    // Swaps positions of two items in the inventory by their indices
     public void swapItems(Collectible item1, Collectible item2)
     {
         Debug.Log(item1.Name);
@@ -212,12 +214,13 @@ public class PlayerManager : MonoBehaviour
             }
             index++;
         }
+        // Swap the items if both indices are found
         InventoryItem Temp = Inventory[indexOf2];
         Inventory[indexOf2] = Inventory[indexOf1];
         Inventory[indexOf1] = Temp;
     }
-    
 
+    // Checks if a specific item is in the inventory
     public bool isInInventory(string collectibleName)
     {
         foreach (InventoryItem collected in Inventory)
@@ -226,11 +229,11 @@ public class PlayerManager : MonoBehaviour
             {
                 return true;
             }
-
         }
         return false;
     }
 
+    // Gets the count of a specific item in the inventory
     public int getItemCount(string collectibleName)
     {
         foreach (InventoryItem collected in Inventory)
@@ -239,33 +242,34 @@ public class PlayerManager : MonoBehaviour
             {
                 return collected.getCount();
             }
-
         }
         return 0;
     }
 
+    // Returns the current inventory list
     public List<InventoryItem> getInventory()
     {
-
         return Inventory;
-
     }
 
+    // Sets if fists are equipped
     public void setFistsEquipped(bool fistsEquipped)
     {
         FistsEquipped = fistsEquipped;
     }
 
+    // Sets if the harpoon is equipped
     public void setHarpoonEquipped(bool harpoonEquipped)
     {
         HarpoonEquipped = harpoonEquipped;
     }
+
+    // Prints the names of all items in the inventory to the console
     public void printKeys()
     {
         foreach (InventoryItem collected in Inventory)
         {
             Debug.Log(collected.getCollectible().Name);
         }
-        }
-
+    }
 }

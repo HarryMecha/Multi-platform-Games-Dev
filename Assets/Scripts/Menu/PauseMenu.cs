@@ -35,7 +35,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     /*
-     * CloseMenu() close the pause menu GUI element.
+     * ActivateMenu() close or opens the pause menu GUI element it will also change the state of the players cursor to either lock it to the game or free it to interact with the menu.
      */
 
     public void ActivateMenu()
@@ -57,6 +57,9 @@ public class PauseMenu : MonoBehaviour
          }       
     }
 
+    /*
+    * ActivateInventoryMenu() close or opens the inventory menu GUI element it will also change the state of the players cursor to either lock it to the game or free it to interact with the menu.
+    */
     public void ActivateInventoryMenu()
     {
         if (inventoryMenu.activeSelf)
@@ -78,6 +81,9 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    /*
+   * ActivateOptionsMenu() close or opens the options menu GUI element it will also change the state of the players cursor to either lock it to the game or free it to interact with the menu.
+   */
     public void ActivateOptionsMenu()
     {
         if (optionsMenu.activeSelf)
@@ -93,6 +99,9 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    /*
+   * ActivateDeathMenu() close or opens the death menu GUI element upon the players death it will also change the state of the players cursor to either lock it to the game or free it to interact with the menu.
+   */
     public void ActivateDeathMenu()
     {
         if (deathMenu.activeSelf)
@@ -112,6 +121,9 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    /*
+   * resetButton() reloads the current scene.
+   */
     public void resetButton()
     {
 
@@ -119,6 +131,9 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(currentScene.name);
     }
 
+    /*
+   * quitButton() will stopAllCoroutines to stop any scripted events, unsubscribes the enviromentManager gameObject in order for it to be destroyed and loads the mainMenu scene.
+   */
     public void quitButton()
     {
         StopAllCoroutines();
@@ -128,7 +143,9 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-
+    /*
+   * CloseMenuViaButton() is an alternative to closing the menu via AcitvateMenu(), it will close the pause menu and lock the players cursor back into the game window.
+   */
     public void CloseMenuViaButton()
     {
         Controller.setMenuClosed();

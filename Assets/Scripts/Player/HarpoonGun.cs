@@ -14,6 +14,7 @@ using UnityEngine.InputSystem.HID;
 
 public class HarpoonGun : MonoBehaviour
 {
+    #region Fields
     public Camera PlayerCamera;
     public float maxDistance;
     public LineRenderer lineRenderer;
@@ -38,6 +39,7 @@ public class HarpoonGun : MonoBehaviour
     private List<GameObject> activeHarpoons = new List<GameObject>();
     private GameObject EnviromentManager;
     private string currentHarpoonType;
+    #endregion
 
     // Start is called before the first frame update
     void Awake()
@@ -163,6 +165,7 @@ public class HarpoonGun : MonoBehaviour
         {
             startTime = Time.time;
             currentHarpoonType = EnviromentManager.GetComponent<PlayerManager>().currentHarpoonEquipped;
+            //this switch is used to determine the effect the currently equipped Harpoon will have.
             switch (currentHarpoonType)
             {
                 case ("none"):

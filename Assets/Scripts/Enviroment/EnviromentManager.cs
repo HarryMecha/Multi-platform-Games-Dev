@@ -11,6 +11,7 @@ using System.Linq;
 
 public class EnviromentManager : MonoBehaviour
 {
+    #region Fields
     private Scene currentScene;
     private string currentSceneName;
     private string previousSceneName = null;
@@ -40,17 +41,20 @@ public class EnviromentManager : MonoBehaviour
         Easy,
         Hard
     }
+    #endregion
 
+    //Setter method that will change the variable of confirmPressed to true when called
     public void onConfirmPress()
     {
         confirmPressed = true;
     }
 
+    //Setter method that will change the variable of inventoryOpen to it's opposite boolean value when called
     public void onInventoryOpen()
     {
         inventoryOpen = !inventoryOpen;
     }
-
+    
 
     // Start is called before the first frame update
     void Awake()
@@ -64,7 +68,9 @@ public class EnviromentManager : MonoBehaviour
     }
 
     
-
+    /* This is the cooroutine that handles any scripted events, it will see which level is currently loaded and then start the script, in the tutorial scene it opens and closes a dialouge box
+     * based on player inputs, it sometimes checks the players inventory as a means of progression also. At the end of the script it switches the camera and plays an animation to indicate a cutscne has started.
+     */
     IEnumerator ScriptedEvent()
     {
         switch (currentSceneName)
@@ -249,6 +255,10 @@ public class EnviromentManager : MonoBehaviour
                 break;
         }
     }
+
+    /* Will run when the scene has been loaded it sets up the player with all the variables from arounf the scene and starts the scriptedEvent Cooroutine
+     * Unless it's on the main menu where it will just stop all cooroutines allowing the enviroment manager object to be destoryed
+     */
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         
@@ -267,11 +277,13 @@ public class EnviromentManager : MonoBehaviour
 
     }
 
+    // Unsubscribe the currently attached game object from sceneManager
     public void unsubscribeSceneManager()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    //This will just call find all neccesary objects from within the scene, including the player it's contoller, the player manager, any cameras present in the scene and setup the health bar
     private void setupPlayer()
     {
         Debug.Log("Player Setup");
@@ -294,10 +306,10 @@ public class EnviromentManager : MonoBehaviour
             }
         }
         Manager.setupHealthBar();
-        Debug.Log(Manager.Inventory);
+        //Debug.Log(Manager.Inventory);
         foreach (InventoryItem item in Manager.Inventory)
         {
-            Debug.Log(item.getCollectible().Name);
+          //Debug.Log(item.getCollectible().Name);
         }
     }
 

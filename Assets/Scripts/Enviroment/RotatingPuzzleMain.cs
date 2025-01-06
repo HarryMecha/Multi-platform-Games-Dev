@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class RotatingPuzzleMain : MonoBehaviour
 {
-
+    #region Fields
     [SerializeField] private List<RotatingPuzzle> RotatingPuzzles = new List<RotatingPuzzle>();
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,7 @@ public class RotatingPuzzleMain : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    // This will check whether all the puzzleHoles have had their targets hit by harpoons
     void Update()
     {
         int puzzlesStopped = 0;
