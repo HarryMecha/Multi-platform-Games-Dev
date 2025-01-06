@@ -62,4 +62,4 @@ This is an early-stage development project for a game being built in Unity. The 
 </table>
 
 <h2>WebGL Build:</h2>
-The prototype build is available as a WebGL Build. <a href="https://harrymecha.github.io/Multi-platform-Games-Dev/Build/index.html">Click here</a> to play the WebGL build of the game.
+The prototype build is available as a WebGL Build. <a href="https://jsrgolu.itch.io/treasure-sea-ker">Click here</a> to play the WebGL build of the game.
