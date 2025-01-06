@@ -7794,6 +7794,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2576817371413720987, guid: 0695c99347421c74db882b138752a11f, type: 3}
+      propertyPath: Description
+      value: Any adventurers trusty weapon but this gun has more features than that
+        it can be used to grapple onto treasure, enemies and even floating rocks
+        to help you traverse large gaps.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576817371413720987, guid: 0695c99347421c74db882b138752a11f, type: 3}
+      propertyPath: InventoryPicture
+      value: 
+      objectReference: {fileID: 21300000, guid: 919375e5744b2f142a6716d7ed22c567, type: 3}
     - target: {fileID: 6591838664372790819, guid: 0695c99347421c74db882b138752a11f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 245

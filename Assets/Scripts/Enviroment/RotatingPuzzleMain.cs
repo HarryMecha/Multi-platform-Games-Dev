@@ -38,7 +38,7 @@ public class RotatingPuzzleMain : MonoBehaviour
                 puzzlesStopped++;
             }
         }
-        if( puzzlesStopped == RotatingPuzzles.Count)
+        if (puzzlesStopped == RotatingPuzzles.Count)
         {
             Destroy(gameObject);
         }

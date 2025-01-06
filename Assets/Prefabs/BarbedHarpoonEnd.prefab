@@ -58,9 +58,10 @@ MonoBehaviour:
   Name: Barbed Harpoon
   Description: 'An arrow with a barbed tip, when equipped this will deal 10 damage
     to enemies when hit with Harpoon '
-  InventoryPicture: {fileID: 0}
+  InventoryPicture: {fileID: 21300000, guid: 750cfc9b0537465449faa53e450c2b74, type: 3}
   isUseable: 0
   isEquippable: 1
+  EquipType: 0
   HealthIncrease: 0
 --- !u!65 &6787558145236994239
 BoxCollider:
@@ -229,7 +230,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6980384849861701079}
-  m_Mesh: {fileID: -2432090755550338912, guid: 84464ab91dcaa704e8c0a1e001010190, type: 3}
+  m_Mesh: {fileID: -2432090755550338912, guid: 1489386171d8491478886b6c8052d0f4, type: 3}
 --- !u!23 &548301205703058226
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -250,7 +251,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3033667219593020291, guid: 84464ab91dcaa704e8c0a1e001010190, type: 3}
+  - {fileID: -3033667219593020291, guid: 1489386171d8491478886b6c8052d0f4, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
