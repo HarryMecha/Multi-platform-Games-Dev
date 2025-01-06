@@ -52,7 +52,7 @@ This is an early-stage development project for a game being built in Unity. The 
     </tr>
     <tr>
       <td>Open Inventory Menu (when diving suit equipped)</td>
-      <td>i</td>
+      <td>I</td>
     </tr>
     <tr>
       <td>Sprint</td>
