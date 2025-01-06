@@ -12,9 +12,9 @@ Welcome to **Treasure Sea-Ker**, a thrilling 3D platformer game set beneath the 
 <h3>Gameplay Mechanics:</h3>
 <ul>
   <li><b>Movement:</b> Navigate your character using smooth swimming and platforming controls.</li>
-  <li><b>Treasure Hunting:</b> Gather coins, artifacts, and other collectibles to earn points.</li>
-  <li><b>Enemies and Hazards:</b> Avoid jellyfish, sharks, and other threats.</li>
-  <li><b>Level Progression:</b> Explore diverse underwater biomes (coral reefs, deep trenches, shipwrecks).</li>
+  <li><b>Treasure Hunting:</b> Gather treasure chest placed under the water.</li>
+  <li><b>Enemies and Hazards:</b> Avoid octopops and blasty fishes while navigating.</li>
+  <li><b>Level Progression:</b> Explore diverse underwater levels with different challeneges.</li>
 </ul>
 
 <h2>Controls:</h2>
