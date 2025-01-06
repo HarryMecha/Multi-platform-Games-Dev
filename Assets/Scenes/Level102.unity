@@ -7844,15 +7844,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3792163112659057694, guid: 6ee4ead3da47a464b81a98c8d03045fc, type: 3}
       propertyPath: fishesDensity
-      value: 200
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3792163112659057694, guid: 6ee4ead3da47a464b81a98c8d03045fc, type: 3}
       propertyPath: clusterRangeVertical
-      value: 9
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 3792163112659057694, guid: 6ee4ead3da47a464b81a98c8d03045fc, type: 3}
       propertyPath: clusterRangeHorizontal
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6736508102452061043, guid: 6ee4ead3da47a464b81a98c8d03045fc, type: 3}
       propertyPath: m_Name
